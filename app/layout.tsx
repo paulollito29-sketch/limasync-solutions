@@ -14,9 +14,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pivot Solutions — Software y automatización",
+  title: "LimaSync Solutions — Agencia web y automatización",
   description:
-    "Pivot Solutions desarrolla software a medida y automatizaciones para empresas que quieren operar más rápido.",
+    "LimaSync Solutions crea webs, menús digitales QR, tiendas virtuales y automatizaciones para negocios que quieren vender más.",
 };
 
 export default function RootLayout({

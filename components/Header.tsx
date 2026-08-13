@@ -17,7 +17,7 @@ export default function Header() {
         <nav className="nav">
           <a className="logo" href="#top" onClick={() => setOpen(false)}>
             <span className="logo-mark" aria-hidden="true" />
-            PIVOT SOLUTIONS
+            LIMASYNC SOLUTIONS
           </a>
           <div className="nav-cta">
             <div className="nav-links">
@@ -61,7 +61,7 @@ export default function Header() {
         <a
           href="#contacto"
           onClick={() => setOpen(false)}
-          style={{ border: "none", color: "var(--accent)", fontWeight: 700 }}
+          style={{ border: "none", color: "var(--accent-strong)", fontWeight: 700 }}
         >
           Cotizar proyecto →
         </a>

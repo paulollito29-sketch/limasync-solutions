@@ -1,29 +1,33 @@
 import Header from "@/components/Header";
 
+const WHATSAPP =
+  "https://wa.me/51934089222?text=" +
+  encodeURIComponent("Hola LimaSync Solutions, quiero cotizar un proyecto");
+
 const services = [
   {
     num: "01",
-    title: "Software a medida",
-    desc: "Sistemas web, internos y de gestión diseñados alrededor de tu operación real — no alrededor de un molde genérico.",
-    tags: ["Web apps", "Paneles de gestión", "APIs", "Bases de datos"],
+    title: "Desarrollo web",
+    desc: "Sitios y tiendas virtuales diseñados para vender: rápidos, claros y hechos a la medida de tu negocio.",
+    tags: ["Landing pages", "Tiendas virtuales", "E-commerce", "Web apps"],
   },
   {
     num: "02",
-    title: "Automatización",
-    desc: "Convertimos tareas manuales y repetitivas en flujos que corren solos: reportes, notificaciones, sincronización entre herramientas.",
-    tags: ["Flujos de trabajo", "Reportes automáticos", "Bots", "Procesamiento de datos"],
+    title: "Menú digital QR",
+    desc: "Tu carta en el celular del cliente con un escaneo. Pedidos directos a WhatsApp, sin apps y sin fricción.",
+    tags: ["S/ 69/mes", "Pedidos por WhatsApp", "QR en mesa", "Actualización libre"],
   },
   {
     num: "03",
-    title: "Integraciones",
-    desc: "Conectamos las herramientas que ya usas — CRM, hojas de cálculo, facturación, correo — para que hablen entre sí.",
-    tags: ["API REST", "Webhooks", "Google Workspace", "CRMs"],
+    title: "Automatización",
+    desc: "Convertimos tareas repetitivas en flujos que corren solos: reportes, notificaciones y sincronización entre herramientas.",
+    tags: ["Flujos de trabajo", "Reportes automáticos", "Bots", "Integraciones API"],
   },
   {
     num: "04",
-    title: "Mantenimiento y soporte",
-    desc: "Tu software evoluciona con tu empresa. Nos encargamos de mejoras, correcciones y monitoreo después del lanzamiento.",
-    tags: ["Monitoreo", "Mejoras continuas", "Soporte"],
+    title: "POS restaurante",
+    desc: "Control de mesas y pedidos para restaurantes, desde la primera orden hasta el cierre de caja.",
+    tags: ["Control de mesas", "Pedidos", "Reportes de venta", "Caja"],
   },
 ];
 
@@ -31,7 +35,7 @@ const steps = [
   {
     num: "01",
     title: "Escuchamos",
-    desc: "Entendemos tu operación, tu dolor y tu objetivo antes de escribir una sola línea.",
+    desc: "Entendemos tu negocio, tu operación y tu objetivo antes de escribir una sola línea.",
   },
   {
     num: "02",
@@ -51,11 +55,11 @@ const steps = [
 ];
 
 const stripItems = [
-  "Software a medida",
-  "Automatización de procesos",
-  "Integraciones API",
-  "Dashboards",
-  "Bots y flujos internos",
+  "Menú digital QR",
+  "Desarrollo web",
+  "Tiendas virtuales",
+  "Automatización",
+  "POS restaurante",
 ];
 
 export default function Home() {
@@ -63,133 +67,133 @@ export default function Home() {
     <>
       <Header />
       <main id="top">
-      {/* HERO */}
-      <div className="wrap">
-        <div className="hero">
-          <div>
-            <p className="kicker">Desarrollo de software · Automatización</p>
-            <h1>
-              Tu negocio gira en un punto.
-              <br />
-              Nosotros movemos <span className="outline">el resto.</span>
-            </h1>
-            <p className="hero-sub">
-              Diseñamos y construimos software a medida, e integramos
-              automatizaciones que eliminan el trabajo repetitivo. Menos
-              fricción, más velocidad.
-            </p>
-            <div className="hero-actions">
-              <a href="#contacto" className="btn btn-accent">
-                Hablemos de tu proyecto
-              </a>
-              <a href="#servicios" className="btn">
-                Ver servicios
-              </a>
-            </div>
-            <p className="hero-note">// Proyectos claros, alcance definido, sin sorpresas.</p>
-          </div>
-          <div className="orbit" aria-hidden="true">
-            <div className="ring" />
-            <div className="ring r2" />
-            <div className="ring r3" />
-            <div className="axis" />
-            <div className="axis h" />
-            <div className="core">
-              <span>PIVOT</span>
-            </div>
-            <div className="dot" />
-          </div>
-        </div>
-      </div>
-
-      {/* STRIP */}
-      <div className="strip" aria-hidden="true">
-        <div className="strip-inner">
-          {[...stripItems, ...stripItems].map((item, i) => (
-            <span key={i}>{item}</span>
-          ))}
-        </div>
-      </div>
-
-      {/* SERVICIOS */}
-      <section id="servicios">
+        {/* HERO */}
         <div className="wrap">
-          <div className="sec-head">
-            <h2>Qué hacemos</h2>
-            <span className="sec-num">01 / Servicios</span>
+          <div className="hero">
+            <div>
+              <p className="kicker">Agencia web · Software · Automatización</p>
+              <h1>
+                Tu negocio en línea,
+                <br />
+                <span className="outline">sin fricción.</span>
+              </h1>
+              <p className="hero-sub">
+                Creamos webs, menús digitales y automatizaciones para negocios
+                que quieren vender más sin complicarse la operación.
+              </p>
+              <div className="hero-actions">
+                <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="btn btn-accent">
+                  Hablemos por WhatsApp
+                </a>
+                <a href="#servicios" className="btn">
+                  Ver servicios
+                </a>
+              </div>
+              <p className="hero-note">{"// Diseño claro, alcance definido, sin sorpresas."}</p>
+            </div>
+            <div className="orbit" aria-hidden="true">
+              <div className="ring" />
+              <div className="ring r2" />
+              <div className="ring r3" />
+              <div className="axis" />
+              <div className="axis h" />
+              <div className="core">
+                <span>LS</span>
+              </div>
+              <div className="dot" />
+            </div>
           </div>
+        </div>
 
-          <div className="svc">
-            {services.map((s) => (
-              <div className="svc-row" key={s.num}>
-                <span className="svc-num">{s.num}</span>
-                <h3>{s.title}</h3>
-                <div>
-                  <p>{s.desc}</p>
-                  <div className="svc-tags">
-                    {s.tags.map((t) => (
-                      <span className="tag" key={t}>
-                        {t}
-                      </span>
-                    ))}
+        {/* STRIP */}
+        <div className="strip" aria-hidden="true">
+          <div className="strip-inner">
+            {[...stripItems, ...stripItems].map((item, i) => (
+              <span key={i}>{item}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* SERVICIOS */}
+        <section id="servicios">
+          <div className="wrap">
+            <div className="sec-head">
+              <h2>Qué hacemos</h2>
+              <span className="sec-num">01 / Servicios</span>
+            </div>
+
+            <div className="svc">
+              {services.map((s) => (
+                <div className="svc-row" key={s.num}>
+                  <span className="svc-num">{s.num}</span>
+                  <h3>{s.title}</h3>
+                  <div>
+                    <p>{s.desc}</p>
+                    <div className="svc-tags">
+                      {s.tags.map((t) => (
+                        <span className="tag" key={t}>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* PROCESO */}
-      <section id="proceso" style={{ paddingTop: 0 }}>
-        <div className="wrap">
-          <div className="sec-head">
-            <h2>Cómo trabajamos</h2>
-            <span className="sec-num">02 / Proceso</span>
+        {/* PROCESO */}
+        <section id="proceso" style={{ paddingTop: 0 }}>
+          <div className="wrap">
+            <div className="sec-head">
+              <h2>Cómo trabajamos</h2>
+              <span className="sec-num">02 / Proceso</span>
+            </div>
+            <div className="steps">
+              {steps.map((st) => (
+                <div className="step" key={st.num}>
+                  <span className="step-num">{st.num}</span>
+                  <h3>{st.title}</h3>
+                  <p>{st.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="steps">
-            {steps.map((st) => (
-              <div className="step" key={st.num}>
-                <span className="step-num">{st.num}</span>
-                <h3>{st.title}</h3>
-                <p>{st.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section id="contacto" className="cta">
-        <div className="wrap">
-          <div>
-            <h2>¿Tienes un proceso que debería funcionar solo?</h2>
-            <p>
-              Cuéntanos qué te quita tiempo hoy. En una conversación corta te
-              decimos si tiene solución simple — y si no la tiene, también te
-              lo decimos.
-            </p>
-            <a href="mailto:hola@pivotsolutions.com" className="btn">
-              Escríbenos →
-            </a>
+        {/* CTA */}
+        <section id="contacto" className="cta">
+          <div className="wrap">
+            <div>
+              <h2>¿Quieres que tu negocio venda más?</h2>
+              <p>
+                Cuéntanos qué necesitas por WhatsApp. En una conversación corta
+                te decimos qué se puede hacer — y cuánto costaría.
+              </p>
+              <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="btn">
+                Escríbenos por WhatsApp →
+              </a>
+            </div>
+            <div className="cta-mail">
+              <b>+51 934 089 222</b>
+              Lima · Remoto · Latam
+            </div>
           </div>
-          <div className="cta-mail">
-            <b>hola@pivotsolutions.com</b>
-            Lima · Remoto · Latam
-          </div>
-        </div>
-      </section>
+        </section>
       </main>
 
       <footer className="footer">
-      <div className="wrap foot">
-        <span>© {new Date().getFullYear()} PIVOT SOLUTIONS — Software y automatización</span>
-        <span>
-          <a href="mailto:hola@pivotsolutions.com">hola@pivotsolutions.com</a>
-          {" · "}
-          <a href="#top">Inicio ↑</a>
-        </span>
-      </div>
+        <div className="wrap foot">
+          <span>© {new Date().getFullYear()} LIMASYNC SOLUTIONS — Agencia web y automatización</span>
+          <span>
+            <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">
+              WhatsApp
+            </a>
+            {" · "}
+            <a href="#top">Inicio ↑</a>
+          </span>
+        </div>
       </footer>
     </>
   );

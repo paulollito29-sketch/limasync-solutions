@@ -4,7 +4,8 @@
   --ink: #16150f;
   --ink-soft: #5c5a50;
   --line: #dddacd;
-  --accent: #ff4d00;
+  --accent: #0ea5e9;
+  --accent-strong: #0369a1;
   --accent-ink: #fff;
   --sans: var(--font-sans), "Segoe UI", system-ui, sans-serif;
   --mono: var(--font-mono), ui-monospace, monospace;
@@ -30,7 +31,7 @@ body {
 }
 
 ::selection {
-  background: var(--accent);
+  background: var(--accent-strong);
   color: var(--accent-ink);
 }
 
@@ -131,8 +132,8 @@ img {
 }
 
 .btn-accent {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
   color: var(--accent-ink);
 }
 
@@ -201,7 +202,7 @@ img {
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-strong);
   margin-bottom: 1.4rem;
 }
 
@@ -467,7 +468,7 @@ h2 {
 .step-num {
   font-family: var(--mono);
   font-size: 0.85rem;
-  color: var(--accent);
+  color: var(--accent-strong);
   margin-bottom: 1.1rem;
 }
 
@@ -509,8 +510,8 @@ h2 {
 
 .cta .btn {
   margin-top: 1.8rem;
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
   color: var(--accent-ink);
 }
 
@@ -554,7 +555,7 @@ h2 {
 }
 
 .foot a:hover {
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
 /* ---------- responsive ---------- */
