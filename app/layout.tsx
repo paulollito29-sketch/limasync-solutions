@@ -16,7 +16,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "LimaSync Solutions — Agencia web y automatización",
   description:
-    "LimaSync Solutions crea webs, menús digitales QR, tiendas virtuales y automatizaciones para negocios que quieren vender más.",
+    "LimaSync Solutions crea webs, paneles, tiendas virtuales y automatizaciones para negocios que quieren vender más.",
 };
 
 export default function RootLayout({

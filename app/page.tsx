@@ -15,9 +15,9 @@ const services = [
   },
   {
     num: "02",
-    title: "Menú digital QR",
-    desc: "Tu carta en el celular del cliente con un escaneo. Pedidos directos a WhatsApp, sin apps y sin fricción.",
-    tags: ["S/ 69/mes", "Pedidos por WhatsApp", "QR en mesa", "Actualización libre"],
+    title: "Dashboards y paneles",
+    desc: "Paneles de gestión y reportes en tiempo real para que decidas con datos, no con corazonadas.",
+    tags: ["Dashboards", "Reportes en tiempo real", "KPIs", "Visualización de datos"],
   },
   {
     num: "03",
@@ -57,7 +57,7 @@ const steps = [
 ];
 
 const stripItems = [
-  "Menú digital QR",
+  "Dashboards y paneles",
   "Desarrollo web",
   "Tiendas virtuales",
   "Automatización",
@@ -80,7 +80,7 @@ export default function Home() {
                 <span className="outline">sin fricción.</span>
               </h1>
               <p className="hero-sub">
-                Creamos webs, menús digitales y automatizaciones para negocios
+                Creamos webs, paneles y automatizaciones para negocios
                 que quieren vender más sin complicarse la operación.
               </p>
               <div className="hero-actions">
@@ -109,7 +109,7 @@ export default function Home() {
                     <span className="ok">✓</span> landing creada
                   </p>
                   <p>
-                    <span className="ok">✓</span> menú QR en línea
+                    <span className="ok">✓</span> dashboard en línea
                   </p>
                   <p>
                     <span className="ok">✓</span> pedidos → WhatsApp
@@ -120,7 +120,7 @@ export default function Home() {
                 </div>
               </div>
               <span className="chip chip-1">v1.0</span>
-              <span className="chip chip-2">QR</span>
+              <span className="chip chip-2">KPI</span>
             </div>
           </div>
         </div>
