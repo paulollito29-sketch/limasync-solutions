@@ -1,8 +1,10 @@
 import Header from "@/components/Header";
 
 const WHATSAPP =
-  "https://wa.me/51934089222?text=" +
+  "https://wa.me/51981906958?text=" +
   encodeURIComponent("Hola LimaSync Solutions, quiero cotizar un proyecto");
+
+const EMAIL = "limasync0@gmail.com";
 
 const services = [
   {
@@ -91,16 +93,34 @@ export default function Home() {
               </div>
               <p className="hero-note">{"// Diseño claro, alcance definido, sin sorpresas."}</p>
             </div>
-            <div className="orbit" aria-hidden="true">
-              <div className="ring" />
-              <div className="ring r2" />
-              <div className="ring r3" />
-              <div className="axis" />
-              <div className="axis h" />
-              <div className="core">
-                <span>LS</span>
+            <div className="hero-visual" aria-hidden="true">
+              <div className="win">
+                <div className="win-bar">
+                  <span className="win-dot" />
+                  <span className="win-dot accent" />
+                  <span className="win-dot" />
+                  <span className="win-title">limasync.sh</span>
+                </div>
+                <div className="win-body">
+                  <p>
+                    <span className="p">$</span> limasync build --site
+                  </p>
+                  <p>
+                    <span className="ok">✓</span> landing creada
+                  </p>
+                  <p>
+                    <span className="ok">✓</span> menú QR en línea
+                  </p>
+                  <p>
+                    <span className="ok">✓</span> pedidos → WhatsApp
+                  </p>
+                  <p>
+                    <span className="p">$</span> <span className="cursor" />
+                  </p>
+                </div>
               </div>
-              <div className="dot" />
+              <span className="chip chip-1">v1.0</span>
+              <span className="chip chip-2">QR</span>
             </div>
           </div>
         </div>
@@ -176,8 +196,8 @@ export default function Home() {
               </a>
             </div>
             <div className="cta-mail">
-              <b>+51 934 089 222</b>
-              Lima · Remoto · Latam
+              <b>{EMAIL}</b>
+              WhatsApp +51 981 906 958 · Lima · Remoto · Latam
             </div>
           </div>
         </section>
@@ -190,6 +210,8 @@ export default function Home() {
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">
               WhatsApp
             </a>
+            {" · "}
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             {" · "}
             <a href="#top">Inicio ↑</a>
           </span>
