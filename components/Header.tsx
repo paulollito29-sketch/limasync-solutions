@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const links = [
   { href: "#servicios", label: "Servicios" },
-  { href: "#proceso", label: "Proceso" },
+  { href: "#demos", label: "Demos en Vivo" },
+  { href: "#precios", label: "Plan S/ 500" },
+  { href: "#calculadora", label: "Simulador ROI" },
+  { href: "#vr-studio", label: "Meta Quest VR" },
   { href: "#contacto", label: "Contacto" },
 ];
 
@@ -15,10 +19,10 @@ export default function Header() {
     <header className="header">
       <div className="wrap">
         <nav className="nav">
-          <a className="logo" href="#top" onClick={() => setOpen(false)}>
+          <Link className="logo" href="/" onClick={() => setOpen(false)}>
             <span className="logo-mark" aria-hidden="true" />
             LIMASYNC SOLUTIONS
-          </a>
+          </Link>
           <div className="nav-cta">
             <div className="nav-links">
               {links.map((l) => (
@@ -27,8 +31,13 @@ export default function Header() {
                 </a>
               ))}
             </div>
-            <a href="#contacto" className="btn">
-              Cotizar proyecto
+            <a
+              href="https://wa.me/51981906958?text=Hola%20LimaSync%20Solutions,%20quiero%20cotizar%20un%20proyecto"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+            >
+              Cotizar en 72h
             </a>
             <button
               className="burger"
@@ -59,11 +68,13 @@ export default function Header() {
           </a>
         ))}
         <a
-          href="#contacto"
+          href="https://wa.me/51981906958?text=Hola%20LimaSync%20Solutions,%20quiero%20cotizar%20un%20proyecto"
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() => setOpen(false)}
           style={{ border: "none", color: "var(--accent-strong)", fontWeight: 700 }}
         >
-          Cotizar proyecto →
+          Cotizar en 72h por WhatsApp →
         </a>
       </div>
     </header>
