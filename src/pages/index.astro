@@ -69,6 +69,16 @@ const stripItems = [
   "Dominio .com & SSL Incluido",
   "Mantenimiento S/ 99/mes",
 ];
+
+const rubrosPreview = [
+  { icon: "🍽️", name: "Gastronomía & Bares", desc: "Carta QR, cálculo de delivery y pedidos a WhatsApp", slug: "restaurante", badge: "Alta Demanda" },
+  { icon: "🩺", name: "Salud & Bienestar", desc: "Agendamiento de citas, catálogo médico y urgencias 24h", slug: "salud", badge: "Profesional" },
+  { icon: "⚖️", name: "Legal & Corporativo", desc: "Diagnóstico confidencial, marcas INDECOPI y asesoría", slug: "legal", badge: "Corporativo" },
+  { icon: "🛍️", name: "Moda & Comercio", desc: "Selector talla/color, carrito en vivo y pago Yape/Plin", slug: "tienda", badge: "E-Commerce" },
+  { icon: "🔧", name: "Servicios Técnicos", desc: "Cotizador por distrito de Lima y botón de emergencia 45 min", slug: "servicios", badge: "Conversión" },
+  { icon: "🎓", name: "Educación & Academias", desc: "Catálogo de cursos, syllabus descargable y matrícula WhatsApp", slug: "educacion", badge: "Formación" },
+  { icon: "🏨", name: "Hoteles & Hospedaje", desc: "Tarifas por noche, cotizador de estadía y reservas directas", slug: "hoteleria", badge: "Turismo" },
+];
 ---
 
 <Layout lang="es">
@@ -158,8 +168,71 @@ const stripItems = [
       </div>
     </section>
 
-    <!-- 02 DEMOS EN VIVO -->
-    <DemoShowcase client:visible lang="es" />
+    <!-- 02 PROBAR DEMOS POR RUBRO -->
+    <section id="demos" style="padding-block: clamp(3.5rem, 6vw, 5.5rem); border-top: 1px solid var(--line);">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="kicker" style="color: var(--accent-strong);">
+              Arquitecturas Especializadas · Entrega en 72 Horas
+            </p>
+            <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800;">
+              Probar Demos por Rubro
+            </h2>
+          </div>
+          <span class="sec-num">02 / Demos</span>
+        </div>
+
+        <p style="max-width: 72ch; color: var(--ink-soft); margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.6;">
+          Hemos desarrollado 7 plantillas interactivas para que pruebes el flujo real de pedidos, reservas y cotizaciones antes de contratar. Selecciona tu rubro o visita nuestro catálogo interactivo completo.
+        </p>
+
+        <!-- Preview Grid of all 7 rubros -->
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;"
+        >
+          {rubrosPreview.map((r) => (
+            <a
+              href={`/templates/${r.slug}`}
+              style="background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px; padding: 1.4rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s;"
+            >
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                  <span style="font-size: 1.8rem;">{r.icon}</span>
+                  <span style="background: rgba(0,0,0,0.06); border: 1px solid var(--line); font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 999px; font-weight: 600;">
+                    {r.badge}
+                  </span>
+                </div>
+                <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;">{r.name}</h3>
+                <p style="color: var(--ink-soft); font-size: 0.88rem; line-height: 1.4; margin-bottom: 1rem;">
+                  {r.desc}
+                </p>
+              </div>
+              <span style="font-weight: 700; font-size: 0.85rem; color: var(--accent-strong); display: inline-flex; align-items: center; gap: 0.3rem;">
+                Probar Demo en Vivo ↗
+              </span>
+            </a>
+          ))}
+        </div>
+
+        <!-- Big CTA redirecting to /demos -->
+        <div style="background: var(--ink); color: var(--paper); border-radius: 16px; padding: clamp(2rem, 4vw, 3rem); text-align: center; margin-top: 2rem;">
+          <h3 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; margin-bottom: 0.75rem; color: #fff;">
+            ¿Quieres explorar el catálogo interactivo completo con filtros?
+          </h3>
+          <p style="color: rgba(255,255,255,0.75); max-width: 580px; margin: 0 auto 1.8rem; font-size: 1rem; line-height: 1.5;">
+            Visita nuestra página dedicada de Demos con selector interactivo por industria, simulador de WhatsApp y cálculo de inversión para tu negocio.
+          </p>
+          <a
+            href="/demos"
+            class="btn btn-accent"
+            style="padding: 0.95rem 2.2rem; font-size: 1.05rem; font-weight: 800; border-radius: 8px; display: inline-block;"
+          >
+            Probar Demos en la Página Dedicada →
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- 03 PRECIOS & CONTRATO -->
     <PricingSection client:visible lang="es" />

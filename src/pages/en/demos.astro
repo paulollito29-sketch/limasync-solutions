@@ -1,0 +1,74 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header';
+import DemoShowcase from '../../components/DemoShowcase';
+import FloatingWhatsApp from '../../components/FloatingWhatsApp';
+
+const WHATSAPP =
+  "https://wa.me/51906920958?text=" +
+  encodeURIComponent("Hello LimaSync Solutions, I checked the live demo catalog and I want a quote for my business industry.");
+---
+
+<Layout
+  lang="en"
+  title="Web Templates by Industry in Lima | Live Demos — LimaSync Solutions"
+  description="Test live interactive web templates for Restaurants, Clinics, Law Firms, E-Commerce Stores, Technical Services, Academies and Boutique Hotels in Lima. Delivered in 72h starting at S/ 499 (~$135)."
+>
+  <Header client:load lang="en" />
+
+  <main style="padding-top: 2rem;">
+    <!-- Top Hero Demos -->
+    <section style="padding-block: clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid var(--line); background: var(--paper-2);">
+      <div class="wrap" style="text-align: center; max-width: 860px;">
+        <p class="kicker" style="color: var(--accent-strong); margin-bottom: 0.8rem;">
+          Official Catalog · Live Interactive Demos
+        </p>
+        <h1 style="font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.25rem;">
+          Test 7 Master Templates Built by Industry
+        </h1>
+        <p style="color: var(--ink-soft); font-size: 1.12rem; line-height: 1.6; max-width: 680px; margin: 0 auto 2rem;">
+          Each architecture is packed with real tools your business needs to sell: digital QR menus, shipping estimators, district calculators, appointment scheduling, and direct WhatsApp checkout.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="#demos" class="btn btn-accent">
+            Explore Templates by Industry ↓
+          </a>
+          <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" class="btn">
+            Get WhatsApp Advisory →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase Component -->
+    <DemoShowcase client:load lang="en" />
+
+    <!-- Help Banner -->
+    <section style="padding-block: 4rem; border-top: 1px solid var(--line); background: var(--paper-2); text-align: center;">
+      <div class="wrap" style="max-width: 760px;">
+        <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; margin-bottom: 1rem;">
+          Looking for a custom solution for your industry?
+        </h2>
+        <p style="color: var(--ink-soft); font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
+          We tailor layout, branding, copy, and checkout workflows to your exact operations. We launch your website in 72 hours for S/ 499 (~$135) with 50% upfront and 50% upon verified delivery.
+        </p>
+        <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" class="btn btn-accent" style="padding: 0.85rem 1.75rem; font-size: 1rem;">
+          Talk to a Systems Engineer on WhatsApp →
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <span>© {new Date().getFullYear()} LIMASYNC SOLUTIONS — Industry Web Templates</span>
+      <span>
+        <a href="/en">← Back to Home</a>
+        {" · "}
+        <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">WhatsApp (+51 906 920 958)</a>
+      </span>
+    </div>
+  </footer>
+
+  <FloatingWhatsApp client:load lang="en" />
+</Layout>

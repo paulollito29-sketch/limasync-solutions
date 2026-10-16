@@ -69,6 +69,16 @@ const stripItems = [
   ".com Domain & SSL Included",
   "Monthly Care S/ 99/mo",
 ];
+
+const rubrosPreviewEn = [
+  { icon: "🍽️", name: "Dining & Bars", desc: "Digital QR menu, delivery calculator and WhatsApp ordering", slug: "restaurante", badge: "Popular" },
+  { icon: "🩺", name: "Health & Aesthetics", desc: "Online booking, treatment pricing and 24/7 emergencies", slug: "salud", badge: "Professional" },
+  { icon: "⚖️", name: "Legal & Corporate", desc: "Confidential assessment, trademarks and business law", slug: "legal", badge: "Corporate" },
+  { icon: "🛍️", name: "Fashion & Retail", desc: "Size/color selectors, live shopping cart and instant checkout", slug: "tienda", badge: "E-Commerce" },
+  { icon: "🔧", name: "Technical Services", desc: "District cost calculator and 45-minute emergency dispatch", slug: "servicios", badge: "Conversion" },
+  { icon: "🎓", name: "Education & Coaching", desc: "Course catalog, syllabus downloads and WhatsApp enrollment", slug: "educacion", badge: "Training" },
+  { icon: "🏨", name: "Hotels & Airbnb", desc: "Nightly rates, stay calculator and direct WhatsApp bookings", slug: "hoteleria", badge: "Tourism" },
+];
 ---
 
 <Layout
@@ -162,8 +172,71 @@ const stripItems = [
       </div>
     </section>
 
-    <!-- 02 LIVE DEMOS -->
-    <DemoShowcase client:visible lang="en" />
+    <!-- 02 TEST DEMOS BY INDUSTRY -->
+    <section id="demos" style="padding-block: clamp(3.5rem, 6vw, 5.5rem); border-top: 1px solid var(--line);">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="kicker" style="color: var(--accent-strong);">
+              Specialized Web Architectures · 72-Hour Delivery
+            </p>
+            <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800;">
+              Test Demos by Industry
+            </h2>
+          </div>
+          <span class="sec-num">02 / Demos</span>
+        </div>
+
+        <p style="max-width: 72ch; color: var(--ink-soft); margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.6;">
+          We have engineered 7 interactive master templates so you can experience real checkout flows, table bookings, and calculators before hiring. Select your industry or visit our full interactive catalog.
+        </p>
+
+        <!-- Preview Grid of all 7 rubros -->
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;"
+        >
+          {rubrosPreviewEn.map((r) => (
+            <a
+              href={`/templates/${r.slug}`}
+              style="background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px; padding: 1.4rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s;"
+            >
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                  <span style="font-size: 1.8rem;">{r.icon}</span>
+                  <span style="background: rgba(0,0,0,0.06); border: 1px solid var(--line); font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 999px; font-weight: 600;">
+                    {r.badge}
+                  </span>
+                </div>
+                <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;">{r.name}</h3>
+                <p style="color: var(--ink-soft); font-size: 0.88rem; line-height: 1.4; margin-bottom: 1rem;">
+                  {r.desc}
+                </p>
+              </div>
+              <span style="font-weight: 700; font-size: 0.85rem; color: var(--accent-strong); display: inline-flex; align-items: center; gap: 0.3rem;">
+                Test Live Demo ↗
+              </span>
+            </a>
+          ))}
+        </div>
+
+        <!-- Big CTA redirecting to /en/demos -->
+        <div style="background: var(--ink); color: var(--paper); border-radius: 16px; padding: clamp(2rem, 4vw, 3rem); text-align: center; margin-top: 2rem;">
+          <h3 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; margin-bottom: 0.75rem; color: #fff;">
+            Looking for the full interactive catalog with filters?
+          </h3>
+          <p style="color: rgba(255,255,255,0.75); max-width: 580px; margin: 0 auto 1.8rem; font-size: 1rem; line-height: 1.5;">
+            Explore our dedicated Demos page featuring interactive category filtering, live WhatsApp simulators, and instant project pricing.
+          </p>
+          <a
+            href="/en/demos"
+            class="btn btn-accent"
+            style="padding: 0.95rem 2.2rem; font-size: 1.05rem; font-weight: 800; border-radius: 8px; display: inline-block;"
+          >
+            Open Dedicated Demos Catalog Page →
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- 03 PRICING -->
     <PricingSection client:visible lang="en" />

@@ -119,7 +119,7 @@ const TEMPLATES_ES: TemplateInfo[] = [
     features: ["Catálogo de Cursos", "Syllabus en PDF", "Matrícula WhatsApp", "Pagos Yape/Plin"],
     color: "#6366f1",
     badge: "Formación",
-    hasLiveDemo: false,
+    hasLiveDemo: true,
   },
   {
     slug: "hoteleria",
@@ -132,7 +132,7 @@ const TEMPLATES_ES: TemplateInfo[] = [
     features: ["Galería de Habitaciones", "Tarifas por Temporada", "Sin Comisiones Booking", "Reserva WhatsApp"],
     color: "#ec4899",
     badge: "Turismo & Alojamientos",
-    hasLiveDemo: false,
+    hasLiveDemo: true,
   },
 ];
 
@@ -213,7 +213,7 @@ const TEMPLATES_EN: TemplateInfo[] = [
     features: ["Course Catalog", "Downloadable Syllabus", "WhatsApp Enrollment", "Direct Payment"],
     color: "#6366f1",
     badge: "Learning",
-    hasLiveDemo: false,
+    hasLiveDemo: true,
   },
   {
     slug: "hoteleria",
@@ -226,7 +226,7 @@ const TEMPLATES_EN: TemplateInfo[] = [
     features: ["Room Gallery", "Seasonal Rates", "0% Booking Commission", "WhatsApp Direct"],
     color: "#ec4899",
     badge: "Hospitality",
-    hasLiveDemo: false,
+    hasLiveDemo: true,
   },
 ];
 
