@@ -102,7 +102,7 @@ export default function TemplateBanner({
               gap: "0.35rem",
             }}
           >
-            <span>Cambiar Rubro ▾</span>
+            <span>Cambiar Demo ▾</span>
           </button>
 
           {dropdownOpen && (
@@ -162,7 +162,7 @@ export default function TemplateBanner({
             background: "rgba(255,255,255,0.04)",
           }}
         >
-          ← Ver Catálogo
+          ← Demos en Vivo
         </a>
 
         <a

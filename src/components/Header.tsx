@@ -9,14 +9,14 @@ interface HeaderProps {
 const navLinks = {
   es: [
     { href: "/#servicios", label: "Servicios" },
-    { href: "/demos", label: "Plantillas por Rubro" },
+    { href: "/demos", label: "Demos en Vivo" },
     { href: "/#precios", label: "Plan S/ 499" },
     { href: "/#proceso", label: "Proceso" },
     { href: "/#contacto", label: "Contacto" },
   ],
   en: [
     { href: "/en#services", label: "Services" },
-    { href: "/en/demos", label: "Templates by Industry" },
+    { href: "/en/demos", label: "Live Demos" },
     { href: "/en#pricing", label: "Plan S/ 499" },
     { href: "/en#process", label: "Process" },
     { href: "/en#contact", label: "Contact" },

@@ -232,30 +232,30 @@ const TEMPLATES_EN: TemplateInfo[] = [
 
 const copy = {
   es: {
-    kicker: "Plantillas por Rubros · Arquitecturas Especializadas en 72 Horas",
-    title: "Elige la Plantilla Diseñada para tu Rubro",
+    kicker: "Demos en Vivo · Arquitecturas Especializadas en 72 Horas",
+    title: "Demos en Vivo para tu Negocio",
     subtitle:
-      "Cada tipo de negocio vende de forma diferente. No usamos plantillas genéricas: cada arquitectura incluye las herramientas exactas de tu rubro (carta QR, agendamiento de citas, cotizador por distrito o carrito Yape) listas por solo S/ 499.",
-    filterAll: "Todos los Rubros",
+      "Cada tipo de negocio vende de forma diferente. No usamos maquetas genéricas: cada demo interactiva incluye las herramientas exactas para vender (carta QR, agendamiento de citas, cotizador por distrito o carrito Yape) listas por solo S/ 499.",
+    filterAll: "Todas las Demos",
     idealLabel: "Ideal para:",
     viewDemo: "Probar Demo en Vivo ↗",
-    requestRubro: "Pedir este Rubro por WhatsApp →",
-    orderWa: "Cotizar plantilla para mi negocio",
+    requestRubro: "Pedir esta Web por WhatsApp →",
+    orderWa: "Cotizar web para mi negocio",
     waMsg: (t: TemplateInfo) =>
-      `Hola LimaSync Solutions, tengo un negocio en el rubro de ${t.rubroName} y me interesa la plantilla (${t.title}) de S/ 499.`,
+      `Hola LimaSync Solutions, tengo un negocio y me interesa la demo (${t.title}) de S/ 499.`,
   },
   en: {
-    kicker: "Templates by Industry · Tailored Web Architectures in 72 Hours",
-    title: "Select the Template Built for Your Industry",
+    kicker: "Live Demos · Specialized Architectures in 72 Hours",
+    title: "Live Demos for Your Business",
     subtitle:
-      "Every business sells differently. We don't build generic websites: each architecture incorporates the exact tools your industry needs (QR menu, appointment scheduler, district calculator, or instant WhatsApp checkout) ready for S/ 499 (~$135).",
-    filterAll: "All Industries",
+      "Every business sells differently. We don't build generic websites: each live interactive demo incorporates the exact tools you need to sell (QR menu, appointment scheduler, district calculator, or instant WhatsApp checkout) ready for S/ 499 (~$135).",
+    filterAll: "All Live Demos",
     idealLabel: "Ideal for:",
     viewDemo: "Test Live Demo ↗",
-    requestRubro: "Order this Industry on WhatsApp →",
+    requestRubro: "Order this Website on WhatsApp →",
     orderWa: "Get a quote for my business",
     waMsg: (t: TemplateInfo) =>
-      `Hello LimaSync Solutions, I have a business in the ${t.rubroName} industry and I want the template (${t.title}) for S/ 499.`,
+      `Hello LimaSync Solutions, I have a business and I want the demo (${t.title}) for S/ 499.`,
   },
 };
 
@@ -282,7 +282,7 @@ export default function DemoShowcase({ lang = "es" }: DemoShowcaseProps) {
               {t.title}
             </h2>
           </div>
-          <span className="sec-num">{lang === "en" ? "02 / Industries" : "02 / Rubros"}</span>
+          <span className="sec-num">{lang === "en" ? "02 / Live Demos" : "02 / Demos en Vivo"}</span>
         </div>
 
         <p style={{ maxWidth: "70ch", color: "var(--ink-soft)", marginBottom: "2rem", fontSize: "1.05rem" }}>
@@ -292,7 +292,7 @@ export default function DemoShowcase({ lang = "es" }: DemoShowcaseProps) {
         {/* Rubro Filter Tabs Bar */}
         <div
           role="tablist"
-          aria-label={lang === "en" ? "Filter by industry" : "Filtrar por rubro"}
+          aria-label={lang === "en" ? "Filter by demo category" : "Filtrar demos en vivo"}
           style={{
             display: "flex",
             flexWrap: "wrap",
