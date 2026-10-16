@@ -1,1 +1,1 @@
-@AGENTS.md
+# LimaSync Solutions

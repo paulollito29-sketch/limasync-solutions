@@ -6,9 +6,8 @@ import Link from "next/link";
 const links = [
   { href: "#servicios", label: "Servicios" },
   { href: "#demos", label: "Demos en Vivo" },
-  { href: "#precios", label: "Plan S/ 500" },
-  { href: "#calculadora", label: "Simulador ROI" },
-  { href: "#vr-studio", label: "Meta Quest VR" },
+  { href: "#precios", label: "Plan S/ 499" },
+  { href: "#proceso", label: "Proceso" },
   { href: "#contacto", label: "Contacto" },
 ];
 
@@ -32,7 +31,7 @@ export default function Header() {
               ))}
             </div>
             <a
-              href="https://wa.me/51981906958?text=Hola%20LimaSync%20Solutions,%20quiero%20cotizar%20un%20proyecto"
+              href="https://wa.me/51906920958?text=Hola%20LimaSync%20Solutions,%20quiero%20cotizar%20un%20proyecto"
               target="_blank"
               rel="noopener noreferrer"
               className="btn"
@@ -68,7 +67,7 @@ export default function Header() {
           </a>
         ))}
         <a
-          href="https://wa.me/51981906958?text=Hola%20LimaSync%20Solutions,%20quiero%20cotizar%20un%20proyecto"
+          href="https://wa.me/51906920958?text=Hola%20LimaSync%20Solutions,%20quiero%20cotizar%20un%20proyecto"
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setOpen(false)}

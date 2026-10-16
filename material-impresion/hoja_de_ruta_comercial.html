@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>LimaSync Solutions - Hoja de Ruta para Visitas Comerciales</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+    :root {
+      --paper: #ffffff;
+      --ink: #0f172a;
+      --ink-soft: #475569;
+      --line: #cbd5e1;
+      --accent: #0284c7;
+      --accent-dark: #0369a1;
+      --high: #dc2626;
+      --high-bg: #fef2f2;
+      --med: #d97706;
+      --med-bg: #fffbeb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      background: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--ink);
+      padding: 24px;
+    }
+
+    .toolbar {
+      background: var(--ink);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .toolbar h1 { font-size: 18px; font-weight: 700; }
+    .toolbar p { font-size: 12.5px; color: #94a3b8; }
+    .btn-print {
+      background: var(--accent);
+      color: white;
+      border: none;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: white;
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .sheet {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .kpi-card {
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      border-radius: 6px;
+      background: #f8fafc;
+    }
+    .kpi-card .val {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-dark);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .kpi-card .lbl {
+      font-size: 11px;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+    th {
+      background: #f1f5f9;
+      padding: 10px 8px;
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--line);
+    }
+    td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    .prio-alta {
+      color: var(--high);
+      background: var(--high-bg);
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      display: inline-block;
+    }
+    .prio-media {
+      color: var(--med);
+      background: var(--med-bg);
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      display: inline-block;
+    }
+
+    .check-box {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    @media print {
+      body { background: transparent; padding: 0; }
+      .toolbar, .filters { display: none; }
+      .sheet { box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div>
+      <h1>📋 Hoja de Ruta Operativa para Visitas Comerciales</h1>
+      <p>Base oficial de 200 Prospectos (Lima & Callao) · Objetivo: Web S/ 499 + Soporte S/ 99/mes</p>
+    </div>
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir Hoja de Ruta</button>
+  </div>
+
+  <div class="sheet">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="val">200</div>
+        <div class="lbl">Total Prospectos</div>
+      </div>
+      <div class="kpi-card">
+        <div class="val" style="color: #dc2626;">59</div>
+        <div class="lbl">Prioridad Alta</div>
+      </div>
+      <div class="kpi-card">
+        <div class="val">104</div>
+        <div class="lbl">Belleza y Spas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="val">44</div>
+        <div class="lbl">Restaurantes / Cafés</div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterZone('all')">Todas las Zonas (200)</button>
+      <button class="filter-btn" onclick="filterZone('San Miguel')">San Miguel (12)</button>
+      <button class="filter-btn" onclick="filterZone('Magdalena del Mar')">Magdalena (15)</button>
+      <button class="filter-btn" onclick="filterZone('Pueblo Libre')">Pueblo Libre (12)</button>
+      <button class="filter-btn" onclick="filterZone('San Isidro')">San Isidro (16)</button>
+      <button class="filter-btn" onclick="filterZone('San Borja')">San Borja (17)</button>
+      <button class="filter-btn" onclick="filterZone('Santiago de Surco')">Surco (12)</button>
+      <button class="filter-btn" onclick="filterZone('Miraflores')">Miraflores (9)</button>
+    </div>
+
+    <table id="prospectsTable">
+      <thead>
+        <tr>
+          <th style="width: 30px;">Visita</th>
+          <th>ID</th>
+          <th>Prioridad</th>
+          <th>Negocio</th>
+          <th>Rubro</th>
+          <th>Zona</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>Franja Sugerida</th>
+          <th>Propuesta Sugerida</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cargado vía JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Carga inicial
+    fetch('prospectos_lima_callao.csv')
+      .then(r => r.text())
+      .then(csvText => {
+        // En caso de usar la tabla completa
+      });
+  </script>
+</body>
+</html>

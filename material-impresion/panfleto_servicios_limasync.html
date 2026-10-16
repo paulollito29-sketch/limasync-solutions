@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>LimaSync Solutions - Flyer Comercial Imprimible</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --paper: #f6f5f1;
+      --paper-card: #ffffff;
+      --ink: #16150f;
+      --ink-soft: #4a483e;
+      --accent: #0284c7;
+      --accent-strong: #0369a1;
+      --line: #dddacd;
+      --border: #23221b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      background: #e2e0d8;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .no-print-bar {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .btn-print {
+      background: var(--ink);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+    .btn-print:hover { background: var(--accent-strong); }
+
+    /* Hoja A4 para imprimir */
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--paper);
+      padding: 14mm 16mm 12mm 16mm;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      border: 1px solid var(--line);
+    }
+
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .no-print-bar { display: none; }
+      .sheet {
+        box-shadow: none;
+        border: none;
+        width: 100%;
+        min-height: 100vh;
+        page-break-after: always;
+      }
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-symbol {
+      width: 28px;
+      height: 28px;
+      border: 2.5px solid var(--ink);
+      border-radius: 50%;
+      position: relative;
+    }
+    .logo-symbol::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border: 2.5px solid var(--accent);
+      border-top-color: transparent;
+      border-radius: 50%;
+      transform: rotate(35deg);
+    }
+
+    .brand-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .header-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 6px 12px;
+      font-weight: 600;
+      border-radius: 4px;
+    }
+
+    /* HERO */
+    .hero {
+      margin-bottom: 22px;
+    }
+
+    .hero-h1 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .hero-h1 span.outline {
+      color: var(--accent-strong);
+    }
+
+    .hero-sub {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+      max-width: 650px;
+    }
+
+    /* GRID SERVICIOS */
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .svc-card {
+      background: var(--paper-card);
+      border: 1.5px solid var(--ink);
+      padding: 14px 16px;
+      box-shadow: 4px 4px 0px var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .svc-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .svc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-strong);
+      background: #e0f2fe;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .svc-card h3 {
+      font-size: 16px;
+      font-weight: 750;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+
+    .svc-card p {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      padding: 2px 6px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    /* VALOR AGREGADO / METODOLOGIA */
+    .features-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .feat-box {
+      border: 1px solid var(--line);
+      background: #faf9f6;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .feat-box .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-strong);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .feat-box h4 {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .feat-box p {
+      font-size: 10.5px;
+      color: var(--ink-soft);
+      line-height: 1.35;
+    }
+
+    /* FOOTER & CONTACTO */
+    .cta-container {
+      margin-top: auto;
+      background: var(--ink);
+      color: #fff;
+      padding: 16px 20px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cta-text h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    .cta-text p {
+      font-size: 12px;
+      color: #c7c5bc;
+    }
+
+    .cta-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .highlight-contact {
+      color: #38bdf8;
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar como PDF este Panfleto</button>
+  </div>
+
+  <div class="sheet">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-row">
+          <div class="logo-symbol"></div>
+          <span class="brand-title">LimaSync Solutions</span>
+        </div>
+        <span class="brand-kicker">Agencia Web · Software a Medida · Automatización</span>
+      </div>
+      <div class="header-badge">
+        Lima · Remoto · Latam
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero-h1">Tu negocio en línea, <br><span class="outline">sin fricción.</span></h1>
+      <p class="hero-sub">
+        Ayudamos a empresas, restaurantes y comercios a optimizar su operación y vender más con soluciones digitales modernas, rápidas y hechas a su medida.
+      </p>
+    </section>
+
+    <!-- Servicios -->
+    <div class="section-title">Nuestros Servicios Principales</div>
+    <div class="services-grid">
+      
+      <!-- 01 -->
+      <div class="svc-card">
+        <div>
+          <div class="svc-card-top">
+            <span class="svc-num">01</span>
+          </div>
+          <h3>Desarrollo Web & Tiendas</h3>
+          <p>Sitios y tiendas virtuales diseñados para convertir visitas en clientes reales: ultrarrápidos, optimizados para celular y fáciles de usar.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag">Landing pages</span>
+          <span class="tag">Tiendas virtuales</span>
+          <span class="tag">E-commerce</span>
+          <span class="tag">Web Apps</span>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="svc-card">
+        <div>
+          <div class="svc-card-top">
+            <span class="svc-num">02</span>
+          </div>
+          <h3>Dashboards y Paneles</h3>
+          <p>Paneles de control y reportes de gestión en tiempo real para que tomes decisiones con datos claros y actualizados, no con suposiciones.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag">Dashboards</span>
+          <span class="tag">Reportes en vivo</span>
+          <span class="tag">KPIs</span>
+          <span class="tag">Control Financiero</span>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="svc-card">
+        <div>
+          <div class="svc-card-top">
+            <span class="svc-num">03</span>
+          </div>
+          <h3>Automatización de Procesos</h3>
+          <p>Convertimos tareas repetitivas en flujos automáticos que corren solos: reportes, alertas a WhatsApp, inventario y sincronización entre apps.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag">Flujos de trabajo</span>
+          <span class="tag">Bots WhatsApp</span>
+          <span class="tag">Alertas</span>
+          <span class="tag">Integración APIs</span>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="svc-card">
+        <div>
+          <div class="svc-card-top">
+            <span class="svc-num">04</span>
+          </div>
+          <h3>Sistema POS Restaurantes</h3>
+          <p>Software integral para restaurantes y cafeterías: gestión ágil de mesas, comandas a cocina, inventario y cuadre de caja sin errores.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag">Control de mesas</span>
+          <span class="tag">Comandas</span>
+          <span class="tag">Ventas del día</span>
+          <span class="tag">Cierre de caja</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Metodología -->
+    <div class="section-title">Cómo Trabajamos con Tu Negocio</div>
+    <div class="features-row">
+      <div class="feat-box">
+        <div class="num">01. Escuchamos</div>
+        <h4>Entendemos tu meta</h4>
+        <p>Analizamos tus desafíos y objetivos antes de programar.</p>
+      </div>
+      <div class="feat-box">
+        <div class="num">02. Proponemos</div>
+        <h4>Plan y precio claro</h4>
+        <p>Alcance definido y presupuesto cerrado sin costes ocultos.</p>
+      </div>
+      <div class="feat-box">
+        <div class="num">03. Construimos</div>
+        <h4>Ciclos ágiles</h4>
+        <p>Avances visibles y continuos con total transparencia.</p>
+      </div>
+      <div class="feat-box">
+        <div class="num">04. Entregamos</div>
+        <h4>Capacitación y soporte</h4>
+        <p>Tu equipo opera de forma autónoma con nuestro respaldo.</p>
+      </div>
+    </div>
+
+    <!-- Call to Action Footer -->
+    <footer class="cta-container">
+      <div class="cta-text">
+        <h3>¿Listo para digitalizar tu negocio?</h3>
+        <p>Conversemos sin compromiso. Te asesoramos sobre la mejor opción.</p>
+      </div>
+      <div class="cta-contacts">
+        <div class="contact-item highlight-contact">
+          📱 WhatsApp: +51 906 920 958
+        </div>
+        <div class="contact-item">
+          ✉️ limasync0@gmail.com
+        </div>
+        <div class="contact-item">
+          🌐 limasync.com
+        </div>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>

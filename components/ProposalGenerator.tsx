@@ -21,10 +21,10 @@ CLIENTE: ${clientName.toUpperCase() || "EL CLIENTE"} (${businessName.toUpperCase
 LimaSync Solutions se compromete al diseño, desarrollo, configuración y despliegue del sitio web oficial para ${businessName || "el negocio del cliente"}, bajo el rubro de ${rubro}.
 
 2. PRECIO Y CONDICIONES DE PAGO:
-• Inversión Total Setup: S/ 500.00 (Quinientos y 00/100 Soles).
+• Inversión Total Setup: S/ 499.00 (Quinientos y 00/100 Soles).
 • Modalidad 50/50:
-  - Primer Pago (50%): S/ 250.00 al momento de la firma y entrega de materiales base (logo y textos).
-  - Segundo Pago (50%): S/ 250.00 contra entrega y verificación del sitio web en línea.
+  - Primer Pago (50%): S/ 249.00 al momento de la firma y entrega de materiales base (logo y textos).
+  - Segundo Pago (50%): S/ 249.00 contra entrega y verificación del sitio web en línea.
 
 3. PLAZO DE ENTREGA:
 • 72 horas calendario desde la confirmación del pago inicial del 50%.
@@ -38,11 +38,11 @@ LimaSync Solutions se compromete al diseño, desarrollo, configuración y despli
 • Hasta 2 rondas de revisión y ajustes menores antes de la entrega final.
 
 5. PLAN DE MANTENIMIENTO Y ALOJAMIENTO (OPCIONAL / MES 2 EN ADELANTE):
-• Costo mensual: S/ 100.00 / mes (Primer mes bonificado con el setup).
+• Costo mensual: S/ 99.00 / mes (Primer mes bonificado con el setup).
 • Incluye: Alojamiento en Servidor VPS Cloud, backups semanales, soporte técnico continuo y hasta 2 actualizaciones menores de texto o precios al mes. Sin permanencia obligatoria.
 
 6. ACEPTACIÓN:
-El abono del anticipo de S/ 250.00 constituye la aceptación plena de los términos de esta propuesta.
+El abono del anticipo de S/ 249.00 constituye la aceptación plena de los términos de esta propuesta.
 =====================================================`;
 
   const copyToClipboard = () => {
@@ -52,8 +52,8 @@ El abono del anticipo de S/ 250.00 constituye la aceptación plena de los térmi
   };
 
   const sendByWhatsApp = () => {
-    const url = `https://wa.me/51981906958?text=${encodeURIComponent(
-      `*PROPUESTA DE SERVICIO WEB (S/ 500 + S/ 100/MES)*\n\n${contractText}`
+    const url = `https://wa.me/51906920958?text=${encodeURIComponent(
+      `*PROPUESTA DE SERVICIO WEB (S/ 499 + S/ 99/MES)*\n\n${contractText}`
     )}`;
     window.open(url, "_blank");
   };
@@ -112,7 +112,7 @@ El abono del anticipo de S/ 250.00 constituye la aceptación plena de los térmi
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
-              <h3 style={{ fontSize: "1.3rem", fontWeight: 800 }}>Generador de Contrato Estándar S/ 500</h3>
+              <h3 style={{ fontSize: "1.3rem", fontWeight: 800 }}>Generador de Contrato Estándar S/ 499</h3>
               <button
                 onClick={() => setOpen(false)}
                 style={{ background: "none", border: "none", fontSize: "1.5rem", cursor: "pointer", color: "var(--ink-soft)" }}

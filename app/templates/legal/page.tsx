@@ -41,7 +41,7 @@ Materia o Caso: ${matter}
 Nivel de Urgencia: ${urgency}\n
 _Solicitud confidencial generada desde la web demo de LimaSync Solutions_`;
 
-    window.open(`https://wa.me/51981906958?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/51906920958?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (
@@ -101,7 +101,7 @@ _Solicitud confidencial generada desde la web demo de LimaSync Solutions_`;
               Agendar Diagnóstico Legal ↓
             </a>
             <a
-              href="https://wa.me/51981906958?text=Hola,%20requiero%20asesor%C3%ADa%20legal%20urgente"
+              href="https://wa.me/51906920958?text=Hola,%20requiero%20asesor%C3%ADa%20legal%20urgente"
               target="_blank"
               rel="noopener noreferrer"
               style={{

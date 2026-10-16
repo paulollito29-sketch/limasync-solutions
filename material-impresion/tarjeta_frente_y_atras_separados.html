@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>LimaSync Solutions - Tarjetas de Presentación Frente y Atrás</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+    :root {
+      --paper: #f7f6f2;
+      --paper-card: #ffffff;
+      --ink: #16150f;
+      --ink-soft: #525046;
+      --accent: #0284c7;
+      --accent-strong: #0369a1;
+      --line: #e2dfd5;
+      --cut-line: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      background: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 10px;
+      gap: 30px;
+    }
+
+    .toolbar {
+      background: #0f172a;
+      color: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 860px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+    }
+    .toolbar h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .toolbar p {
+      font-size: 13.5px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-print {
+      background: #0284c7;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      padding: 11px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+    }
+    .btn-print:hover { background: #0369a1; }
+    .btn-secondary {
+      background: #334155;
+      box-shadow: none;
+    }
+    .btn-secondary:hover { background: #475569; }
+
+    .page-title-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: -18px;
+    }
+
+    /* HOJAS A4 (210mm x 297mm) */
+    .a4-sheet {
+      width: 210mm;
+      min-height: 297mm;
+      background: white;
+      padding: 13.5mm 15mm;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      display: grid;
+      grid-template-columns: 90mm 90mm;
+      grid-template-rows: repeat(5, 54mm);
+      justify-content: center;
+      align-content: center;
+      gap: 0;
+      position: relative;
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+        gap: 0;
+      }
+      .toolbar, .page-title-label { display: none !important; }
+      .a4-sheet {
+        box-shadow: none;
+        width: 100%;
+        min-height: 100vh;
+        page-break-after: always;
+        padding: 13.5mm 15mm;
+      }
+    }
+
+    /* TARJETA INDIVIDUAL (90mm x 54mm) */
+    .card {
+      width: 90mm;
+      height: 54mm;
+      border: 1px dashed var(--cut-line);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    /* ================= FRENTE ================= */
+    .card-front {
+      background: var(--paper);
+      padding: 5.5mm 6mm;
+    }
+
+    .card-front-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .brand-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-top {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .card-logo-mark {
+      width: 17px;
+      height: 17px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      position: relative;
+    }
+    .card-logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border: 2px solid var(--accent);
+      border-top-color: transparent;
+      border-radius: 50%;
+      transform: rotate(35deg);
+    }
+
+    .brand-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .brand-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.2px;
+      font-weight: 700;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .badge-location {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.2px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2.5px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    .person-block {
+      margin-top: 1.5mm;
+    }
+    .person-name {
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .person-role {
+      font-size: 8.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .services-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: 1mm;
+    }
+    .s-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.8px;
+      padding: 1.5px 5px;
+      background: #ffffff;
+      border: 0.8px solid var(--line);
+      border-radius: 2px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid var(--line);
+      padding-top: 1.5mm;
+      margin-top: 1.5mm;
+    }
+
+    .contacts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.2px;
+      color: var(--ink-soft);
+    }
+    .contacts-list strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .contacts-list .highlight {
+      color: var(--accent-strong);
+      font-weight: 700;
+      font-size: 7.8px;
+    }
+
+    .qr-box {
+      width: 14mm;
+      height: 14mm;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 1mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* ================= ATRÁS / DORSO ================= */
+    .card-back {
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding: 5mm 6mm;
+    }
+
+    .back-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .back-logo-mark {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--paper);
+      border-radius: 50%;
+      position: relative;
+    }
+    .back-logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border: 2px solid #38bdf8;
+      border-top-color: transparent;
+      border-radius: 50%;
+      transform: rotate(35deg);
+    }
+    .back-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .back-slogan {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.6px;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 1px;
+    }
+
+    .back-desc {
+      font-size: 8.5px;
+      color: #cbd5e1;
+      max-width: 72mm;
+      line-height: 1.45;
+      margin: 2mm 0;
+    }
+
+    .back-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2.5px 9px;
+      border-radius: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <h2>💳 Tarjetas de Presentación LimaSync Solutions (Frente y Reverso Separados)</h2>
+    <p>
+      Diseñado para impresión a doble cara o por separado en hoja A4 (10 tarjetas por página, 90mm x 54mm estándar).<br>
+      Puedes imprimir solo la <b>Página 1 (Frente)</b>, solo la <b>Página 2 (Reverso)</b> o ambas a doble cara.
+    </p>
+    <div class="btn-group">
+      <button class="btn-print" onclick="window.print()">🖨️ Imprimir Todo / PDF (Ambas Caras)</button>
+      <button class="btn-print btn-secondary" onclick="printFrontOnly()">📄 Imprimir Solo Frente (Página 1)</button>
+      <button class="btn-print btn-secondary" onclick="printBackOnly()">📄 Imprimir Solo Reverso (Página 2)</button>
+    </div>
+  </div>
+
+  <div class="page-title-label" id="label-p1">Hoja 1: Frente (Datos, Servicios y Código QR)</div>
+  <!-- HOJA 1: FRENTE (10 TARJETAS) -->
+  <div class="a4-sheet" id="sheet-front">
+    <script>
+      const cardFront = `
+      <div class="card card-front">
+        <div class="card-front-header">
+          <div class="brand-group">
+            <div class="brand-top">
+              <div class="card-logo-mark"></div>
+              <span class="brand-name">LimaSync</span>
+            </div>
+            <span class="brand-sub">Solutions</span>
+          </div>
+          <span class="badge-location">Lima · Remoto</span>
+        </div>
+
+        <div class="person-block">
+          <div class="person-name">Paulo Espinoza</div>
+          <div class="person-role">Desarrollo Web & Automatización</div>
+        </div>
+
+        <div class="services-mini">
+          <span class="s-tag">Web & Tiendas</span>
+          <span class="s-tag">Dashboards</span>
+          <span class="s-tag">Automatización</span>
+          <span class="s-tag">POS Restaurante</span>
+        </div>
+
+        <div class="card-footer">
+          <div class="contacts-list">
+            <div>📱 <span class="highlight">+51 906 920 958</span></div>
+            <div>✉️ limasync0@gmail.com</div>
+            <div>🌐 limasync.com</div>
+          </div>
+          <div class="qr-box" title="Escanear para escribir por WhatsApp">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fwa.me%2F51906920958%3Ftext%3DHola%2520LimaSync%252C%2520quiero%2520cotizar%2520un%2520proyecto" alt="QR WhatsApp">
+          </div>
+        </div>
+      </div>
+      `;
+
+      for (let i = 0; i < 10; i++) {
+        document.write(cardFront);
+      }
+    </script>
+  </div>
+
+  <div class="page-title-label" id="label-p2">Hoja 2: Reverso / Detrás (Estilo Corporativo Slate & Cyan)</div>
+  <!-- HOJA 2: REVERSO (10 TARJETAS CON IDÉNTICO POSICIONAMIENTO PARA COINCIDIR EXACTO) -->
+  <div class="a4-sheet" id="sheet-back">
+    <script>
+      const cardBack = `
+      <div class="card card-back">
+        <div>
+          <div class="back-logo-wrap">
+            <div class="back-logo-mark"></div>
+            <span class="back-title">LimaSync Solutions</span>
+          </div>
+          <div class="back-slogan">Tu negocio en línea, sin fricción</div>
+        </div>
+
+        <div class="back-desc">
+          Creamos webs, paneles y automatizaciones para negocios que quieren vender más sin complicarse la operación.
+        </div>
+
+        <div class="back-url">limasync.com</div>
+      </div>
+      `;
+
+      for (let i = 0; i < 10; i++) {
+        document.write(cardBack);
+      }
+    </script>
+  </div>
+
+  <script>
+    function printFrontOnly() {
+      document.getElementById('sheet-back').style.display = 'none';
+      document.getElementById('label-p2').style.display = 'none';
+      document.getElementById('sheet-front').style.display = 'grid';
+      window.print();
+      // Restaurar
+      setTimeout(() => {
+        document.getElementById('sheet-back').style.display = 'grid';
+        document.getElementById('label-p2').style.display = 'block';
+      }, 1000);
+    }
+
+    function printBackOnly() {
+      document.getElementById('sheet-front').style.display = 'none';
+      document.getElementById('label-p1').style.display = 'none';
+      document.getElementById('sheet-back').style.display = 'grid';
+      window.print();
+      // Restaurar
+      setTimeout(() => {
+        document.getElementById('sheet-front').style.display = 'grid';
+        document.getElementById('label-p1').style.display = 'block';
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>

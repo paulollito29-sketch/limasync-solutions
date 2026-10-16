@@ -8,7 +8,7 @@
 
 ### 1. Objeto y Filosofía de la Sociedad Dual
 La empresa opera bajo un modelo de sinergia complementaria:
-1. **Unidad 1 — Agencia Web Lima (Liquidez & Cash Cow):** Genera flujo de caja inmediato mediante desarrollo express en 72 horas (S/ 500 setup) y cartera recurrente de mantenimiento (S/ 100/mes).
+1. **Unidad 1 — Agencia Web Lima (Liquidez & Cash Cow):** Genera flujo de caja inmediato mediante desarrollo express en 72 horas (S/ 499 setup) y cartera recurrente de mantenimiento (S/ 99/mes).
 2. **Unidad 2 — Estudio XR Meta Quest (Activo Escalable & Moonshot):** Desarrolla propiedad intelectual de videojuegos en dólares en Meta Horizon Store financiado por el flujo de la Agencia Web.
 
 ---
@@ -41,6 +41,6 @@ flowchart TD
 ---
 
 ### 4. Estándares Operativos No Negociables
-1. **Entrega de Webs en 72 Horas:** No se permite diseño desde cero fuera de las 5 plantillas maestras a precio de S/ 500. El límite de tiempo por web es de 8 horas efectivas de trabajo para proteger el margen del 91.4%.
-2. **Alcance del Mantenimiento (S/ 100/mes):** Incluye hosting en VPS, SSL, backups semanales y hasta 2 cambios menores de textos/fotos. Modificaciones estructurales o nuevas secciones se cotizan como servicio adicional.
+1. **Entrega de Webs en 72 Horas:** No se permite diseño desde cero fuera de las 5 plantillas maestras a precio de S/ 499. El límite de tiempo por web es de 8 horas efectivas de trabajo para proteger el margen del 91.4%.
+2. **Alcance del Mantenimiento (S/ 99/mes):** Incluye hosting en VPS, SSL, backups semanales y hasta 2 cambios menores de textos/fotos. Modificaciones estructurales o nuevas secciones se cotizan como servicio adicional.
 3. **Punto de Equilibrio (Hito Mes 4-5):** Al alcanzar 15 clientes en mantenimiento activo (S/ 1,500/mes recurrentes), todos los costos fijos de la empresa quedan cubiertos al 100%.

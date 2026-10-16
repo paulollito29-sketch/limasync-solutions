@@ -164,14 +164,14 @@ export default function RoiCalculator() {
             </div>
 
             <p style={{ color: "#cbd5e1", fontSize: "0.9rem", lineHeight: 1.5 }}>
-              Invirtiendo solo <strong>S/ 500</strong> en el setup inicial, el retorno sobre la inversión (ROI) anual estimado es de un{" "}
+              Invirtiendo solo <strong>S/ 499</strong> en el setup inicial, el retorno sobre la inversión (ROI) anual estimado es de un{" "}
               <strong style={{ color: "#22c55e" }}>+{roiPercentage}%</strong> para un negocio de {rubro}.
             </p>
 
             <div style={{ marginTop: "1.75rem" }}>
               <a
-                href={`https://wa.me/51981906958?text=${encodeURIComponent(
-                  `Hola LimaSync Solutions, usé el simulador para mi negocio de ${rubro} (Ticket promedio S/ ${ticket}) y quiero poner en marcha mi web por S/ 500.`
+                href={`https://wa.me/51906920958?text=${encodeURIComponent(
+                  `Hola LimaSync Solutions, usé el simulador para mi negocio de ${rubro} (Ticket promedio S/ ${ticket}) y quiero poner en marcha mi web por S/ 499.`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

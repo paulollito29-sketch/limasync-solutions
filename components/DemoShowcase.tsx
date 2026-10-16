@@ -77,7 +77,7 @@ export default function DemoShowcase() {
         </div>
 
         <p style={{ maxWidth: "68ch", color: "var(--ink-soft)", marginBottom: "2.5rem", fontSize: "1.05rem" }}>
-          No inventamos la rueda en cada proyecto. Hemos diseñado y optimizado 5 arquitecturas web ultra-rápidas según tu rubro, listas para personalizar con tu logo, fotos y colores por solo <strong>S/ 500</strong>.
+          No inventamos la rueda en cada proyecto. Hemos diseñado y optimizado 5 arquitecturas web ultra-rápidas según tu rubro, listas para personalizar con tu logo, fotos y colores por solo <strong>S/ 499</strong>.
         </p>
 
         <div
@@ -171,7 +171,7 @@ export default function DemoShowcase() {
                   Probar Demo en Vivo ↗
                 </Link>
                 <a
-                  href={`https://wa.me/51981906958?text=${encodeURIComponent(
+                  href={`https://wa.me/51906920958?text=${encodeURIComponent(
                     `Hola LimaSync Solutions, me interesa la plantilla de ${t.niche} (${t.title}) para mi negocio.`
                   )}`}
                   target="_blank"

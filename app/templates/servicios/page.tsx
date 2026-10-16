@@ -48,7 +48,7 @@ export default function ServiciosTemplate() {
     text += `*Estimado Base: S/ ${estimatedTotal}*\n`;
     text += `\n_Cotización generada desde la web demo desarrollada por LimaSync Solutions_`;
 
-    window.open(`https://wa.me/51981906958?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/51906920958?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (
@@ -100,7 +100,7 @@ export default function ServiciosTemplate() {
               Calcular Cotización Online ↓
             </a>
             <a
-              href="https://wa.me/51981906958?text=Hola,%20tengo%20una%20urgencia%20en%20mi%20hogar"
+              href="https://wa.me/51906920958?text=Hola,%20tengo%20una%20urgencia%20en%20mi%20hogar"
               target="_blank"
               rel="noopener noreferrer"
               style={{

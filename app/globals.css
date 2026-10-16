@@ -6,9 +6,10 @@
   --line: #dddacd;
   --accent: #0ea5e9;
   --accent-strong: #0369a1;
-  --accent-ink: #fff;
-  --sans: var(--font-sans), "Segoe UI", system-ui, sans-serif;
-  --mono: var(--font-mono), ui-monospace, monospace;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --sans: var(--font-sans);
+  --mono: var(--font-mono);
   --pad: clamp(1.25rem, 4vw, 3.5rem);
 }
 

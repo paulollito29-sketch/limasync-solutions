@@ -1,20 +1,17 @@
 import Header from "@/components/Header";
 import DemoShowcase from "@/components/DemoShowcase";
 import PricingSection from "@/components/PricingSection";
-import RoiCalculator from "@/components/RoiCalculator";
-import VrStudioSection from "@/components/VrStudioSection";
-import ProposalGenerator from "@/components/ProposalGenerator";
 
 const WHATSAPP =
-  "https://wa.me/51981906958?text=" +
-  encodeURIComponent("Hola LimaSync Solutions, quiero cotizar mi sitio web por S/ 500");
+  "https://wa.me/51906920958?text=" +
+  encodeURIComponent("Hola LimaSync Solutions, quiero cotizar mi sitio web por S/ 499");
 
 const EMAIL = "limasync0@gmail.com";
 
 const services = [
   {
     num: "01",
-    title: "Desarrollo Web Express (S/ 500)",
+    title: "Desarrollo Web Express (S/ 499)",
     desc: "Sitios corporativos y landing pages diseñados para vender. Rápidos, claros, optimizados para celulares y entregados en 72 horas.",
     tags: ["Landing pages", "Entrega 72h", "WhatsApp Checkout", "Dominio .com"],
   },
@@ -46,7 +43,7 @@ const steps = [
   },
   {
     num: "02",
-    title: "Anticipo del 50% (S/ 250)",
+    title: "Anticipo del 50% (S/ 249)",
     desc: "Nos envías tu logo, fotos y teléfonos. Aseguramos el inicio inmediato con contrato estándar.",
   },
   {
@@ -57,17 +54,17 @@ const steps = [
   {
     num: "04",
     title: "Lanzamiento & Capacitación",
-    desc: "Verificas la web en vivo, abonas el 50% restante (S/ 250) y te capacitamos en 15 min para operarla.",
+    desc: "Verificas la web en vivo, abonas el 50% restante (S/ 249) y te capacitamos en 15 min para operarla.",
   },
 ];
 
 const stripItems = [
   "Entrega en 72 Horas",
-  "Webs desde S/ 500",
-  "Meta Quest VR Studio",
+  "Webs desde S/ 499",
+  "Automatización de Ventas",
   "Pedidos directos a WhatsApp",
   "Dominio .com & SSL Incluido",
-  "Mantenimiento S/ 100/mes",
+  "Mantenimiento S/ 99/mes",
 ];
 
 export default function Home() {
@@ -79,11 +76,11 @@ export default function Home() {
         <div className="wrap">
           <div className="hero">
             <div>
-              <p className="kicker">Agencia Web · Software · Estudio Meta Quest VR</p>
+              <p className="kicker">Agencia Web · Software · Automatización</p>
               <h1>
                 Tu negocio en línea,
                 <br />
-                <span className="outline">en 72 horas por S/ 500.</span>
+                <span className="outline">en 72 horas por S/ 499.</span>
               </h1>
               <p className="hero-sub">
                 Creamos páginas web de alto impacto, paneles y soluciones digitales en Lima.
@@ -94,41 +91,23 @@ export default function Home() {
                   Hablemos por WhatsApp →
                 </a>
                 <a href="#demos" className="btn">
-                  Ver Demos en Vivo ↓
+                   Ver Demos en Vivo ↓
                 </a>
               </div>
               <p className="hero-note">{"// Entrega en 72h · Dominio .com y SSL incluidos · Soporte continuo"}</p>
             </div>
-            <div className="hero-visual" aria-hidden="true">
-              <div className="win">
-                <div className="win-bar">
-                  <span className="win-dot" />
-                  <span className="win-dot accent" />
-                  <span className="win-dot" />
-                  <span className="win-title">limasync-deploy.sh</span>
-                </div>
-                <div className="win-body">
-                  <p>
-                    <span className="p">$</span> limasync deploy --client "pyme-lima"
-                  </p>
-                  <p>
-                    <span className="ok">✓</span> plantilla maestra configurada (72h)
-                  </p>
-                  <p>
-                    <span className="ok">✓</span> dominio .com &amp; SSL activo
-                  </p>
-                  <p>
-                    <span className="ok">✓</span> pedidos y cotizaciones → WhatsApp
-                  </p>
-                  <p>
-                    <span className="ok">✓</span> VR Lab: Meta Quest 3S (90 FPS)
-                  </p>
-                  <p>
-                    <span className="p">$</span> <span className="cursor" />
-                  </p>
-                </div>
+            <div className="hero-visual">
+              <div className="hero-mockup-wrap">
+                <img
+                  src="/images/hero_mockup.png"
+                  alt="Plataforma y aplicación web responsive LimaSync"
+                  className="hero-mockup-img"
+                  width={1024}
+                  height={1024}
+                  loading="eager"
+                />
               </div>
-              <span className="chip chip-1">S/ 500</span>
+              <span className="chip chip-1">S/ 499</span>
               <span className="chip chip-2">72 Horas</span>
             </div>
           </div>
@@ -182,17 +161,8 @@ export default function Home() {
 
         {/* 03 PRECIOS & CONTRATO */}
         <PricingSection />
-        <div className="wrap">
-          <ProposalGenerator />
-        </div>
 
-        {/* 04 CALCULADORA ROI */}
-        <RoiCalculator />
-
-        {/* 05 ESTUDIO VR META QUEST */}
-        <VrStudioSection />
-
-        {/* 06 PROCESO */}
+        {/* 04 PROCESO */}
         <section id="proceso" style={{ paddingBlock: "clamp(3.5rem, 6vw, 5.5rem)", borderTop: "1px solid var(--line)" }}>
           <div className="wrap">
             <div className="sec-head">
@@ -202,7 +172,7 @@ export default function Home() {
                 </p>
                 <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 800 }}>Cómo trabajamos</h2>
               </div>
-              <span className="sec-num">06 / Proceso</span>
+              <span className="sec-num">04 / Proceso</span>
             </div>
             <div className="steps">
               {steps.map((st) => (
@@ -223,15 +193,15 @@ export default function Home() {
               <h2>¿Listo para poner tu negocio en línea en 72 horas?</h2>
               <p>
                 Escríbenos por WhatsApp con el nombre y rubro de tu negocio. En 10 minutos
-                te mostramos la demo recomendada y coordinamos el inicio con solo S/ 250 de anticipo.
+                te mostramos la demo recomendada y coordinamos el inicio con solo S/ 249 de anticipo.
               </p>
               <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="btn">
-                Escríbenos por WhatsApp (+51 981 906 958) →
+                Escríbenos por WhatsApp →
               </a>
             </div>
             <div className="cta-mail">
               <b>{EMAIL}</b>
-              WhatsApp +51 981 906 958 · Lima · San Isidro · Miraflores · Remoto
+              WhatsApp +51 906 920 958 · Lima · San Isidro · Miraflores · Remoto
             </div>
           </div>
         </section>
@@ -239,10 +209,10 @@ export default function Home() {
 
       <footer className="footer">
         <div className="wrap foot">
-          <span>© {new Date().getFullYear()} LIMASYNC SOLUTIONS — Agencia Web &amp; Meta Quest VR Studio</span>
+          <span>© {new Date().getFullYear()} LIMASYNC SOLUTIONS — Agencia Web y Automatización</span>
           <span>
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">
-              WhatsApp (+51 981 906 958)
+              WhatsApp (+51 906 920 958)
             </a>
             {" · "}
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>

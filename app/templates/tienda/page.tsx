@@ -112,7 +112,7 @@ export default function TiendaTemplate() {
     text += `\nMétodo de pago preferido: Yape / Plin / Transferencia BCP\n`;
     text += `_Pedido generado desde la tienda demo desarrollada por LimaSync Solutions_`;
 
-    window.open(`https://wa.me/51981906958?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/51906920958?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (

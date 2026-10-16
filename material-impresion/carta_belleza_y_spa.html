@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>LimaSync Solutions - Cartas y Pitch Cards para Salones y Spas</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+    :root {
+      --paper: #ffffff;
+      --ink: #16150f;
+      --ink-soft: #4b5563;
+      --line: #e5e7eb;
+      --accent: #0284c7;
+      --accent-dark: #0369a1;
+      --rose: #be185d;
+      --rose-light: #fdf2f8;
+      --tag-bg: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      background: #e5e7eb;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--ink);
+      padding: 30px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .no-print {
+      background: #0f172a;
+      color: white;
+      padding: 18px 26px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 820px;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    .no-print h2 { font-size: 18px; margin-bottom: 6px; }
+    .no-print p { font-size: 13px; color: #94a3b8; margin-bottom: 12px; }
+    .no-print button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      font-weight: 700;
+      padding: 11px 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .letter-page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--paper);
+      padding: 24mm 22mm 20mm 22mm;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @media print {
+      body { background: transparent; padding: 0; gap: 0; }
+      .no-print { display: none; }
+      .letter-page {
+        box-shadow: none;
+        width: 100%;
+        min-height: 100vh;
+        page-break-after: always;
+        padding: 20mm 20mm 15mm 20mm;
+      }
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #000;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+    }
+
+    .logo-area h2 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-area span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent-dark);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .header-info {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .letter-meta {
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .letter-meta .date { color: var(--ink-soft); margin-bottom: 12px; }
+    .recipient-title { font-weight: 700; color: var(--ink); }
+
+    .subject {
+      font-weight: 800;
+      font-size: 15.5px;
+      color: var(--accent-dark);
+      margin-bottom: 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .body-text p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #374151;
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    .proposal-box {
+      background: var(--rose-light);
+      border: 1px solid #fbcfe8;
+      border-left: 4px solid var(--rose);
+      padding: 14px 18px;
+      margin: 16px 0;
+      border-radius: 4px;
+    }
+    .proposal-box h4 {
+      font-size: 14px;
+      color: #831843;
+      margin-bottom: 8px;
+    }
+    .proposal-box ul {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .proposal-box li {
+      font-size: 12px;
+      color: #374151;
+    }
+    .proposal-box li strong { color: #9d174d; }
+
+    .pricing-strip {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .pricing-strip strong { color: #166534; }
+    .pricing-strip .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: #166534;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .signature-area {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .sign-block { display: flex; flex-direction: column; gap: 3px; }
+    .sign-line { width: 220px; height: 1px; background: #9ca3af; margin-bottom: 8px; }
+    .sign-name { font-weight: 700; font-size: 14px; }
+    .sign-role { font-size: 12px; color: var(--ink-soft); }
+    .sign-company { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-dark); font-weight: 600; }
+
+    .page-footer {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-soft);
+    }
+    .highlight-contact { color: var(--accent-dark); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <div class="no-print">
+    <h2>🌸 Carta Especializada para Salones de Belleza, Spas & Estéticas</h2>
+    <p>Diseñada específicamente para los <b>104 prospectos de Belleza & Bienestar</b> de la base de datos de Lima y Callao (Jr. Lima, Grau, Av. Faucett, Miraflores, San Borja, etc.).</p>
+    <button onclick="window.print()">🖨️ Imprimir Carta en A4 / Guardar PDF</button>
+  </div>
+
+  <div class="letter-page">
+    <div>
+      <div class="header">
+        <div class="logo-area">
+          <h2>LimaSync Solutions</h2>
+          <span>Páginas Web · Catálogos Online · Reservas por WhatsApp</span>
+        </div>
+        <div class="header-info">
+          WhatsApp: +51 906 920 958<br>
+          Email: limasync0@gmail.com<br>
+          Web: limasync.com
+        </div>
+      </div>
+
+      <div class="letter-meta">
+        <div class="date">Lima, Perú — Octubre de 2026</div>
+        <div class="recipient-title">
+          Estimado(a) Propietario(a) / Administrador(a) / Especialista en Belleza<br>
+          Presente.-
+        </div>
+      </div>
+
+      <div class="subject">
+        ASUNTO: Creación de página web profesional con catálogo de servicios y botón directo de citas a WhatsApp
+      </div>
+
+      <div class="body-text">
+        <p>
+          Reciba un cordial saludo. Notamos la excelente acogida y el flujo de clientes que tiene su salón. Hoy en día, miles de clientas buscan servicios como manicure, alisados, tintes, faciales o masajes en Google Maps y redes sociales antes de decidir dónde atenderse.
+        </p>
+
+        <p>
+          Sin embargo, muchas veces la falta de una página web propia hace que clientas potenciales duden sobre los precios exactos, no encuentren la lista completa de servicios o terminen agendando en otro establecimiento. En <strong>LimaSync Solutions</strong> creamos webs atractivas, rápidas y muy fáciles de usar para su público:
+        </p>
+
+        <div class="proposal-box">
+          <h4>¿Qué incluye la propuesta web para su Salón / Spa?</h4>
+          <ul>
+            <li><strong>Galería de Trabajos:</strong> Fotos reales de antes y después, cortes, uñas, peinados y tratamientos.</li>
+            <li><strong>Catálogo y Lista de Precios:</strong> Servicios ordenados con promociones actualizables de temporada.</li>
+            <li><strong>Botón Directo de Citas:</strong> Las clientas eligen el servicio y le escriben a su WhatsApp con el pedido listo.</li>
+            <li><strong>Ubicación y Horarios en Google:</strong> Enlace a Google Maps para que cualquier clienta llegue caminando o en taxi sin perderse.</li>
+          </ul>
+        </div>
+
+        <div class="pricing-strip">
+          <div>
+            <b>Tarifa accesible:</b> Implementación completa desde <strong>S/ 499</strong> con soporte técnico mensual opcional de S/ 99.
+          </div>
+          <span class="badge">Alcance Cerrado</span>
+        </div>
+
+        <p>
+          No requiere conocimientos de computación. Nos encargamos del diseño, la publicación en internet y la sincronización con su celular.
+        </p>
+
+        <p>
+          Nos gustaría coordinar una breve demostración visual de 5 minutos en su local o por WhatsApp para mostrarle cómo luciría la página de su salón.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="signature-area">
+        <div class="sign-block">
+          <div class="sign-line"></div>
+          <div class="sign-name">Paulo Espinoza</div>
+          <div class="sign-role">Consultor de Soluciones Digitales</div>
+          <div class="sign-company">LimaSync Solutions</div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Lima y Callao · Visitas Comerciales y Soporte Técnico</span>
+        <span>Coordinar visita por WhatsApp: <strong class="highlight-contact">+51 906 920 958</strong></span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>LimaSync Solutions - Cartas de Presentación Comercial</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --paper: #ffffff;
+      --ink: #1e1e1e;
+      --ink-soft: #4b5563;
+      --line: #e5e7eb;
+      --accent: #0284c7;
+      --accent-dark: #0369a1;
+      --tag-bg: #f3f4f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      background: #e5e7eb;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--ink);
+      padding: 30px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .no-print {
+      background: #111827;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .no-print button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .letter-page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--paper);
+      padding: 24mm 22mm 20mm 22mm;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+        gap: 0;
+      }
+      .no-print { display: none; }
+      .letter-page {
+        box-shadow: none;
+        width: 100%;
+        min-height: 100vh;
+        page-break-after: always;
+        padding: 20mm 20mm 15mm 20mm;
+      }
+    }
+
+    /* HEADER CARTA */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #000;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+    }
+
+    .logo-area h2 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-area span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent-dark);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .header-info {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    /* METADATA CARTA */
+    .letter-meta {
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .letter-meta .date {
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+    }
+
+    .recipient-title {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* CONTENIDO */
+    .subject {
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--accent-dark);
+      margin-bottom: 18px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .body-text p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #374151;
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    .services-summary {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      margin: 18px 0;
+      border-radius: 4px;
+    }
+
+    .services-summary h4 {
+      font-size: 13.5px;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .services-summary ul {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .services-summary li {
+      font-size: 12px;
+      color: #334155;
+    }
+    .services-summary li strong {
+      color: var(--accent-dark);
+    }
+
+    /* FIRMA */
+    .signature-area {
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .sign-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .sign-line {
+      width: 220px;
+      height: 1px;
+      background: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .sign-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .sign-role {
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .sign-company {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    .page-footer {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-soft);
+    }
+
+    .highlight-contact {
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print">
+    <h3>📄 Pack de Cartas de Presentación LimaSync Solutions</h3>
+    <p style="font-size: 13px; color: #9ca3af; margin-top: 4px;">Contiene 2 modelos: <b>Carta Comercial General (PyMEs/Empresas)</b> y <b>Carta Especializada para Restaurantes y Negocios Gastronómicos</b>.</p>
+    <button onclick="window.print()">🖨️ Imprimir Cartas en A4 / Guardar PDF</button>
+  </div>
+
+  <!-- CARTA 1: GENERAL PYMES Y EMPRESAS -->
+  <div class="letter-page">
+    <div>
+      <div class="header">
+        <div class="logo-area">
+          <h2>LimaSync Solutions</h2>
+          <span>Desarrollo Web · Automatización · Software a Medida</span>
+        </div>
+        <div class="header-info">
+          WhatsApp: +51 906 920 958<br>
+          Email: limasync0@gmail.com<br>
+          Web: limasync.com
+        </div>
+      </div>
+
+      <div class="letter-meta">
+        <div class="date">Lima, Perú — Octubre de 2026</div>
+        <div class="recipient-title">
+          Estimado(a) Director(a) / Gerente General / Responsable de Operaciones<br>
+          Presente.-
+        </div>
+      </div>
+
+      <div class="subject">
+        ASUNTO: Presentación de servicios de modernización digital, automatización de procesos y desarrollo web a medida
+      </div>
+
+      <div class="body-text">
+        <p>
+          Reciba un cordial saludo. Nos dirigimos a usted con el propósito de presentar formalmente a <strong>LimaSync Solutions</strong>, firma tecnológica dedicada a ayudar a micro, pequeñas y medianas empresas a optimizar sus operaciones y potenciar sus ventas a través de soluciones de software eficientes, claras y sin fricción.
+        </p>
+
+        <p>
+          En el mercado actual, la velocidad de respuesta y el control en tiempo real marcan la diferencia. Desarrollamos herramientas que se integran a su flujo de trabajo habitual sin requerir curvas complejas de aprendizaje ni generar dependencia técnica:
+        </p>
+
+        <div class="services-summary">
+          <h4>Nuestras Principales Líneas de Servicio:</h4>
+          <ul>
+            <li><strong>01. Desarrollo Web & E-commerce:</strong> Páginas corporativas, catálogos y tiendas virtuales diseñadas para convertir y vender rápido.</li>
+            <li><strong>02. Dashboards y Paneles:</strong> Visualización de métricas, reportes de venta y KPIs en tiempo real para decisiones estratégicas.</li>
+            <li><strong>03. Automatización de Procesos:</strong> Conexión entre plataformas, alertas automáticas a WhatsApp y eliminación de tareas manuales.</li>
+            <li><strong>04. Software Operativo a Medida:</strong> Sistemas creados con base en el flujo exacto de su equipo de trabajo.</li>
+          </ul>
+        </div>
+
+        <p>
+          Trabajamos bajo una metodología de alcance cerrado y entregas progresivas: usted conocerá el presupuesto exacto y el cronograma desde el primer día, con comunicación continua y acompañamiento técnico posterior.
+        </p>
+
+        <p>
+          Estaríamos encantados de coordinar una breve reunión o llamada de 10 minutos para evaluar cómo podemos sumar valor a su organización en sus metas de este trimestre.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="signature-area">
+        <div class="sign-block">
+          <div class="sign-line"></div>
+          <div class="sign-name">Equipo de Soluciones Comerciales</div>
+          <div class="sign-role">Consultoría y Desarrollo Tecnológico</div>
+          <div class="sign-company">LimaSync Solutions</div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Lima · Remoto · Cobertura a Nivel Nacional y Regional</span>
+        <span>Contacto directo: <strong class="highlight-contact">+51 906 920 958</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARTA 2: ESPECIAL RESTAURANTES, BARES Y CAFETERIAS -->
+  <div class="letter-page">
+    <div>
+      <div class="header">
+        <div class="logo-area">
+          <h2>LimaSync Solutions</h2>
+          <span>Soluciones Tecnológicas Gastronómicas & Retail</span>
+        </div>
+        <div class="header-info">
+          WhatsApp: +51 906 920 958<br>
+          Email: limasync0@gmail.com<br>
+          Web: limasync.com
+        </div>
+      </div>
+
+      <div class="letter-meta">
+        <div class="date">Lima, Perú — Octubre de 2026</div>
+        <div class="recipient-title">
+          Estimado(a) Administrador(a) / Propietario(a) / Jefe de Salón<br>
+          Presente.-
+        </div>
+      </div>
+
+      <div class="subject">
+        ASUNTO: Optimización operativa, control de salón y sistema POS inteligente para su establecimiento gastronómico
+      </div>
+
+      <div class="body-text">
+        <p>
+          Es un placer saludarle. Desde <strong>LimaSync Solutions</strong> entendemos de primera mano el dinamismo, la exigencia y la velocidad que demanda el rubro gastronómico en cada turno de atención. Un pedido demorado o un error en el cuadre de caja repercute directamente en la experiencia del comensal y en la rentabilidad del negocio.
+        </p>
+
+        <p>
+          Por esta razón, hemos desarrollado y adaptado soluciones tecnológicas orientadas a suprimir la fricción operativa diaria de salones, barras y cocinas:
+        </p>
+
+        <div class="services-summary">
+          <h4>Capacidades de Nuestro Sistema para Restaurantes:</h4>
+          <ul>
+            <li><strong>Gestión de Mesas en Vivo:</strong> Visualización del salón, estado de ocupación, comandas y asignación por mozo.</li>
+            <li><strong>Comandas Inmediatas a Cocina:</strong> Los pedidos viajan sin demoras al área de preparación, reduciendo tiempos de espera.</li>
+            <li><strong>Control de Caja y Medios de Pago:</strong> Cierre de turno exacto, registro por Yape, Plin, tarjetas y efectivo sin descuadres.</li>
+            <li><strong>Menú Digital y Pedidos Web:</strong> Carta online interactiva vinculada directamente al WhatsApp o al sistema del local.</li>
+          </ul>
+        </div>
+
+        <p>
+          Nuestras herramientas se adaptan a su hardware existente (pantallas táctiles, computadoras, tablets o impresoras de tickets térmicas) con un periodo de inducción ágil para mozos, cajeros y personal de cocina.
+        </p>
+
+        <p>
+          Nos gustaría poner a su disposición una demostración guiada sin compromiso para mostrarle en minutos cómo elevar el control y la rotación de mesas en su local.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="signature-area">
+        <div class="sign-block">
+          <div class="sign-line"></div>
+          <div class="sign-name">Área de Implementación Gastronómica</div>
+          <div class="sign-role">Especialistas en Punto de Venta y Automatización</div>
+          <div class="sign-company">LimaSync Solutions</div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Lima · Soporte Continuo y Puesta en Marcha en Local</span>
+        <span>Agendar demo WhatsApp: <strong class="highlight-contact">+51 906 920 958</strong></span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

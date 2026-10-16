@@ -10,11 +10,11 @@ interface TemplateBannerProps {
 
 export default function TemplateBanner({
   niche,
-  price = "S/ 500",
+  price = "S/ 499",
   deliveryTime = "72 horas",
 }: TemplateBannerProps) {
   const whatsappUrl =
-    "https://wa.me/51981906958?text=" +
+    "https://wa.me/51906920958?text=" +
     encodeURIComponent(
       `Hola LimaSync Solutions, vi la plantilla de demo para ${niche} y quiero una igual adaptada a mi negocio con la oferta de ${price}.`
     );
@@ -56,7 +56,7 @@ export default function TemplateBanner({
         <span>
           Plantilla Maestra para <strong>{niche}</strong> · Entrega en{" "}
           <strong style={{ color: "#38bdf8" }}>{deliveryTime}</strong> por{" "}
-          <strong style={{ color: "#38bdf8" }}>{price}</strong> (+ S/ 100/mes hosting & soporte).
+          <strong style={{ color: "#38bdf8" }}>{price}</strong> (+ S/ 99/mes hosting & soporte).
         </span>
       </div>
 

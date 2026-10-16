@@ -1,8 +1,8 @@
 "use client";
 
 const WHATSAPP_PRICING =
-  "https://wa.me/51981906958?text=" +
-  encodeURIComponent("Hola LimaSync Solutions, quiero contratar el Pack Web S/ 500 con entrega en 72 horas.");
+  "https://wa.me/51906920958?text=" +
+  encodeURIComponent("Hola LimaSync Solutions, quiero contratar el Pack Web S/ 499 con entrega en 72 horas.");
 
 export default function PricingSection() {
   return (
@@ -14,14 +14,14 @@ export default function PricingSection() {
               Tarifas Claras · Sin Letra Chica · Para PYMEs de Lima
             </p>
             <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 800 }}>
-              Plan Web S/ 500 + S/ 100/mes
+              Plan Web S/ 499 + S/ 99/mes
             </h2>
           </div>
           <span className="sec-num">03 / Precios</span>
         </div>
 
         <p style={{ maxWidth: "68ch", color: "var(--ink-soft)", marginBottom: "3rem", fontSize: "1.05rem" }}>
-          Un modelo accesible y predecible: 50% de adelanto (S/ 250) al iniciar y el 50% restante (S/ 250) contra entrega verificada en 72 horas.
+          Un modelo accesible y predecible: 50% de adelanto (S/ 249) al iniciar y el 50% restante (S/ 249) contra entrega verificada en 72 horas.
         </p>
 
         <div
@@ -32,7 +32,7 @@ export default function PricingSection() {
             alignItems: "stretch",
           }}
         >
-          {/* Card 1: Setup S/ 500 */}
+          {/* Card 1: Setup S/ 499 */}
           <div
             style={{
               background: "var(--paper-2)",
@@ -68,7 +68,7 @@ export default function PricingSection() {
                 Paso 1 · Creación & Lanzamiento
               </p>
               <div style={{ marginBlock: "0.75rem 1.5rem" }}>
-                <span style={{ fontSize: "3rem", fontWeight: 900, letterSpacing: "-0.03em" }}>S/ 500</span>
+                <span style={{ fontSize: "3rem", fontWeight: 900, letterSpacing: "-0.03em" }}>S/ 499</span>
                 <span style={{ color: "var(--ink-soft)", fontSize: "0.95rem" }}> / pago único</span>
               </div>
               <p style={{ color: "var(--ink-soft)", fontSize: "0.95rem", lineHeight: 1.5, marginBottom: "1.5rem" }}>
@@ -101,12 +101,12 @@ export default function PricingSection() {
                 className="btn btn-accent"
                 style={{ width: "100%", textAlign: "center", padding: "0.85rem", boxSizing: "border-box", display: "block" }}
               >
-                Comenzar con S/ 250 de adelanto →
+                Comenzar con S/ 249 de adelanto →
               </a>
             </div>
           </div>
 
-          {/* Card 2: Mantenimiento S/ 100/mes */}
+          {/* Card 2: Mantenimiento S/ 99/mes */}
           <div
             style={{
               background: "var(--paper)",
@@ -123,7 +123,7 @@ export default function PricingSection() {
                 Paso 2 · Soporte & Paz Mental
               </p>
               <div style={{ marginBlock: "0.75rem 1.5rem" }}>
-                <span style={{ fontSize: "3rem", fontWeight: 900, letterSpacing: "-0.03em" }}>S/ 100</span>
+                <span style={{ fontSize: "3rem", fontWeight: 900, letterSpacing: "-0.03em" }}>S/ 99</span>
                 <span style={{ color: "var(--ink-soft)", fontSize: "0.95rem" }}> / mes (sin contrato forzoso)</span>
               </div>
               <p style={{ color: "var(--ink-soft)", fontSize: "0.95rem", lineHeight: 1.5, marginBottom: "1.5rem" }}>
@@ -150,7 +150,7 @@ export default function PricingSection() {
 
             <div style={{ marginTop: "2rem" }}>
               <a
-                href="https://wa.me/51981906958?text=Hola,%20quiero%20conocer%20m%C3%A1s%20sobre%20el%20plan%20de%20mantenimiento%20mensual"
+                href="https://wa.me/51906920958?text=Hola,%20quiero%20conocer%20m%C3%A1s%20sobre%20el%20plan%20de%20mantenimiento%20mensual"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn"

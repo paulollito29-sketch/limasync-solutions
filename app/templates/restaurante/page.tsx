@@ -119,7 +119,7 @@ export default function RestauranteTemplate() {
     text += `\n*TOTAL A PAGAR: S/ ${total}*\n`;
     text += `\n_Pedido generado desde la web demo desarrollada por LimaSync Solutions_`;
 
-    window.open(`https://wa.me/51981906958?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/51906920958?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (
@@ -171,7 +171,7 @@ export default function RestauranteTemplate() {
               Ver Menú Digital ↓
             </a>
             <a
-              href="https://wa.me/51981906958?text=Hola%20quiero%20reservar%20una%20mesa%20en%20La%20Redonda"
+              href="https://wa.me/51906920958?text=Hola%20quiero%20reservar%20una%20mesa%20en%20La%20Redonda"
               target="_blank"
               rel="noopener noreferrer"
               style={{

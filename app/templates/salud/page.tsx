@@ -25,7 +25,7 @@ const SERVICES = [
   {
     title: "Blanqueamiento Láser LED",
     desc: "Aclara hasta 4 tonos en una sola sesión de 45 minutos sin sensibilidad excesiva.",
-    price: "S/ 250 (Promo del Mes)",
+    price: "S/ 249 (Promo del Mes)",
     time: "45 minutos",
   },
   {
@@ -53,7 +53,7 @@ Fecha solicitada: ${date || "A convenir"}
 Horario preferido: ${preferredTime}\n
 _Enviado desde la web demo de LimaSync Solutions_`;
 
-    window.open(`https://wa.me/51981906958?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/51906920958?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (
@@ -106,7 +106,7 @@ _Enviado desde la web demo de LimaSync Solutions_`;
               Agendar Cita Online ↓
             </a>
             <a
-              href="https://wa.me/51981906958?text=Hola,%20tengo%20una%20urgencia%20dental"
+              href="https://wa.me/51906920958?text=Hola,%20tengo%20una%20urgencia%20dental"
               target="_blank"
               rel="noopener noreferrer"
               style={{
