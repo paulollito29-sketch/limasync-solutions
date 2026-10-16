@@ -57,69 +57,133 @@ _Enviado desde la web demo de LimaSync Solutions_`;
   };
 
   return (
-    <div style={{ background: "#f8fafc", color: "#0f172a", minHeight: "100vh", fontFamily: "sans-serif" }}>
-      <TemplateBanner niche="Clínicas, Salud & Odontología" />
+    <div style={{ background: "#f8fafc", color: "#0f172a", minHeight: "100vh", fontFamily: "var(--sans)" }}>
+      <TemplateBanner niche="Clínicas, Salud & Odontología" currentSlug="salud" />
 
-      {/* Header Clínica */}
+      {/* Header Clínica con Fotografía y Credenciales */}
       <header
         style={{
-          background: "linear-gradient(135deg, #0284c7 0%, #0369a1 100%)",
+          background: "linear-gradient(135deg, #0369a1 0%, #075985 100%)",
           color: "#fff",
-          padding: "4.5rem 1.5rem 4rem",
-          textAlign: "center",
+          padding: "3.5rem 1.5rem 3rem",
         }}
       >
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              background: "rgba(255,255,255,0.15)",
-              padding: "0.3rem 0.8rem",
-              borderRadius: "999px",
-              fontSize: "0.85rem",
-              fontWeight: 600,
-            }}
-          >
-            <span>⚕️</span> Especialistas Certificados COP · San Isidro, Lima
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem", alignItems: "center" }}>
+          <div>
+            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center", marginBottom: "1rem" }}>
+              <span
+                style={{
+                  background: "rgba(255,255,255,0.18)",
+                  padding: "0.25rem 0.75rem",
+                  borderRadius: "999px",
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.35rem",
+                }}
+              >
+                <span>⚕️</span> Especialistas COP 24190 · San Isidro
+              </span>
+              <span
+                style={{
+                  background: "#38bdf8",
+                  color: "#0c4a6e",
+                  padding: "0.25rem 0.65rem",
+                  borderRadius: "999px",
+                  fontSize: "0.78rem",
+                  fontWeight: 700,
+                }}
+              >
+                ⭐ 4.9 (380+ pacientes en Google)
+              </span>
+            </div>
+
+            <h1 style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.4rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+              San Isidro <span style={{ color: "#7dd3fc" }}>Dental & Estética</span>
+            </h1>
+
+            <p style={{ color: "#e0f2fe", fontSize: "1.08rem", marginTop: "1rem", lineHeight: 1.6, maxWidth: "520px" }}>
+              Odontología digital de alta precisión, diseño de sonrisa 3D y ortodoncia invisible. Atención personalizada y sin dolor en San Isidro.
+            </p>
+
+            <div style={{ display: "flex", gap: "0.6rem", marginTop: "1rem", fontSize: "0.85rem", color: "#bae6fd", flexWrap: "wrap" }}>
+              <span>📍 Av. Los Conquistadores 840, San Isidro</span>
+              <span>•</span>
+              <span>🕒 Lun a Sáb: 8:30 am - 8:00 pm</span>
+            </div>
+
+            <div style={{ display: "flex", gap: "0.85rem", marginTop: "1.75rem", flexWrap: "wrap" }}>
+              <a
+                href="#agendar"
+                style={{
+                  background: "#ffffff",
+                  color: "#0369a1",
+                  padding: "0.75rem 1.4rem",
+                  borderRadius: "8px",
+                  fontWeight: 700,
+                  textDecoration: "none",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                }}
+              >
+                Agendar Cita Online ↓
+              </a>
+              <a
+                href="https://wa.me/51906920958?text=Hola,%20tengo%20una%20urgencia%20dental%20en%20San%20Isidro%20Dental"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: "#ef4444",
+                  color: "#ffffff",
+                  padding: "0.75rem 1.4rem",
+                  borderRadius: "8px",
+                  fontWeight: 700,
+                  textDecoration: "none",
+                }}
+              >
+                🚨 Urgencias 24h WhatsApp
+              </a>
+            </div>
           </div>
-          <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)", marginTop: "1.2rem", fontWeight: 800 }}>
-            San Isidro <span style={{ color: "#7dd3fc" }}>Dental & Estética</span>
-          </h1>
-          <p style={{ color: "#e0f2fe", fontSize: "1.1rem", marginTop: "1rem", lineHeight: 1.6 }}>
-            Odontología de alta precisión, tecnología 3D y atención personalizada para toda tu familia. Tu sonrisa en manos expertas.
-          </p>
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", marginTop: "2rem", flexWrap: "wrap" }}>
-            <a
-              href="#agendar"
+
+          {/* Hero Clinical Photo Card */}
+          <div style={{ position: "relative" }}>
+            <div
               style={{
-                background: "#ffffff",
-                color: "#0369a1",
-                padding: "0.85rem 1.6rem",
-                borderRadius: "8px",
-                fontWeight: 700,
-                textDecoration: "none",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                borderRadius: "16px",
+                overflow: "hidden",
+                border: "3px solid rgba(255,255,255,0.25)",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.25)",
+                position: "relative",
               }}
             >
-              Agendar Cita Online ↓
-            </a>
-            <a
-              href="https://wa.me/51906920958?text=Hola,%20tengo%20una%20urgencia%20dental"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                background: "#ef4444",
-                color: "#ffffff",
-                padding: "0.85rem 1.6rem",
-                borderRadius: "8px",
-                fontWeight: 700,
-                textDecoration: "none",
-              }}
-            >
-              🚨 Urgencias 24h WhatsApp
-            </a>
+              <img
+                src="/images/templates/salud.jpg"
+                alt="Clínica y consultorio San Isidro Dental"
+                style={{ width: "100%", height: "360px", objectFit: "cover", display: "block" }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  insetInline: 0,
+                  background: "linear-gradient(to top, rgba(3, 105, 161, 0.95) 0%, transparent 100%)",
+                  padding: "1.25rem",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
+                }}
+              >
+                <div>
+                  <span style={{ color: "#bae6fd", fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase" }}>Dirección Médica</span>
+                  <div style={{ fontWeight: 800, fontSize: "1.1rem" }}>Dr. Roberto Vargas & Equipo</div>
+                  <div style={{ fontSize: "0.8rem", color: "#e0f2fe" }}>Colegio Odontológico del Perú (COP 24190)</div>
+                </div>
+                <span style={{ background: "#ffffff", color: "#0369a1", fontWeight: 800, padding: "0.25rem 0.65rem", borderRadius: "6px", fontSize: "0.85rem" }}>
+                  San Isidro, Lima
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </header>

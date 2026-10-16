@@ -123,69 +123,138 @@ export default function RestauranteTemplate() {
   };
 
   return (
-    <div style={{ background: "#0b0f19", color: "#f8fafc", minHeight: "100vh", fontFamily: "sans-serif" }}>
-      <TemplateBanner niche="Restaurantes & Gastronomía" />
+    <div style={{ background: "#0b0f19", color: "#f8fafc", minHeight: "100vh", fontFamily: "var(--sans)" }}>
+      <TemplateBanner niche="Restaurantes & Gastronomía" currentSlug="restaurante" />
 
-      {/* Hero del Restaurante */}
+      {/* Hero del Restaurante con Fotografía Real */}
       <header
         style={{
           borderBottom: "1px solid #1e293b",
-          background: "radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0b0f19 80%)",
-          padding: "4rem 1.5rem 3rem",
-          textAlign: "center",
+          background: "radial-gradient(circle at 50% 15%, #2a1b14 0%, #0b0f19 80%)",
+          padding: "3.5rem 1.5rem 2.5rem",
         }}
       >
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <span
-            style={{
-              background: "#ea580c",
-              color: "#fff",
-              padding: "0.25rem 0.75rem",
-              borderRadius: "999px",
-              fontSize: "0.8rem",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-            }}
-          >
-            Sabor Tradicional Limeño
-          </span>
-          <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", marginTop: "1rem", fontWeight: 800 }}>
-            La Redonda <span style={{ color: "#f97316" }}>Cevichería & Bistro</span>
-          </h1>
-          <p style={{ color: "#94a3b8", fontSize: "1.1rem", marginTop: "0.75rem", lineHeight: 1.6 }}>
-            Pesca del día artesanal, cortes premium y la auténtica sazón criolla directo a tu mesa en Miraflores y San Isidro.
-          </p>
-          <div style={{ marginTop: "1.5rem", display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <a
-              href="#carta"
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem", alignItems: "center" }}>
+          <div>
+            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center", marginBottom: "1rem" }}>
+              <span
+                style={{
+                  background: "#ea580c",
+                  color: "#fff",
+                  padding: "0.25rem 0.75rem",
+                  borderRadius: "999px",
+                  fontSize: "0.78rem",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                }}
+              >
+                Pesca del Día Artesanal
+              </span>
+              <span
+                style={{
+                  background: "rgba(234, 88, 12, 0.15)",
+                  border: "1px solid rgba(234, 88, 12, 0.35)",
+                  color: "#fdba74",
+                  padding: "0.25rem 0.65rem",
+                  borderRadius: "999px",
+                  fontSize: "0.78rem",
+                  fontWeight: 600,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.3rem",
+                }}
+              >
+                <span>⭐ 4.9</span>
+                <span>(540+ reseñas en Google)</span>
+              </span>
+            </div>
+
+            <h1 style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.4rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+              La Redonda <span style={{ color: "#f97316" }}>Cevichería & Bistro</span>
+            </h1>
+
+            <p style={{ color: "#94a3b8", fontSize: "1.08rem", marginTop: "1rem", lineHeight: 1.6, maxWidth: "520px" }}>
+              Auténtico ceviche carretillero, arroces melosos al wok y coctelería de autor. Pide directo por WhatsApp o reserva tu mesa en Miraflores.
+            </p>
+
+            <div style={{ display: "flex", gap: "0.6rem", marginTop: "1rem", fontSize: "0.85rem", color: "#cbd5e1", flexWrap: "wrap" }}>
+              <span>📍 Calle Manuel Bonilla 142, Miraflores</span>
+              <span>•</span>
+              <span>🕒 Lun a Dom: 11:30 am - 10:30 pm</span>
+            </div>
+
+            <div style={{ marginTop: "1.75rem", display: "flex", gap: "0.85rem", flexWrap: "wrap" }}>
+              <a
+                href="#carta"
+                style={{
+                  background: "#f97316",
+                  color: "#fff",
+                  padding: "0.75rem 1.4rem",
+                  borderRadius: "8px",
+                  fontWeight: 700,
+                  textDecoration: "none",
+                  boxShadow: "0 4px 14px rgba(249, 115, 22, 0.35)",
+                }}
+              >
+                Ver Menú Digital & Pedir ↓
+              </a>
+              <a
+                href="https://wa.me/51906920958?text=Hola%20quiero%20reservar%20una%20mesa%20en%20La%20Redonda"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: "#1e293b",
+                  color: "#f8fafc",
+                  border: "1px solid #334155",
+                  padding: "0.75rem 1.4rem",
+                  borderRadius: "8px",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                }}
+              >
+                Reservar Mesa (WhatsApp)
+              </a>
+            </div>
+          </div>
+
+          {/* Hero Photography Card */}
+          <div style={{ position: "relative" }}>
+            <div
               style={{
-                background: "#f97316",
-                color: "#fff",
-                padding: "0.75rem 1.5rem",
-                borderRadius: "8px",
-                fontWeight: 700,
-                textDecoration: "none",
+                borderRadius: "16px",
+                overflow: "hidden",
+                border: "2px solid rgba(249, 115, 22, 0.3)",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
+                position: "relative",
               }}
             >
-              Ver Menú Digital ↓
-            </a>
-            <a
-              href="https://wa.me/51906920958?text=Hola%20quiero%20reservar%20una%20mesa%20en%20La%20Redonda"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                background: "#1e293b",
-                color: "#f8fafc",
-                border: "1px solid #334155",
-                padding: "0.75rem 1.5rem",
-                borderRadius: "8px",
-                fontWeight: 600,
-                textDecoration: "none",
-              }}
-            >
-              Reservar Mesa (WhatsApp)
-            </a>
+              <img
+                src="/images/templates/restaurante.jpg"
+                alt="Platos de ceviche y mariscos en La Redonda"
+                style={{ width: "100%", height: "360px", objectFit: "cover", display: "block" }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  insetInline: 0,
+                  background: "linear-gradient(to top, rgba(11, 15, 25, 0.95) 0%, transparent 100%)",
+                  padding: "1.25rem",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
+                }}
+              >
+                <div>
+                  <span style={{ color: "#fdba74", fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase" }}>Especialidad del Chef</span>
+                  <div style={{ fontWeight: 800, fontSize: "1.1rem" }}>Ceviche Clásico Carretillero</div>
+                </div>
+                <span style={{ background: "#ea580c", color: "#fff", fontWeight: 800, padding: "0.25rem 0.65rem", borderRadius: "6px", fontSize: "0.95rem" }}>
+                  S/ 36.00
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </header>

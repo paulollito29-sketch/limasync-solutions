@@ -116,37 +116,104 @@ export default function TiendaTemplate() {
   };
 
   return (
-    <div style={{ background: "#18181b", color: "#f4f4f5", minHeight: "100vh", fontFamily: "sans-serif" }}>
-      <TemplateBanner niche="E-Commerce, Tiendas & Ropa (Gamarra)" />
+    <div style={{ background: "#18181b", color: "#f4f4f5", minHeight: "100vh", fontFamily: "var(--sans)" }}>
+      <TemplateBanner niche="E-Commerce, Tiendas & Ropa (Gamarra)" currentSlug="tienda" />
 
-      {/* Hero Tienda */}
+      {/* Hero Tienda con Fotografía Editorial */}
       <header
         style={{
           borderBottom: "1px solid #27272a",
-          padding: "4rem 1.5rem 3rem",
-          textAlign: "center",
+          padding: "3.5rem 1.5rem 2.5rem",
           background: "radial-gradient(circle at center, #27272a 0%, #18181b 100%)",
         }}
       >
-        <span
-          style={{
-            background: "#fafafa",
-            color: "#09090b",
-            padding: "0.25rem 0.65rem",
-            fontSize: "0.75rem",
-            fontWeight: 800,
-            textTransform: "uppercase",
-            letterSpacing: "0.1em",
-          }}
-        >
-          Hecho en Perú · Algodón Pima
-        </span>
-        <h1 style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)", fontWeight: 900, textTransform: "uppercase", marginTop: "1rem", letterSpacing: "-0.03em" }}>
-          Gamarra <span style={{ color: "#38bdf8" }}>Urbana</span>
-        </h1>
-        <p style={{ color: "#a1a1aa", fontSize: "1.1rem", marginTop: "0.5rem" }}>
-          Streetwear con los mejores algodones del mundo. Envíos diarios a todo el Perú vía Shalom y Olva Courier.
-        </p>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem", alignItems: "center" }}>
+          <div>
+            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center", marginBottom: "1rem" }}>
+              <span
+                style={{
+                  background: "#fafafa",
+                  color: "#09090b",
+                  padding: "0.25rem 0.65rem",
+                  fontSize: "0.75rem",
+                  fontWeight: 800,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                Hecho en Perú · Algodón Pima 100%
+              </span>
+              <span
+                style={{
+                  background: "rgba(56, 189, 248, 0.15)",
+                  border: "1px solid rgba(56, 189, 248, 0.3)",
+                  color: "#7dd3fc",
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  padding: "0.2rem 0.55rem",
+                  borderRadius: "999px",
+                }}
+              >
+                ⭐ 4.9 (1,200+ pedidos enviados)
+              </span>
+            </div>
+
+            <h1 style={{ fontSize: "clamp(2.4rem, 5vw, 3.8rem)", fontWeight: 900, textTransform: "uppercase", letterSpacing: "-0.03em", lineHeight: 1.05 }}>
+              Gamarra <span style={{ color: "#38bdf8" }}>Urbana</span>
+            </h1>
+
+            <p style={{ color: "#a1a1aa", fontSize: "1.08rem", marginTop: "1rem", lineHeight: 1.6, maxWidth: "500px" }}>
+              Streetwear premium con cortes boxy y telas pesadas de 400 GSM. Envíos el mismo día a todo el Perú vía Shalom y Olva Courier.
+            </p>
+
+            <div style={{ display: "flex", gap: "0.6rem", marginTop: "1rem", fontSize: "0.85rem", color: "#cbd5e1", flexWrap: "wrap" }}>
+              <span>📦 Envío Lima 24h: S/ 10</span>
+              <span>•</span>
+              <span>🚚 Provincias: S/ 15</span>
+              <span>•</span>
+              <span>📲 Paga con Yape / Plin</span>
+            </div>
+          </div>
+
+          {/* Hero Editorial Card */}
+          <div style={{ position: "relative" }}>
+            <div
+              style={{
+                borderRadius: "16px",
+                overflow: "hidden",
+                border: "2px solid rgba(56, 189, 248, 0.35)",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
+                position: "relative",
+              }}
+            >
+              <img
+                src="/images/templates/tienda.jpg"
+                alt="Colección Streetwear Gamarra Urbana"
+                style={{ width: "100%", height: "360px", objectFit: "cover", display: "block" }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  insetInline: 0,
+                  background: "linear-gradient(to top, rgba(24, 24, 27, 0.95) 0%, transparent 100%)",
+                  padding: "1.25rem",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
+                }}
+              >
+                <div>
+                  <span style={{ color: "#38bdf8", fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase" }}>Nueva Colección</span>
+                  <div style={{ fontWeight: 800, fontSize: "1.1rem" }}>Drop 01 — Heavyweight Hoodies</div>
+                </div>
+                <span style={{ background: "#38bdf8", color: "#09090b", fontWeight: 800, padding: "0.25rem 0.65rem", borderRadius: "6px", fontSize: "0.95rem" }}>
+                  Desde S/ 69
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* Tienda Main Grid */}
