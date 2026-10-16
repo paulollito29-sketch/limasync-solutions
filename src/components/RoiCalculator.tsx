@@ -34,7 +34,7 @@ export default function RoiCalculator() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
             gap: "2.5rem",
             alignItems: "center",
             marginTop: "1.5rem",
@@ -151,7 +151,7 @@ export default function RoiCalculator() {
               <span style={{ color: "#38bdf8", textDecoration: "underline" }}>{daysToPayback} días</span>
             </h3>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem", marginBlock: "1.5rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 140px), 1fr))", gap: "1.25rem", marginBlock: "1.5rem" }}>
               <div style={{ background: "rgba(255,255,255,0.05)", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <span style={{ fontSize: "0.75rem", color: "#94a3b8", display: "block" }}>Ventas Extra / Mes</span>
                 <span style={{ fontSize: "1.6rem", fontWeight: 800, color: "#38bdf8" }}>+{extraSalesMonth}</span>

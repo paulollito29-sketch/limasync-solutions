@@ -121,7 +121,7 @@ El abono del anticipo de S/ 249.00 constituye la aceptación plena de los térmi
               </button>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))", gap: "1rem", marginBottom: "1.25rem" }}>
               <div>
                 <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "0.25rem" }}>
                   Nombre del Negocio / Marca:

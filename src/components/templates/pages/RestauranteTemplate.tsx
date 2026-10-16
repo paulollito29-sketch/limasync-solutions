@@ -134,7 +134,7 @@ export default function RestauranteTemplate() {
           padding: "3.5rem 1.5rem 2.5rem",
         }}
       >
-        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem", alignItems: "center" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: "2.5rem", alignItems: "center" }}>
           <div>
             <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center", marginBottom: "1rem" }}>
               <span
@@ -261,7 +261,7 @@ export default function RestauranteTemplate() {
 
       {/* Menú y Carrito Grid */}
       <main id="carta" style={{ maxWidth: "1200px", margin: "0 auto", padding: "3rem 1.5rem" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr minmax(320px, 380px)", gap: "2.5rem" }}>
+        <div className="template-responsive-split">
           
           {/* Columna Menú */}
           <div>
@@ -413,7 +413,7 @@ export default function RestauranteTemplate() {
                     <label style={{ fontSize: "0.8rem", color: "#94a3b8", display: "block", marginBottom: "0.3rem" }}>
                       Modalidad de Entrega:
                     </label>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", marginBottom: "0.75rem" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 120px), 1fr))", gap: "0.5rem", marginBottom: "0.75rem" }}>
                       <button
                         onClick={() => setDeliveryType("delivery")}
                         style={{

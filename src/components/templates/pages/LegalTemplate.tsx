@@ -201,7 +201,7 @@ _Solicitud amparada bajo secreto profesional generada desde la web demo de LimaS
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))", gap: "1.75rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 270px), 1fr))", gap: "1.75rem" }}>
           {PRACTICE_AREAS.map((p, idx) => (
             <div
               key={idx}
@@ -264,7 +264,7 @@ _Solicitud amparada bajo secreto profesional generada desde la web demo de LimaS
 
       {/* Perfil del Socio Director */}
       <section style={{ background: "#141210", borderTop: "1px solid #292524", borderBottom: "1px solid #292524", padding: "4.5rem 1.5rem" }}>
-        <div style={{ maxWidth: "1000px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "3rem", alignItems: "center" }}>
+        <div style={{ maxWidth: "1000px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: "3rem", alignItems: "center" }}>
           <div
             style={{
               background: "#1c1917",
@@ -312,7 +312,7 @@ _Solicitud amparada bajo secreto profesional generada desde la web demo de LimaS
               Nuestra práctica rechaza los honorarios opacos y la burocracia innecesaria. Trabajamos con entregables concretos, cronogramas verificables ante notarías y reporte semanal de estado de expedientes.
             </p>
 
-            <div style={{ fontFamily: "sans-serif", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginTop: "1.5rem" }}>
+            <div style={{ fontFamily: "sans-serif", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 180px), 1fr))", gap: "1rem", marginTop: "1.5rem" }}>
               <div style={{ background: "#1c1917", padding: "1rem", borderRadius: "6px", border: "1px solid #292524" }}>
                 <span style={{ color: "#22c55e", fontWeight: 700 }}>🔒 Secreto Profesional</span>
                 <p style={{ fontSize: "0.78rem", color: "#78716c", marginTop: "0.2rem" }}>Amparado por el Art. 2 inc. 18 de la Constitución Política.</p>

@@ -149,7 +149,7 @@ export default function HoteleriaTemplate() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
             gap: "3rem",
             alignItems: "center",
           }}
@@ -230,7 +230,7 @@ export default function HoteleriaTemplate() {
               alt="Nuna Boutique Hotel Habitación Master Suite Miraflores"
               style={{
                 width: "100%",
-                height: "440px",
+                height: "clamp(260px, 45vw, 440px)",
                 objectFit: "cover",
                 display: "block",
               }}
@@ -271,7 +271,7 @@ export default function HoteleriaTemplate() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
             gap: "2.5rem",
             alignItems: "start",
           }}
@@ -423,7 +423,7 @@ export default function HoteleriaTemplate() {
                 />
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 140px), 1fr))", gap: "1rem" }}>
                 <div>
                   <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "0.4rem", color: "#d4d4d8", fontWeight: 600 }}>
                     Fecha de Entrada:

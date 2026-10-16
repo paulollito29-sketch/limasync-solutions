@@ -223,7 +223,7 @@ export default function ServiciosTemplate() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))", gap: "1.5rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 270px), 1fr))", gap: "1.5rem" }}>
           {SERVICES_LIST.map((s) => (
             <div
               key={s.id}
@@ -318,7 +318,7 @@ export default function ServiciosTemplate() {
           </div>
 
           <form onSubmit={handleSendQuote} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: "1rem" }}>
               <div>
                 <label style={{ display: "block", fontSize: "0.85rem", color: "#cbd5e1", marginBottom: "0.35rem", fontWeight: 600 }}>
                   1. Servicio Requerido:
@@ -383,7 +383,7 @@ export default function ServiciosTemplate() {
               />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: "1rem" }}>
               <div>
                 <label style={{ display: "block", fontSize: "0.85rem", color: "#cbd5e1", marginBottom: "0.35rem", fontWeight: 600 }}>
                   3. Tu Nombre Completo:

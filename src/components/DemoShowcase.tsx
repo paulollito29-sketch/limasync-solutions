@@ -295,9 +295,12 @@ export default function DemoShowcase({ lang = "es" }: DemoShowcaseProps) {
           aria-label={lang === "en" ? "Filter by demo category" : "Filtrar demos en vivo"}
           style={{
             display: "flex",
-            flexWrap: "wrap",
             gap: "0.5rem",
             marginBottom: "2.5rem",
+            overflowX: "auto",
+            paddingBottom: "0.5rem",
+            WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none",
           }}
         >
           {rubros.map((r) => {
@@ -323,6 +326,8 @@ export default function DemoShowcase({ lang = "es" }: DemoShowcaseProps) {
                   cursor: "pointer",
                   transition: "all 0.15s ease",
                   boxShadow: isActive ? "0 4px 12px rgba(0,0,0,0.12)" : "none",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
                 }}
               >
                 <span>{r.icon}</span>
@@ -336,7 +341,7 @@ export default function DemoShowcase({ lang = "es" }: DemoShowcaseProps) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
             gap: "1.75rem",
           }}
         >

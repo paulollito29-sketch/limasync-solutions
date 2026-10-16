@@ -34,29 +34,9 @@ export default function TemplateBanner({
     );
 
   return (
-    <aside
-      aria-label="Barra de información del demo"
-      style={{
-        background: "rgba(15, 23, 42, 0.94)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        color: "#f8fafc",
-        padding: "0.55rem 1.25rem",
-        fontSize: "0.85rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
-        gap: "0.75rem",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
-        position: "sticky",
-        top: 0,
-        zIndex: 9999,
-        boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
-      }}
-    >
+    <aside aria-label="Barra de información del demo" className="template-banner-wrap">
       {/* Left: Badge & Info */}
-      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <span
           style={{
             background: "#22c55e",
@@ -70,15 +50,14 @@ export default function TemplateBanner({
             display: "inline-flex",
             alignItems: "center",
             gap: "0.3rem",
+            whiteSpace: "nowrap",
           }}
         >
           <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#15803d" }} />
-          Demo Oficial Activa
+          <span>Demo<span className="template-banner-badge-text"> Oficial Activa</span></span>
         </span>
-        <span style={{ color: "#cbd5e1", fontSize: "0.84rem" }}>
-          Plantilla para <strong style={{ color: "#fff" }}>{niche}</strong> · Entrega en{" "}
-          <strong style={{ color: "#38bdf8" }}>{deliveryTime}</strong> por{" "}
-          <strong style={{ color: "#38bdf8" }}>{price}</strong>
+        <span className="template-banner-desc" style={{ color: "#cbd5e1", fontSize: "0.82rem", whiteSpace: "nowrap" }}>
+          Plantilla para <strong style={{ color: "#fff" }}>{niche}</strong> · Entrega <strong style={{ color: "#38bdf8" }}>{deliveryTime}</strong> ({price})
         </span>
       </div>
 

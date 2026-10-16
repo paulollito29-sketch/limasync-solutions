@@ -68,7 +68,7 @@ _Enviado desde la web demo de LimaSync Solutions_`;
           padding: "3.5rem 1.5rem 3rem",
         }}
       >
-        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2.5rem", alignItems: "center" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: "2.5rem", alignItems: "center" }}>
           <div>
             <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center", marginBottom: "1rem" }}>
               <span
@@ -197,7 +197,7 @@ _Enviado desde la web demo de LimaSync Solutions_`;
           <h2 style={{ fontSize: "2.2rem", fontWeight: 800, marginTop: "0.5rem" }}>Tratamientos de Vanguardia</h2>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 270px), 1fr))", gap: "1.5rem" }}>
           {SERVICES.map((s, idx) => (
             <div
               key={idx}
@@ -312,7 +312,7 @@ _Enviado desde la web demo de LimaSync Solutions_`;
               </select>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))", gap: "1rem" }}>
               <div>
                 <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.3rem" }}>
                   Fecha Estimada:
