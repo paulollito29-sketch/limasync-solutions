@@ -4,33 +4,241 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  lang?: 'es' | 'en';
+  canonical?: string;
+  keywords?: string;
+  googleSiteVerification?: string;
 }
 
 const {
-  title = "LIMASYNC SOLUTIONS — Sitios Web y Automatización en Lima",
-  description = "Creamos tu página web profesional optimizada para ventas y WhatsApp en 72 horas por S/ 499. Agencia en Lima, Perú.",
+  lang = 'es',
+  title = lang === 'es'
+    ? 'LIMASYNC SOLUTIONS — Sitios Web y Automatización en Lima en 72 Horas'
+    : 'LIMASYNC SOLUTIONS — Web Development & Automation in Lima in 72 Hours',
+  description = lang === 'es'
+    ? 'Agencia de software y desarrollo web en Lima, Perú. Creamos tu página web profesional optimizada para ventas y WhatsApp en 72 horas por S/ 499.'
+    : 'Web development, software & automation agency in Lima, Peru. High-converting websites and systems delivered in 72 hours starting at S/ 499 (~$135).',
+  keywords = lang === 'es'
+    ? 'desarrollo web lima, paginas web lima, diseño web peru, paginas web express 72 horas, software y automatizacion lima, lima sync solutions, agencia web lima, cartas qr restaurantes lima, tienda online peru, sistemas lima'
+    : 'web development lima, website design peru, express 72h website, software agency lima, limasync solutions, qr menu restaurants lima, ecommerce peru',
+  canonical,
+  googleSiteVerification,
 } = Astro.props;
+
+const siteUrl = 'https://www.limasync.com';
+const currentPath = Astro.url.pathname;
+const cleanPath = currentPath.replace(/\/+$/, '') || '/';
+const canonicalUrl = canonical || (siteUrl + (cleanPath === '/' ? '/' : cleanPath));
+
+// Alternate URLs for SEO
+const isEn = lang === 'en';
+const esUrl = siteUrl + (cleanPath.startsWith('/en') ? cleanPath.replace(/^\/en/, '') || '/' : cleanPath);
+const enUrl = siteUrl + (cleanPath.startsWith('/en') ? cleanPath : `/en${cleanPath === '/' ? '' : cleanPath}`);
+
+const ogImageUrl = `${siteUrl}/images/hero_mockup.png`;
+
+// JSON-LD Schemas
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${siteUrl}/#organization`,
+  name: 'LimaSync Solutions',
+  alternateName: 'LimaSync',
+  url: siteUrl,
+  logo: ogImageUrl,
+  image: ogImageUrl,
+  description: description,
+  telephone: '+51906920958',
+  email: 'limasync0@gmail.com',
+  priceRange: 'S/ 499 - S/ 999',
+  currenciesAccepted: 'PEN, USD',
+  paymentAccepted: 'Yape, Plin, Transferencia Bancaria, Efectivo',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Lima',
+    addressRegion: 'Lima',
+    addressCountry: 'PE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -12.046374,
+    longitude: -77.042793,
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Lima' },
+    { '@type': 'AdministrativeArea', name: 'Lima Metropolitana' },
+    { '@type': 'Country', name: 'Perú' },
+  ],
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '08:00',
+      closes: '20:00',
+    },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: isEn ? 'Web Development Services' : 'Servicios de Desarrollo Web',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: isEn ? 'Express Web Development (72h)' : 'Desarrollo Web Express 72 Horas',
+          description: isEn
+            ? 'Professional high-speed responsive website with domain, SSL and WhatsApp checkout in 72 hours.'
+            : 'Sitio web profesional con diseño adaptado a móviles, dominio .com, certificado SSL y WhatsApp en 72 horas.',
+        },
+        price: '499',
+        priceCurrency: 'PEN',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: isEn ? 'Monthly Web Care & Cloud Hosting' : 'Mantenimiento Web y VPS Cloud',
+          description: isEn
+            ? '24/7 uptime monitoring, weekly backups, SSL renewal and content updates.'
+            : 'Monitoreo 24/7, copias de seguridad semanales, hosting VPS de alta velocidad y soporte continuo.',
+        },
+        price: '99',
+        priceCurrency: 'PEN',
+      },
+    ],
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  url: siteUrl,
+  name: 'LimaSync Solutions',
+  description: description,
+  inLanguage: ['es-PE', 'en-US'],
+  publisher: {
+    '@id': `${siteUrl}/#organization`,
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: isEn
+    ? [
+        {
+          '@type': 'Question',
+          name: 'How much does a professional website cost at LimaSync Solutions?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Our express web pack starts at S/ 499 (~$135 USD). You pay 50% upfront (S/ 249) and 50% upon verified delivery within 72 hours.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What is included in the S/ 499 package?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Includes a responsive design for mobile and desktop, .com domain for 1 year, SSL security certificate, high-speed cloud hosting, direct WhatsApp buttons, and a 15-minute training call.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How long does the web delivery take?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Guaranteed delivery in 72 business hours from receiving your logo, photos, and basic business details.',
+          },
+        },
+      ]
+    : [
+        {
+          '@type': 'Question',
+          name: '¿Cuánto cuesta crear una página web en LimaSync Solutions?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Nuestro plan express cuesta S/ 499 con entrega garantizada en 72 horas. Se abona el 50% de anticipo (S/ 249) y el 50% restante (S/ 249) contra entrega verificada.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '¿Qué incluye el plan de desarrollo web por S/ 499?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Incluye diseño 100% responsive optimizado para celulares y tablets, dominio .com por 1 año, certificado de seguridad SSL, alojamiento en servidor VPS, botones de WhatsApp estratégicos y capacitación en videollamada.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '¿Cuánto tiempo tarda la entrega del sitio web?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Entregamos tu sitio web completamente operativo en máximo 72 horas hábiles desde que nos envías tu logo y detalles.',
+          },
+        },
+      ],
+};
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Search Engine Indexing & Robots -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="author" content="LimaSync Solutions" />
+
+    <!-- Google Search Console Verification (Meta Tag) -->
+    {googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification} />}
+
+    <!-- Canonical & Alternate Hreflang Tags for SEO -->
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="LimaSync Solutions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://limasync.com" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content="LimaSync Solutions — Plataforma Web y Automatización" />
+    <meta property="og:locale" content={isEn ? 'en_US' : 'es_PE'} />
+    <meta property="og:locale:alternate" content={isEn ? 'es_PE' : 'en_US'} />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </head>
   <body>
     <slot />

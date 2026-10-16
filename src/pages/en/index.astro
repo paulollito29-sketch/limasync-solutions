@@ -1,0 +1,232 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header';
+import DemoShowcase from '../../components/DemoShowcase';
+import PricingSection from '../../components/PricingSection';
+import FloatingWhatsApp from '../../components/FloatingWhatsApp';
+
+const WHATSAPP =
+  "https://wa.me/51906920958?text=" +
+  encodeURIComponent("Hello LimaSync Solutions, I want to get a quote for my website for S/ 499 (~$135)");
+
+const EMAIL = "limasync0@gmail.com";
+
+const services = [
+  {
+    num: "01",
+    title: "Express Web Development (S/ 499 / ~$135)",
+    desc: "High-impact corporate websites and landing pages engineered to sell. Ultra-fast, responsive, mobile-first, and delivered in 72 hours.",
+    tags: ["Landing pages", "72h Delivery", "WhatsApp Checkout", ".com Domain"],
+  },
+  {
+    num: "02",
+    title: "Dashboards & Business Portals",
+    desc: "Management dashboards and real-time analytics so you steer your business with actual metrics, not guesswork.",
+    tags: ["Dashboards", "Real-Time Reports", "KPI Tracking", "Data Visualization"],
+  },
+  {
+    num: "03",
+    title: "Automation & Custom Bots",
+    desc: "Turn repetitive chores into autonomous workflows: instant WhatsApp alerts, automated email reports, and cross-platform syncing.",
+    tags: ["Workflows", "WhatsApp Alerts", "API Integrations", "Google Sheets"],
+  },
+  {
+    num: "04",
+    title: "POS & Digital QR Menus for Restaurants",
+    desc: "Table management, digital QR menus, and direct ordering to kitchen or WhatsApp, from ordering to register closing.",
+    tags: ["Digital QR Menu", "WhatsApp Orders", "Table Control", "Fast POS"],
+  },
+];
+
+const steps = [
+  {
+    num: "01",
+    title: "Choose Your Architecture",
+    desc: "We pick the ideal template based on your industry (Dining, Healthcare, Legal, Retail, or Services).",
+  },
+  {
+    num: "02",
+    title: "50% Kickoff Deposit (S/ 249 / ~$68)",
+    desc: "Send us your logo, imagery, and contact info. We guarantee immediate project kickoff with a clear agreement.",
+  },
+  {
+    num: "03",
+    title: "72-Hour Express Development",
+    desc: "We configure your custom domain, SSL certificate, responsive layout, and direct WhatsApp buttons in record time.",
+  },
+  {
+    num: "04",
+    title: "Live Launch & Training",
+    desc: "You test the live site, pay the remaining 50% (S/ 249), and we conduct a 15-minute video call to onboard you.",
+  },
+];
+
+const stripItems = [
+  "72-Hour Delivery",
+  "Websites from S/ 499 (~$135)",
+  "Sales Automation",
+  "Direct WhatsApp Checkout",
+  ".com Domain & SSL Included",
+  "Monthly Care S/ 99/mo",
+];
+---
+
+<Layout
+  lang="en"
+  title="LIMASYNC SOLUTIONS — High-Impact Websites & Automation in 72 Hours"
+  description="Web development, software & automation agency in Lima, Peru. High-converting websites and systems delivered in 72 hours starting at S/ 499 (~$135)."
+>
+  <Header client:load lang="en" />
+  
+  <main id="top">
+    <!-- HERO -->
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <p class="kicker">Web Agency · Software · Automation</p>
+          <h1>
+            Your business online,
+            <br />
+            <span class="outline">in 72 hours for S/ 499 (~$135).</span>
+          </h1>
+          <p class="hero-sub">
+            We build high-impact websites, client dashboards, and digital workflows in Lima, Peru.
+            No convoluted contracts or hidden fees: 50% upfront and 50% upon verified delivery.
+          </p>
+          <div class="hero-actions">
+            <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" class="btn btn-accent">
+              Chat on WhatsApp →
+            </a>
+            <a href="#demos" class="btn">
+              Explore Live Demos ↓
+            </a>
+          </div>
+          <p class="hero-note">// 72-hour delivery · .com domain & SSL included · Continuous support</p>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-mockup-wrap">
+            <img
+              src="/images/hero_mockup.png"
+              alt="LimaSync responsive web platform and mobile application"
+              class="hero-mockup-img"
+              width="1024"
+              height="1024"
+              loading="eager"
+            />
+          </div>
+          <span class="chip chip-1">S/ 499</span>
+          <span class="chip chip-2">72 Hours</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STRIP / MARQUEE -->
+    <div class="strip" aria-hidden="true">
+      <div class="strip-inner">
+        {[...stripItems, ...stripItems].map((item) => (
+          <span>{item}</span>
+        ))}
+      </div>
+    </div>
+
+    <!-- 01 SERVICES -->
+    <section id="services">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="kicker" style="color: var(--accent-strong);">
+              Systems Engineering Solutions
+            </p>
+            <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800;">What we do</h2>
+          </div>
+          <span class="sec-num">01 / Services</span>
+        </div>
+
+        <div class="svc">
+          {services.map((s) => (
+            <div class="svc-row">
+              <span class="svc-num">{s.num}</span>
+              <h3>{s.title}</h3>
+              <div>
+                <p>{s.desc}</p>
+                <div class="svc-tags">
+                  {s.tags.map((t) => (
+                    <span class="tag">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 LIVE DEMOS -->
+    <DemoShowcase client:visible lang="en" />
+
+    <!-- 03 PRICING -->
+    <PricingSection client:visible lang="en" />
+
+    <!-- 04 PROCESS -->
+    <section id="process" style="padding-block: clamp(3.5rem, 6vw, 5.5rem); border-top: 1px solid var(--line);">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="kicker" style="color: var(--accent-strong);">
+              72-Hour Agile Methodology
+            </p>
+            <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800;">How we work</h2>
+          </div>
+          <span class="sec-num">04 / Process</span>
+        </div>
+        <div class="steps">
+          {steps.map((st) => (
+            <div class="step">
+              <span class="step-num">{st.num}</span>
+              <h3>{st.title}</h3>
+              <p>{st.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="contact" class="cta">
+      <div class="wrap">
+        <div>
+          <h2>Ready to get your business online in 72 hours?</h2>
+          <p>
+            Message us on WhatsApp with your business name and industry. In 10 minutes
+            we will show you our recommended live demo and schedule kickoff with just S/ 249 (~$68) upfront.
+          </p>
+          <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" class="btn">
+            Chat on WhatsApp →
+          </a>
+        </div>
+        <div class="cta-mail">
+          <b>{EMAIL}</b>
+          WhatsApp +51 906 920 958 · Lima · San Isidro · Miraflores · Remote Worldwide
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <span>© {new Date().getFullYear()} LIMASYNC SOLUTIONS — Web Agency & Automation</span>
+      <span>
+        <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">
+          WhatsApp (+51 906 920 958)
+        </a>
+        {" · "}
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        {" · "}
+        <a href="#top">Top ↑</a>
+      </span>
+    </div>
+  </footer>
+
+  <FloatingWhatsApp client:load lang="en" />
+</Layout>

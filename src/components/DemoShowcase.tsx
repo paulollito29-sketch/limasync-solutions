@@ -10,7 +10,11 @@ interface TemplateInfo {
   badge: string;
 }
 
-const TEMPLATES: TemplateInfo[] = [
+interface DemoShowcaseProps {
+  lang?: "es" | "en";
+}
+
+const TEMPLATES_ES: TemplateInfo[] = [
   {
     slug: "restaurante",
     niche: "Gastronomía & Bares",
@@ -58,24 +62,98 @@ const TEMPLATES: TemplateInfo[] = [
   },
 ];
 
-export default function DemoShowcase() {
+const TEMPLATES_EN: TemplateInfo[] = [
+  {
+    slug: "restaurante",
+    niche: "Dining, Bars & Bistros",
+    title: "La Redonda — Cevichería & Bistro",
+    desc: "Interactive categorized menu, real-time cart, automated delivery fee estimation, and direct WhatsApp checkout.",
+    features: ["Digital QR Menu", "Delivery Calculator", "WhatsApp Ordering", "Table Booking"],
+    color: "#ea580c",
+    badge: "Most Popular",
+  },
+  {
+    slug: "salud",
+    niche: "Healthcare & Aesthetics",
+    title: "San Isidro Dental & Aesthetics",
+    desc: "Interactive appointment scheduling, treatment catalog with upfront pricing, and 24/7 emergency dispatch.",
+    features: ["Online Booking", "Treatment Catalog", "24/7 Emergencies", "WhatsApp Direct"],
+    color: "#0284c7",
+    badge: "Professional",
+  },
+  {
+    slug: "legal",
+    niche: "Law Firms & Consultancy",
+    title: "Vargas & Associates Law",
+    desc: "Distinguished corporate presence, practice areas (Corporate, Trademarks, Litigation), and confidential legal assessment form.",
+    features: ["Confidential Assessment", "Trademark Registration", "Corporate Law", "Private Consults"],
+    color: "#d97706",
+    badge: "Corporate",
+  },
+  {
+    slug: "tienda",
+    niche: "Fashion & Retail",
+    title: "Gamarra Urbana Streetwear",
+    desc: "High-speed digital store with size/color pickers, shopping bag drawer, shipping calculations, and WhatsApp checkout.",
+    features: ["Size & Color Picker", "WhatsApp Checkout", "Live Cart Drawer", "Visual Catalog"],
+    color: "#8b5cf6",
+    badge: "Express Store",
+  },
+  {
+    slug: "servicios",
+    niche: "Home Services & Repairs",
+    title: "LimaFix Pro Services",
+    desc: "Plumbing, electrical, and HVAC repairs with dynamic district cost calculator and 45-minute emergency dispatch.",
+    features: ["District Calculator", "24/7 Emergency Dispatch", "Upfront Pricing", "Written Guarantee"],
+    color: "#10b981",
+    badge: "High Conversion",
+  },
+];
+
+const copy = {
+  es: {
+    kicker: "Catálogo de Demos en Vivo · Entrega en 72 Horas",
+    title: "5 Plantillas Maestras para tu Negocio",
+    subtitle:
+      "No inventamos la rueda en cada proyecto. Hemos diseñado y optimizado 5 arquitecturas web ultra-rápidas según tu rubro, listas para personalizar con tu logo, fotos y colores por solo S/ 499.",
+    viewDemo: "Probar Demo en Vivo ↗",
+    orderWa: "Pedir por WhatsApp",
+    waMsg: (t: TemplateInfo) =>
+      `Hola LimaSync Solutions, me interesa la plantilla de ${t.niche} (${t.title}) para mi negocio.`,
+  },
+  en: {
+    kicker: "Live Demo Catalog · 72-Hour Delivery",
+    title: "5 Master Templates for Your Business",
+    subtitle:
+      "We don't reinvent the wheel every time. We've crafted 5 battle-tested, ultra-fast web architectures tailored to your industry, ready to customize with your branding for just S/ 499 (~$135).",
+    viewDemo: "Test Live Demo ↗",
+    orderWa: "Order via WhatsApp",
+    waMsg: (t: TemplateInfo) =>
+      `Hello LimaSync Solutions, I am interested in the ${t.niche} template (${t.title}) for my business.`,
+  },
+};
+
+export default function DemoShowcase({ lang = "es" }: DemoShowcaseProps) {
+  const templates = lang === "en" ? TEMPLATES_EN : TEMPLATES_ES;
+  const t = copy[lang];
+
   return (
     <section id="demos" style={{ paddingBlock: "clamp(3.5rem, 6vw, 5.5rem)", borderTop: "1px solid var(--line)" }}>
       <div className="wrap">
         <div className="sec-head">
           <div>
             <p className="kicker" style={{ color: "var(--accent-strong)" }}>
-              Catálogo de Demos en Vivo · Entrega en 72 Horas
+              {t.kicker}
             </p>
             <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 800 }}>
-              5 Plantillas Maestras para tu Negocio
+              {t.title}
             </h2>
           </div>
-          <span className="sec-num">02 / Demos</span>
+          <span className="sec-num">{lang === "en" ? "02 / Demos" : "02 / Demos"}</span>
         </div>
 
         <p style={{ maxWidth: "68ch", color: "var(--ink-soft)", marginBottom: "2.5rem", fontSize: "1.05rem" }}>
-          No inventamos la rueda en cada proyecto. Hemos diseñado y optimizado 5 arquitecturas web ultra-rápidas según tu rubro, listas para personalizar con tu logo, fotos y colores por solo <strong>S/ 499</strong>.
+          {t.subtitle}
         </p>
 
         <div
@@ -85,9 +163,9 @@ export default function DemoShowcase() {
             gap: "1.75rem",
           }}
         >
-          {TEMPLATES.map((t) => (
+          {templates.map((item) => (
             <div
-              key={t.slug}
+              key={item.slug}
               style={{
                 background: "var(--paper-2)",
                 border: "1px solid var(--line)",
@@ -106,12 +184,12 @@ export default function DemoShowcase() {
                       fontFamily: "var(--mono)",
                       fontSize: "0.75rem",
                       fontWeight: 700,
-                      color: t.color,
+                      color: item.color,
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
                   >
-                    {t.niche}
+                    {item.niche}
                   </span>
                   <span
                     style={{
@@ -123,17 +201,17 @@ export default function DemoShowcase() {
                       fontWeight: 600,
                     }}
                   >
-                    {t.badge}
+                    {item.badge}
                   </span>
                 </div>
 
-                <h3 style={{ fontSize: "1.35rem", fontWeight: 700, marginBottom: "0.5rem" }}>{t.title}</h3>
+                <h3 style={{ fontSize: "1.35rem", fontWeight: 700, marginBottom: "0.5rem" }}>{item.title}</h3>
                 <p style={{ color: "var(--ink-soft)", fontSize: "0.9rem", lineHeight: 1.5, marginBottom: "1.25rem" }}>
-                  {t.desc}
+                  {item.desc}
                 </p>
 
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.5rem" }}>
-                  {t.features.map((f, idx) => (
+                  {item.features.map((f, idx) => (
                     <span
                       key={idx}
                       style={{
@@ -153,7 +231,7 @@ export default function DemoShowcase() {
 
               <div style={{ borderTop: "1px solid var(--line)", paddingTop: "1rem", display: "flex", gap: "0.6rem" }}>
                 <a
-                  href={`/templates/${t.slug}`}
+                  href={`/templates/${item.slug}`}
                   style={{
                     flex: 1,
                     textAlign: "center",
@@ -166,12 +244,10 @@ export default function DemoShowcase() {
                     textDecoration: "none",
                   }}
                 >
-                  Probar Demo en Vivo ↗
+                  {t.viewDemo}
                 </a>
                 <a
-                  href={`https://wa.me/51906920958?text=${encodeURIComponent(
-                    `Hola LimaSync Solutions, me interesa la plantilla de ${t.niche} (${t.title}) para mi negocio.`
-                  )}`}
+                  href={`https://wa.me/51906920958?text=${encodeURIComponent(t.waMsg(item))}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -185,7 +261,7 @@ export default function DemoShowcase() {
                     display: "flex",
                     alignItems: "center",
                   }}
-                  title="Pedir por WhatsApp"
+                  title={t.orderWa}
                 >
                   📲
                 </a>

@@ -2,11 +2,19 @@
 
 import { motion } from "framer-motion";
 
-const WHATSAPP_URL =
-  "https://wa.me/51906920958?text=" +
-  encodeURIComponent("Hola LimaSync Solutions, quiero cotizar mi sitio web por S/ 499");
+interface FloatingWhatsAppProps {
+  lang?: "es" | "en";
+}
 
-export default function FloatingWhatsApp() {
+export default function FloatingWhatsApp({ lang = "es" }: FloatingWhatsAppProps) {
+  const msg =
+    lang === "en"
+      ? "Hello LimaSync Solutions, I want to get a quote for my website for S/ 499"
+      : "Hola LimaSync Solutions, quiero cotizar mi sitio web por S/ 499";
+
+  const label = lang === "en" ? "Chat on WhatsApp" : "Escríbenos por WhatsApp";
+  const whatsappUrl = `https://wa.me/51906920958?text=${encodeURIComponent(msg)}`;
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8, y: 30 }}
@@ -20,10 +28,10 @@ export default function FloatingWhatsApp() {
       }}
     >
       <motion.a
-        href={WHATSAPP_URL}
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Escríbenos por WhatsApp"
+        aria-label={label}
         whileHover={{
           scale: 1.06,
           boxShadow: "0 12px 30px rgba(34, 197, 94, 0.45)",
@@ -96,7 +104,7 @@ export default function FloatingWhatsApp() {
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
           </svg>
         </span>
-        <span>Escríbenos por WhatsApp</span>
+        <span>{label}</span>
       </motion.a>
     </motion.div>
   );
