@@ -21,7 +21,6 @@ const ALL_DEMOS = [
 
 export default function TemplateBanner({
   niche,
-  price = "S/ 499",
   deliveryTime = "72 horas",
   currentSlug,
 }: TemplateBannerProps) {
@@ -30,7 +29,7 @@ export default function TemplateBanner({
   const whatsappUrl =
     "https://wa.me/51906920958?text=" +
     encodeURIComponent(
-      `Hola LimaSync Solutions, estoy probando la demo de ${niche} y quiero implementarla para mi negocio por ${price} con entrega en ${deliveryTime}.`
+      `Hola LimaSync Solutions, estoy probando la demo de ${niche} y quiero cotizar la implementación para mi negocio.`
     );
 
   return (
@@ -57,7 +56,7 @@ export default function TemplateBanner({
           <span>Demo<span className="template-banner-badge-text"> Oficial Activa</span></span>
         </span>
         <span className="template-banner-desc" style={{ color: "#cbd5e1", fontSize: "0.82rem", whiteSpace: "nowrap" }}>
-          Plantilla para <strong style={{ color: "#fff" }}>{niche}</strong> · Entrega <strong style={{ color: "#38bdf8" }}>{deliveryTime}</strong> ({price})
+          Plantilla para <strong style={{ color: "#fff" }}>{niche}</strong> · Entrega en <strong style={{ color: "#38bdf8" }}>{deliveryTime}</strong>
         </span>
       </div>
 
@@ -162,7 +161,7 @@ export default function TemplateBanner({
             boxShadow: "0 2px 8px rgba(34, 197, 94, 0.3)",
           }}
         >
-          <span>📲 Pedir esta web (S/ 499)</span>
+          <span>📲 Cotizar esta web</span>
         </a>
       </div>
     </aside>

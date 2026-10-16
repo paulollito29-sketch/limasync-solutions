@@ -171,7 +171,7 @@ export default function RoiCalculator() {
             <div style={{ marginTop: "1.75rem" }}>
               <a
                 href={`https://wa.me/51906920958?text=${encodeURIComponent(
-                  `Hola LimaSync Solutions, usé el simulador para mi negocio de ${rubro} (Ticket promedio S/ ${ticket}) y quiero poner en marcha mi web por S/ 499.`
+                  `Hola LimaSync Solutions, usé el simulador para mi negocio de ${rubro} (Ticket promedio S/ ${ticket}) y quiero cotizar mi web.`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

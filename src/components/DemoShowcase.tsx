@@ -235,27 +235,27 @@ const copy = {
     kicker: "Demos en Vivo · Arquitecturas Especializadas en 72 Horas",
     title: "Demos en Vivo para tu Negocio",
     subtitle:
-      "Cada tipo de negocio vende de forma diferente. No usamos maquetas genéricas: cada demo interactiva incluye las herramientas exactas para vender (carta QR, agendamiento de citas, cotizador por distrito o carrito Yape) listas por solo S/ 499.",
+      "Cada tipo de negocio vende de forma diferente. No usamos maquetas genéricas: cada demo interactiva incluye las herramientas exactas para vender (carta QR, agendamiento de citas, cotizador por distrito o carrito Yape) listas para potenciar tus ventas.",
     filterAll: "Todas las Demos",
     idealLabel: "Ideal para:",
     viewDemo: "Probar Demo en Vivo ↗",
     requestRubro: "Pedir esta Web por WhatsApp →",
     orderWa: "Cotizar web para mi negocio",
     waMsg: (t: TemplateInfo) =>
-      `Hola LimaSync Solutions, tengo un negocio y me interesa la demo (${t.title}) de S/ 499.`,
+      `Hola LimaSync Solutions, tengo un negocio y quiero cotizar la implementación de la demo (${t.title}).`,
   },
   en: {
     kicker: "Live Demos · Specialized Architectures in 72 Hours",
     title: "Live Demos for Your Business",
     subtitle:
-      "Every business sells differently. We don't build generic websites: each live interactive demo incorporates the exact tools you need to sell (QR menu, appointment scheduler, district calculator, or instant WhatsApp checkout) ready for S/ 499 (~$135).",
+      "Every business sells differently. We don't build generic websites: each live interactive demo incorporates the exact tools you need to sell (QR menu, appointment scheduler, district calculator, or instant WhatsApp checkout) ready to boost your sales.",
     filterAll: "All Live Demos",
     idealLabel: "Ideal for:",
     viewDemo: "Test Live Demo ↗",
     requestRubro: "Order this Website on WhatsApp →",
     orderWa: "Get a quote for my business",
     waMsg: (t: TemplateInfo) =>
-      `Hello LimaSync Solutions, I have a business and I want the demo (${t.title}) for S/ 499.`,
+      `Hello LimaSync Solutions, I have a business and I want to get a quote for the demo (${t.title}).`,
   },
 };
 

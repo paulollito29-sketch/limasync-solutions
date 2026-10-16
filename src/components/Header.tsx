@@ -10,14 +10,14 @@ const navLinks = {
   es: [
     { href: "/#servicios", label: "Servicios" },
     { href: "/demos", label: "Demos en Vivo" },
-    { href: "/#precios", label: "Plan S/ 499" },
+    { href: "/#precios", label: "Planes" },
     { href: "/#proceso", label: "Proceso" },
     { href: "/#contacto", label: "Contacto" },
   ],
   en: [
     { href: "/en#services", label: "Services" },
     { href: "/en/demos", label: "Live Demos" },
-    { href: "/en#pricing", label: "Plan S/ 499" },
+    { href: "/en#pricing", label: "Plans" },
     { href: "/en#process", label: "Process" },
     { href: "/en#contact", label: "Contact" },
   ],

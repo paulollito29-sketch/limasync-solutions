@@ -9,8 +9,8 @@ interface FloatingWhatsAppProps {
 export default function FloatingWhatsApp({ lang = "es" }: FloatingWhatsAppProps) {
   const msg =
     lang === "en"
-      ? "Hello LimaSync Solutions, I want to get a quote for my website for S/ 499"
-      : "Hola LimaSync Solutions, quiero cotizar mi sitio web por S/ 499";
+      ? "Hello LimaSync Solutions, I want to get a quote for my website"
+      : "Hola LimaSync Solutions, quiero cotizar mi sitio web";
 
   const label = lang === "en" ? "Chat on WhatsApp" : "Escríbenos por WhatsApp";
   const whatsappUrl = `https://wa.me/51906920958?text=${encodeURIComponent(msg)}`;
