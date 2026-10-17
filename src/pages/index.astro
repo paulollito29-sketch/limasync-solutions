@@ -95,6 +95,9 @@ const stripItems = [
             <a href="#precios" class="btn">
               Ver Planes ↓
             </a>
+            <a href={`mailto:${EMAIL}?subject=Cotizaci%C3%B3n%20de%20Proyecto%20Web%20-%20LimaSync`} class="btn btn-hero-mail" title="Escríbenos directamente a limasync0@gmail.com">
+              ✉️ Por Correo
+            </a>
           </div>
           <p class="hero-note">// Entrega en 72h · Dominio .com y SSL incluidos · Soporte continuo</p>
         </div>
@@ -190,20 +193,58 @@ const stripItems = [
         <div>
           <h2>¿Listo para poner tu negocio en línea en 72 horas?</h2>
           <p>
-            Escríbenos por WhatsApp con el nombre y rubro de tu negocio. En 10 minutos
+            Escríbenos por WhatsApp o por correo con el nombre y rubro de tu negocio. En 10 minutos
             te mostramos la demo recomendada y coordinamos el inicio con solo S/ 249 de anticipo.
           </p>
-          <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" class="btn">
-            Escríbenos por WhatsApp →
-          </a>
+          <div class="cta-actions">
+            <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" class="btn">
+              Escríbenos por WhatsApp →
+            </a>
+            <a href={`mailto:${EMAIL}?subject=Cotizaci%C3%B3n%20de%20Proyecto%20Web%20-%20LimaSync&body=Hola%20LimaSync,%20quiero%20cotizar%20un%20proyecto%20web.`} class="btn btn-mail" title="Contactar por correo electrónico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>Contactar por Correo</span>
+            </a>
+          </div>
         </div>
         <div class="cta-mail">
-          <b>{EMAIL}</b>
-          WhatsApp +51 906 920 958 · Lima · San Isidro · Miraflores · Remoto
+          <div class="cta-email-box">
+            <a href={`mailto:${EMAIL}`} class="cta-email-link" title="Escribir correo a limasync0@gmail.com">{EMAIL}</a>
+            <button class="btn-copy-email" type="button" data-email={EMAIL} title="Copiar correo">
+              <span class="copy-text">Copiar</span>
+            </button>
+          </div>
+          <span>WhatsApp +51 906 920 958 · Lima · San Isidro · Miraflores · Remoto</span>
         </div>
       </div>
     </section>
   </main>
+
+  <script is:inline>
+    document.addEventListener("click", function (e) {
+      const btn = e.target.closest(".btn-copy-email");
+      if (btn) {
+        const email = btn.getAttribute("data-email") || "limasync0@gmail.com";
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(function () {
+            const orig = btn.innerHTML;
+            btn.innerHTML = "✓ ¡Copiado!";
+            btn.style.background = "#22c55e";
+            btn.style.color = "#ffffff";
+            btn.style.borderColor = "#22c55e";
+            setTimeout(function () {
+              btn.innerHTML = orig;
+              btn.style.background = "";
+              btn.style.color = "";
+              btn.style.borderColor = "";
+            }, 2000);
+          }).catch(function () {});
+        }
+      }
+    });
+  </script>
 
   <footer class="footer">
     <div class="wrap foot">

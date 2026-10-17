@@ -143,9 +143,22 @@ export default function Header({ lang = "es" }: HeaderProps) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setOpen(false)}
-          style={{ border: "none", color: "var(--accent-strong)", fontWeight: 700, paddingBlock: "1rem" }}
+          style={{ border: "none", color: "var(--accent-strong)", fontWeight: 700, paddingBlock: "0.85rem" }}
         >
           {cta.drawer}
+        </a>
+
+        <a
+          href="mailto:limasync0@gmail.com?subject=Consulta%20de%20Proyecto%20Web%20-%20LimaSync"
+          onClick={() => setOpen(false)}
+          className="drawer-mail-btn"
+          title="Enviar correo a limasync0@gmail.com"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          <span>{lang === "es" ? "Contactar por correo (limasync0@gmail.com)" : "Contact by email (limasync0@gmail.com)"}</span>
         </a>
       </div>
     </header>
