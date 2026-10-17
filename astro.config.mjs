@@ -7,6 +7,7 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
+      filter: (page) => !page.includes('/tarjetas'),
       i18n: {
         defaultLocale: 'es',
         locales: {

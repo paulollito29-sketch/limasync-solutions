@@ -323,6 +323,9 @@ const faqSchema = {
               ctrlOrCmd &&
               (e.key === "p" || e.key === "P" || e.keyCode === 80)
             ) {
+              if (window.location.pathname.includes('/tarjetas')) {
+                return; // Allow printing on business card generator page
+              }
               e.preventDefault();
               e.stopPropagation();
               return false;
