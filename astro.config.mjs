@@ -1,21 +1,10 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://www.limasync.com',
+  site: 'https://limasync.com',
   integrations: [
     react(),
-    sitemap({
-      filter: (page) => !page.includes('/tarjetas'),
-      i18n: {
-        defaultLocale: 'es',
-        locales: {
-          es: 'es-PE',
-          en: 'en-US',
-        },
-      },
-    }),
   ],
   i18n: {
     defaultLocale: 'es',
