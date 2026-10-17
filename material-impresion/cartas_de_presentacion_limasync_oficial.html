@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LimaSync Solutions — Cartas Oficiales de Presentación para Impresión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --ink: #111827;
+      --ink-soft: #4b5563;
+      --ink-light: #6b7280;
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-soft: #f0f9ff;
+      --accent: #b45309;
+      --border: #d1d5db;
+      --border-light: #e5e7eb;
+      --paper: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      background: #374151;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 30px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    /* BARRA SUPERIOR DE CONTROL (SOLO PANTALLA) */
+    .control-panel {
+      background: #111827;
+      color: #f3f4f6;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      max-width: 900px;
+      width: 100%;
+      padding: 20px 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .control-panel h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .control-panel p {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .control-item label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .control-item select,
+    .control-item input {
+      width: 100%;
+      background: #1f2937;
+      border: 1px solid #4b5563;
+      color: #f9fafb;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .control-item select:focus,
+    .control-item input:focus {
+      border-color: #38bdf8;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid #374151;
+    }
+
+    .btn-print {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .btn-print:hover {
+      background: #0369a1;
+    }
+
+    .quick-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-btn {
+      background: #1f2937;
+      border: 1px solid #4b5563;
+      color: #cbd5e1;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tag-btn:hover, .tag-btn.active {
+      background: #38bdf8;
+      color: #0f172a;
+      border-color: #38bdf8;
+      font-weight: 600;
+    }
+
+    /* ESTRUCTURA DE PÁGINA A4 PARA IMPRESIÓN */
+    .sheet-a4 {
+      width: 210mm;
+      height: 296mm;
+      max-height: 296mm;
+      background: var(--paper);
+      padding: 16mm 18mm 14mm 18mm;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    /* ENCABEZADO */
+    .letter-header {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-badge {
+      width: 44px;
+      height: 44px;
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+    }
+
+    .brand-title h2 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #0f172a;
+      line-height: 1.1;
+    }
+
+    .brand-title span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--primary-dark);
+      font-weight: 700;
+      display: block;
+      margin-top: 3px;
+    }
+
+    .header-contact-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .header-contact-meta strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    /* METADATOS Y DESTINATARIO */
+    .meta-box {
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 12.5px;
+    }
+
+    .meta-date {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ink-light);
+      font-size: 11px;
+    }
+
+    .recipient-block {
+      margin-bottom: 14px;
+      font-size: 13.5px;
+      line-height: 1.35;
+    }
+
+    .recipient-lead {
+      color: var(--ink-light);
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .recipient-name {
+      font-weight: 800;
+      font-size: 15.5px;
+      color: #0f172a;
+      margin-top: 2px;
+    }
+
+    .recipient-locality {
+      color: var(--ink-soft);
+      font-size: 12.5px;
+    }
+
+    /* ASUNTO */
+    .subject-banner {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--primary);
+      padding: 8px 12px;
+      margin-bottom: 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .subject-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary-dark);
+      background: #e0f2fe;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* CUERPO DE LA CARTA */
+    .letter-body {
+      font-size: 12.8px;
+      color: #374151;
+      line-height: 1.55;
+      text-align: justify;
+    }
+
+    .letter-body p {
+      margin-bottom: 10px;
+    }
+
+    .letter-body strong {
+      color: #111827;
+      font-weight: 700;
+    }
+
+    /* CUADRO DESTACADO DE SOLUCIÓN Y OFERTA */
+    .highlight-card {
+      background: #fafaf9;
+      border: 1px solid #e7e5e4;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 10px 0 12px 0;
+    }
+
+    .highlight-card h4 {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .features-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+      list-style: none;
+    }
+
+    .features-list li {
+      font-size: 11.8px;
+      color: #334155;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .bullet-icon {
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    /* OFERTA CERRADA DESTACADA */
+    .pricing-pill {
+      background: #ecfdf5;
+      border: 1px dashed #059669;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin: 10px 0 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pricing-info {
+      font-size: 12px;
+      color: #065f46;
+    }
+
+    .pricing-info strong {
+      font-size: 14px;
+      color: #047857;
+    }
+
+    .pricing-badge {
+      font-family: 'JetBrains Mono', monospace;
+      background: #047857;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* BLOQUE INFERIOR CON QR Y FIRMA */
+    .bottom-section {
+      border-top: 1px solid var(--border-light);
+      padding-top: 12px;
+      margin-top: 10px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .signature-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sign-line {
+      width: 180px;
+      height: 1px;
+      background: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .sign-author {
+      font-weight: 800;
+      font-size: 13px;
+      color: #0f172a;
+    }
+
+    .sign-job {
+      font-size: 11px;
+      color: var(--ink-soft);
+    }
+
+    .sign-dept {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    /* CAJA DE CÓDIGO QR */
+    .qr-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    .qr-svg {
+      width: 60px;
+      height: 60px;
+      background: white;
+      border: 1px solid #cbd5e1;
+      padding: 2px;
+    }
+
+    .qr-info {
+      font-size: 10px;
+      line-height: 1.35;
+      color: var(--ink-soft);
+    }
+
+    .qr-info strong {
+      color: #0f172a;
+      display: block;
+      font-size: 10.5px;
+    }
+
+    .qr-url {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 9.5px;
+    }
+
+    /* PIE DE PÁGINA FORMAL */
+    .page-footer-bar {
+      border-top: 1px solid var(--border-light);
+      padding-top: 8px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--ink-light);
+    }
+
+    .page-footer-bar strong {
+      color: #0f172a;
+    }
+
+    /* MODELO 5: VOLANTES DÍPTICOS A5 (2 POR HOJA A4) */
+    .half-sheet-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .flyer-card {
+      height: 48%;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      padding: 12mm 14mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      background: #ffffff;
+    }
+
+    .flyer-cut-hint {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #94a3b8;
+      background: var(--paper);
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .flyer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid #0f172a;
+      padding-bottom: 8px;
+    }
+
+    .flyer-headline {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+      margin: 8px 0 4px 0;
+    }
+
+    .flyer-sub {
+      font-size: 11.5px;
+      color: #4b5563;
+      line-height: 1.35;
+    }
+
+    .flyer-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 10px;
+      font-size: 10.5px;
+      color: #334155;
+      margin: 8px 0;
+    }
+
+    .flyer-cta-box {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+
+    .flyer-cta-box strong {
+      color: #38bdf8;
+      font-size: 13px;
+    }
+
+    /* REGLAS ESTRICTAS DE IMPRESIÓN */
+    @media print {
+      body {
+        background: transparent !important;
+        padding: 0 !important;
+        gap: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .sheet-a4 {
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PANEL DE CONFIGURACIÓN Y CONTROL (SOLO VISIBLE EN PANTALLA) -->
+  <div class="control-panel no-print">
+    <h1>📄 LimaSync Solutions — Suite de Cartas Comerciales para Impresión</h1>
+    <p>Documentos formateados a medida exacta de hoja A4 (210 × 297 mm) con tipografía institucional, códigos QR vectoriales y ofertas cerradas listas para repartir en mano a dueños y administradores en Lima.</p>
+    
+    <div class="controls-grid">
+      <div class="control-item">
+        <label for="filter-select">Modelo de Carta a Visualizar / Imprimir:</label>
+        <select id="filter-select" onchange="filterLetters(this.value)">
+          <option value="all">Ver e Imprimir las 5 Cartas en A4</option>
+          <option value="carta-1">Carta 1: General PyMEs y Comercios</option>
+          <option value="carta-2">Carta 2: Gastronomía & Restaurantes</option>
+          <option value="carta-3">Carta 3: Salones de Belleza, Barberías & Spas</option>
+          <option value="carta-4">Carta 4: Clínicas Dentales, Salud & Veterinarias</option>
+          <option value="carta-5">Carta 5: Volantes Rápidos A5 (2 por hoja)</option>
+        </select>
+      </div>
+
+      <div class="control-item">
+        <label for="custom-recipient">Personalizar Nombre del Negocio:</label>
+        <input type="text" id="custom-recipient" placeholder="Ej. Benny Salón / Cevichería El Paisita" oninput="updateCustomFields()" />
+      </div>
+
+      <div class="control-item">
+        <label for="custom-district">Distrito / Zona:</label>
+        <input type="text" id="custom-district" placeholder="Ej. Surquillo / Miraflores / San Isidro" oninput="updateCustomFields()" />
+      </div>
+
+      <div class="control-item">
+        <label for="custom-rep">Asesor Comercial:</label>
+        <input type="text" id="custom-rep" value="Equipo de Soluciones Comerciales" oninput="updateCustomFields()" />
+      </div>
+    </div>
+
+    <div class="button-row">
+      <div class="quick-tags">
+        <span style="font-size: 11px; color: #94a3b8; margin-right: 4px;">Filtro rápido:</span>
+        <button class="tag-btn active" onclick="setQuickFilter('all')">Todas</button>
+        <button class="tag-btn" onclick="setQuickFilter('carta-1')">PyMEs</button>
+        <button class="tag-btn" onclick="setQuickFilter('carta-2')">Restaurantes</button>
+        <button class="tag-btn" onclick="setQuickFilter('carta-3')">Salones</button>
+        <button class="tag-btn" onclick="setQuickFilter('carta-4')">Clínicas/Vet</button>
+        <button class="tag-btn" onclick="setQuickFilter('carta-5')">Volantes A5</button>
+      </div>
+      <button class="btn-print" onclick="window.print()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+        Imprimir en A4 / Guardar en PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CARTA 1: GENERAL PYMES Y COMERCIOS (A4)   -->
+  <!-- ========================================== -->
+  <div class="sheet-a4" id="carta-1">
+    <div>
+      <div class="letter-header">
+        <div class="brand-group">
+          <div class="brand-logo-badge">LS</div>
+          <div class="brand-title">
+            <h2>LimaSync Solutions</h2>
+            <span>Desarrollo Web de Alta Conversión · Catálogos B2B</span>
+          </div>
+        </div>
+        <div class="header-contact-meta">
+          WhatsApp Directo: <strong>+51 906 920 958</strong><br>
+          Email: <strong>limasync0@gmail.com</strong><br>
+          Web: <strong>limasync-solutions.vercel.app</strong>
+        </div>
+      </div>
+
+      <div class="meta-box">
+        <div class="meta-date">Lima, Perú — <span class="current-date-text">Octubre de 2026</span></div>
+        <div class="header-contact-meta">Sede: Lima Metropolitana</div>
+      </div>
+
+      <div class="recipient-block">
+        <div class="recipient-lead">Dirigido a:</div>
+        <div class="recipient-name dyn-recipient">Estimado(a) Director(a) / Propietario(a) / Administrador(a)</div>
+        <div class="recipient-locality dyn-district">Establecimiento Comercial · Lima, Perú</div>
+      </div>
+
+      <div class="subject-banner">
+        <span class="subject-tag">Propuesta Oficial</span>
+        <span>ASUNTO: Creación de su Sitio Web Oficial, Catálogo Interactivo y Reservas a WhatsApp sin intermediarios</span>
+      </div>
+
+      <div class="letter-body">
+        <p>
+          Reciba un cordial saludo. Nos dirigimos a usted desde <strong>LimaSync Solutions</strong> con el propósito de presentarle nuestra propuesta de modernización digital diseñada especialmente para negocios y comercios en Lima que ya cuentan con reputación local o clientes en Google Maps, pero que aún no cuentan con una plataforma web rápida, moderna y propia.
+        </p>
+
+        <p>
+          Hoy en día, más del <strong>80% de los vecinos y clientes</strong> buscan en Google Maps antes de visitar un local. Si al buscar su negocio encuentran información desactualizada o la página web de su competencia, se pierden ventas todos los días. En LimaSync implementamos sitios web con identidad visual editorial de alto impacto que convierten visitas en pedidos directos:
+        </p>
+
+        <div class="highlight-card">
+          <h4>¿Qué incluye nuestra solución integral para su negocio?</h4>
+          <ul class="features-list">
+            <li>
+              <span class="bullet-icon">✓</span>
+              <span><strong>Catálogo / Carta Digital:</strong> Lista con fotos, precios claros y cálculo dinámico de subtotal en Soles.</span>
+            </li>
+            <li>
+              <span class="bullet-icon">✓</span>
+              <span><strong>Botón de Pedido a WhatsApp:</strong> El cliente selecciona lo que desea y le llega el resumen listo al WhatsApp del local.</span>
+            </li>
+            <li>
+              <span class="bullet-icon">✓</span>
+              <span><strong>Google Maps & Reseñas:</strong> Geolocalización exacta con botón de ruta y destacados de clientes satisfechos.</span>
+            </li>
+            <li>
+              <span class="bullet-icon">✓</span>
+              <span><strong>100% Adaptada a Móviles:</strong> Carga ultrarrápida en menos de 1 segundo en cualquier celular o tablet.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pricing-pill">
+          <div class="pricing-info">
+            Inversión única de lanzamiento: <strong>S/ 500 (Pago Único)</strong> · Entrega lista en <strong>72 horas</strong>
+            <div style="font-size: 10.5px; color: #047857;">Incluye dominio corporativo .com, servidor de alta velocidad y primer mes de soporte. Sin comisiones por venta.</div>
+          </div>
+          <span class="pricing-badge">Sin Mensualidades</span>
+        </div>
+
+        <p>
+          Le invitamos a escanear el código QR adjunto para ver en su propio celular una muestra interactiva en tiempo real de cómo luciría su catálogo funcionando hoy mismo. Estaremos encantados de visitarlo brevemente o coordinar 3 minutos por WhatsApp para ajustar los detalles de su marca.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="bottom-section">
+        <div class="signature-group">
+          <div class="sign-line"></div>
+          <div class="sign-author dyn-rep">Equipo de Soluciones Comerciales</div>
+          <div class="sign-job">Consultoría y Desarrollo Web para Negocios</div>
+          <div class="sign-dept">LimaSync Solutions · RUC y Boleta/Factura</div>
+        </div>
+
+        <div class="qr-container">
+          <!-- QR SVG LIMASYNC DEMO -->
+          <svg class="qr-svg" viewBox="0 0 100 100">
+            <rect width="100" height="100" fill="white"/>
+            <!-- Patrón QR Vectorial Limpio -->
+            <rect x="10" y="10" width="24" height="24" fill="#0f172a"/>
+            <rect x="14" y="14" width="16" height="16" fill="white"/>
+            <rect x="18" y="18" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="10" width="24" height="24" fill="#0f172a"/>
+            <rect x="70" y="14" width="16" height="16" fill="white"/>
+            <rect x="74" y="18" width="8" height="8" fill="#0f172a"/>
+            <rect x="10" y="66" width="24" height="24" fill="#0f172a"/>
+            <rect x="14" y="70" width="16" height="16" fill="white"/>
+            <rect x="18" y="74" width="8" height="8" fill="#0f172a"/>
+            <rect x="42" y="14" width="6" height="6" fill="#0f172a"/>
+            <rect x="52" y="14" width="6" height="6" fill="#0f172a"/>
+            <rect x="42" y="24" width="16" height="6" fill="#0f172a"/>
+            <rect x="14" y="42" width="6" height="16" fill="#0f172a"/>
+            <rect x="24" y="46" width="14" height="6" fill="#0f172a"/>
+            <rect x="42" y="42" width="16" height="16" fill="#0284c7"/>
+            <rect x="66" y="42" width="10" height="6" fill="#0f172a"/>
+            <rect x="80" y="42" width="10" height="10" fill="#0f172a"/>
+            <rect x="66" y="56" width="6" height="14" fill="#0f172a"/>
+            <rect x="76" y="56" width="14" height="6" fill="#0f172a"/>
+            <rect x="42" y="66" width="8" height="24" fill="#0f172a"/>
+            <rect x="54" y="74" width="14" height="8" fill="#0f172a"/>
+            <rect x="72" y="70" width="18" height="20" fill="#0f172a"/>
+          </svg>
+          <div class="qr-info">
+            <strong>Escanear con la Cámara:</strong>
+            <span>Ver muestra interactiva en vivo</span>
+            <span class="qr-url">demo-solutions-livid.vercel.app</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer-bar">
+        <span>LimaSync Solutions · Atención Personalizada en Lima Metropolitana</span>
+        <span>Coordinar visita WhatsApp: <strong>+51 906 920 958</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CARTA 2: GASTRONOMÍA & RESTAURANTES (A4)   -->
+  <!-- ========================================== -->
+  <div class="sheet-a4" id="carta-2">
+    <div>
+      <div class="letter-header">
+        <div class="brand-group">
+          <div class="brand-logo-badge" style="background: #b84a24;">LS</div>
+          <div class="brand-title">
+            <h2>LimaSync Solutions</h2>
+            <span style="color: #b84a24;">Especialidad Gastronómica · Cartas Digitales & Salón</span>
+          </div>
+        </div>
+        <div class="header-contact-meta">
+          WhatsApp: <strong>+51 906 920 958</strong><br>
+          Email: <strong>limasync0@gmail.com</strong><br>
+          Web: <strong>limasync-solutions.vercel.app</strong>
+        </div>
+      </div>
+
+      <div class="meta-box">
+        <div class="meta-date">Lima, Perú — <span class="current-date-text">Octubre de 2026</span></div>
+        <div class="header-contact-meta">Sector: Restaurantes, Cevicherías & Cafés</div>
+      </div>
+
+      <div class="recipient-block">
+        <div class="recipient-lead">Atención especial para:</div>
+        <div class="recipient-name dyn-recipient">Estimado(a) Administrador(a) / Chef Propietario(a) / Jefe(a) de Salón</div>
+        <div class="recipient-locality dyn-district">Restaurante / Cevichería / Establecimiento Gastronómico · Lima</div>
+      </div>
+
+      <div class="subject-banner" style="border-left-color: #b84a24;">
+        <span class="subject-tag" style="background: #ffedd5; color: #b84a24;">Carta Digital Directa</span>
+        <span>ASUNTO: Elimine comisiones de delivery y aumente pedidos directos a su WhatsApp con su propia carta web</span>
+      </div>
+
+      <div class="letter-body">
+        <p>
+          Estimado equipo gastronómico: Sabemos el enorme esfuerzo que implica levantar cada turno de cocina y salón, cuidando insumos frescos y servicio al comensal. Sin embargo, las aplicaciones de delivery tradicionales llegan a descontarle entre el <strong>25% y 30% de cada pedido</strong>, recortando drásticamente su margen de ganancia.
+        </p>
+
+        <p>
+          Desde <strong>LimaSync Solutions</strong> desarrollamos cartas digitales interactivas para cevicherías, pollerías y restaurantes criollos en Lima, pensadas para que sus clientes habituales y vecinos pidan directo sin intermediarios:
+        </p>
+
+        <div class="highlight-card">
+          <h4 style="color: #9a3412;">Ventajas clave de su propia carta web gastronómica:</h4>
+          <ul class="features-list">
+            <li>
+              <span class="bullet-icon" style="color: #b84a24;">✓</span>
+              <span><strong>Cero Comisiones por Pedido:</strong> Todo el cobro de cada plato va directo a su negocio (Yape, Plin, tarjeta o efectivo).</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #b84a24;">✓</span>
+              <span><strong>Pedido Armado a WhatsApp:</strong> El cliente elige sus ceviches, dúos o calientes y envía el mensaje con el subtotal ya sumado.</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #b84a24;">✓</span>
+              <span><strong>Código QR para Mesas & Barra:</strong> Ideal para cartas físicas sin desgaste, facilitando la atención de los mozos en hora punta.</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #b84a24;">✓</span>
+              <span><strong>Fotografía de Platos a Sangre:</strong> Muestre sus especialidades con diseño sobrio y apetitoso que estimula el apetito.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pricing-pill">
+          <div class="pricing-info">
+            Inversión especial gastronómica: <strong>S/ 500 (Pago Único)</strong> · Entrega lista en <strong>72 horas</strong>
+            <div style="font-size: 10.5px; color: #047857;">Incluye dominio propio, carta cargada con sus precios y soporte. Sin cargos mensuales sorpresa.</div>
+          </div>
+          <span class="pricing-badge">Mayor Rentabilidad</span>
+        </div>
+
+        <p>
+          Escanee el código QR adjunto para probar en vivo una muestra de carta cevichera/restaurante operando en Lima. Con gusto podemos pasar por su local antes del turno de almuerzo para mostrarle el flujo en 3 minutos.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="bottom-section">
+        <div class="signature-group">
+          <div class="sign-line"></div>
+          <div class="sign-author dyn-rep">Área de Soluciones Gastronómicas</div>
+          <div class="sign-job">Especialistas en Cartas Digitales y Pedidos Directos</div>
+          <div class="sign-dept">LimaSync Solutions</div>
+        </div>
+
+        <div class="qr-container">
+          <svg class="qr-svg" viewBox="0 0 100 100">
+            <rect width="100" height="100" fill="white"/>
+            <rect x="10" y="10" width="24" height="24" fill="#1e293b"/>
+            <rect x="14" y="14" width="16" height="16" fill="white"/>
+            <rect x="18" y="18" width="8" height="8" fill="#1e293b"/>
+            <rect x="66" y="10" width="24" height="24" fill="#1e293b"/>
+            <rect x="70" y="14" width="16" height="16" fill="white"/>
+            <rect x="74" y="18" width="8" height="8" fill="#1e293b"/>
+            <rect x="10" y="66" width="24" height="24" fill="#1e293b"/>
+            <rect x="14" y="70" width="16" height="16" fill="white"/>
+            <rect x="18" y="74" width="8" height="8" fill="#1e293b"/>
+            <rect x="40" y="14" width="18" height="6" fill="#1e293b"/>
+            <rect x="44" y="24" width="10" height="6" fill="#1e293b"/>
+            <rect x="14" y="42" width="8" height="18" fill="#1e293b"/>
+            <rect x="42" y="42" width="16" height="16" fill="#b84a24"/>
+            <rect x="66" y="42" width="24" height="6" fill="#1e293b"/>
+            <rect x="66" y="54" width="8" height="14" fill="#1e293b"/>
+            <rect x="42" y="66" width="12" height="24" fill="#1e293b"/>
+            <rect x="64" y="68" width="26" height="22" fill="#1e293b"/>
+          </svg>
+          <div class="qr-info">
+            <strong>Probar Carta en el Móvil:</strong>
+            <span>Ver demo de cevichería / restaurante</span>
+            <span class="qr-url">demo-solutions-livid.vercel.app/?id=P004</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer-bar">
+        <span>LimaSync Solutions · Soporte local en distritos gastronómicos de Lima</span>
+        <span>WhatsApp Directo: <strong>+51 906 920 958</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CARTA 3: BELLEZA, SALONES & SPAS (A4)     -->
+  <!-- ========================================== -->
+  <div class="sheet-a4" id="carta-3">
+    <div>
+      <div class="letter-header">
+        <div class="brand-group">
+          <div class="brand-logo-badge" style="background: #7a2e3a;">LS</div>
+          <div class="brand-title">
+            <h2>LimaSync Solutions</h2>
+            <span style="color: #7a2e3a;">Estudio Editorial · Salones de Belleza, Barberías & Spas</span>
+          </div>
+        </div>
+        <div class="header-contact-meta">
+          WhatsApp: <strong>+51 906 920 958</strong><br>
+          Email: <strong>limasync0@gmail.com</strong><br>
+          Web: <strong>limasync-solutions.vercel.app</strong>
+        </div>
+      </div>
+
+      <div class="meta-box">
+        <div class="meta-date">Lima, Perú — <span class="current-date-text">Octubre de 2026</span></div>
+        <div class="header-contact-meta">Sector: Estilismo, Colorimetría & Spa Urbano</div>
+      </div>
+
+      <div class="recipient-block">
+        <div class="recipient-lead">Atención para la dirección de:</div>
+        <div class="recipient-name dyn-recipient">Estimado(a) Director(a) / Estilista Titular / Administrador(a)</div>
+        <div class="recipient-locality dyn-district">Salón de Belleza / Barbería / Spa Urbano · Lima</div>
+      </div>
+
+      <div class="subject-banner" style="border-left-color: #7a2e3a;">
+        <span class="subject-tag" style="background: #fae8eb; color: #7a2e3a;">Tarifario & Citas</span>
+        <span>ASUNTO: Tarifario de tratamientos, catálogo antes/después y reservas directas a su WhatsApp</span>
+      </div>
+
+      <div class="letter-body">
+        <p>
+          Reciba un cordial saludo. En el rubro de la estética y cuidado personal, sus clientes buscan profesionalismo, insumos de marca garantizados (Wella, Alfaparf, L'Oréal) y claridad en los precios. Con frecuencia, las clientas pasan minutos preguntando por chat <em>"¿cuánto está el balayage?"</em> o <em>"¿qué incluye el alisado?"</em>, saturando la atención de sus estilistas.
+        </p>
+
+        <p>
+          En <strong>LimaSync Solutions</strong> creamos sitios web editoriales estilo <em>boutique</em> para salones y spas en Lima (como nuestro prototipo desarrollado para <strong>Benny Salón & Spa</strong> en Surquillo), donde sus clientas pueden consultar la carta completa y armar su cita en segundos:
+        </p>
+
+        <div class="highlight-card">
+          <h4 style="color: #7a2e3a;">Módulos diseñados para su salón o spa:</h4>
+          <ul class="features-list">
+            <li>
+              <span class="bullet-icon" style="color: #7a2e3a;">✓</span>
+              <span><strong>Tarifario de Servicios por Categorías:</strong> Color & Mechas, Alisados orgánicos, Corte de autor, Manicure y Cejas.</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #7a2e3a;">✓</span>
+              <span><strong>Comparador Táctil Antes / Después:</strong> Slider interactivo para apreciar el brillo y acabado de sus trabajos reales.</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #7a2e3a;">✓</span>
+              <span><strong>Reserva Automática a WhatsApp:</strong> La clienta elige su turno (mañana, tarde o noche) y confirma directo con el local.</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #7a2e3a;">✓</span>
+              <span><strong>Galería Fotográfica del Local:</strong> Muestre la comodidad de sus sillones, estaciones de lavado e higiene profesional.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pricing-pill">
+          <div class="pricing-info">
+            Inversión única salón de belleza: <strong>S/ 500 (Pago Único)</strong> · Entrega lista en <strong>72 horas</strong>
+            <div style="font-size: 10.5px; color: #047857;">Incluye dominio corporativo .com, fotografías de sus ambientes y configuración completa.</div>
+          </div>
+          <span class="pricing-badge">Citas Ordenadas</span>
+        </div>
+
+        <p>
+          Le invitamos a escanear el código QR adjunto con su celular para ver cómo funciona el comparador antes/después y el ticket de reserva en vivo. Será un gusto coordinar 3 minutos para mostrarle el diseño personalizado para su marca.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="bottom-section">
+        <div class="signature-group">
+          <div class="sign-line"></div>
+          <div class="sign-author dyn-rep">Consultoría en Estilismo Digital</div>
+          <div class="sign-job">Diseño Web Editorial y Captación de Citas</div>
+          <div class="sign-dept">LimaSync Solutions</div>
+        </div>
+
+        <div class="qr-container">
+          <svg class="qr-svg" viewBox="0 0 100 100">
+            <rect width="100" height="100" fill="white"/>
+            <rect x="10" y="10" width="24" height="24" fill="#18181b"/>
+            <rect x="14" y="14" width="16" height="16" fill="white"/>
+            <rect x="18" y="18" width="8" height="8" fill="#18181b"/>
+            <rect x="66" y="10" width="24" height="24" fill="#18181b"/>
+            <rect x="70" y="14" width="16" height="16" fill="white"/>
+            <rect x="74" y="18" width="8" height="8" fill="#18181b"/>
+            <rect x="10" y="66" width="24" height="24" fill="#18181b"/>
+            <rect x="14" y="70" width="16" height="16" fill="white"/>
+            <rect x="18" y="74" width="8" height="8" fill="#18181b"/>
+            <rect x="42" y="14" width="16" height="6" fill="#18181b"/>
+            <rect x="44" y="24" width="12" height="6" fill="#18181b"/>
+            <rect x="14" y="42" width="6" height="16" fill="#18181b"/>
+            <rect x="42" y="42" width="16" height="16" fill="#7a2e3a"/>
+            <rect x="66" y="42" width="24" height="6" fill="#18181b"/>
+            <rect x="66" y="56" width="10" height="12" fill="#18181b"/>
+            <rect x="42" y="66" width="10" height="24" fill="#18181b"/>
+            <rect x="62" y="68" width="28" height="22" fill="#18181b"/>
+          </svg>
+          <div class="qr-info">
+            <strong>Ver Demo en su Celular:</strong>
+            <span>Prototipo Salón & Spa con Comparador</span>
+            <span class="qr-url">demo-solutions-livid.vercel.app/?id=P001</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer-bar">
+        <span>LimaSync Solutions · Transformación digital de negocios de belleza en Lima</span>
+        <span>WhatsApp: <strong>+51 906 920 958</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CARTA 4: ODONTOLOGÍA, SALUD & VETERINARIA  -->
+  <!-- ========================================== -->
+  <div class="sheet-a4" id="carta-4">
+    <div>
+      <div class="letter-header">
+        <div class="brand-group">
+          <div class="brand-logo-badge" style="background: #0f5257;">LS</div>
+          <div class="brand-title">
+            <h2>LimaSync Solutions</h2>
+            <span style="color: #0f5257;">Área Clínica · Odontología, Centros Médicos & Veterinarias</span>
+          </div>
+        </div>
+        <div class="header-contact-meta">
+          WhatsApp: <strong>+51 906 920 958</strong><br>
+          Email: <strong>limasync0@gmail.com</strong><br>
+          Web: <strong>limasync-solutions.vercel.app</strong>
+        </div>
+      </div>
+
+      <div class="meta-box">
+        <div class="meta-date">Lima, Perú — <span class="current-date-text">Octubre de 2026</span></div>
+        <div class="header-contact-meta">Sector: Salud, Dental, Fisioterapia & Veterinaria</div>
+      </div>
+
+      <div class="recipient-block">
+        <div class="recipient-lead">Atención para la dirección clínica de:</div>
+        <div class="recipient-name dyn-recipient">Estimado(a) Doctor(a) / Director(a) Médico / Odontólogo(a) / Veterinario(a)</div>
+        <div class="recipient-locality dyn-district">Centro Odontológico / Clínica / Consultorio Especializado · Lima</div>
+      </div>
+
+      <div class="subject-banner" style="border-left-color: #0f5257;">
+        <span class="subject-tag" style="background: #ccfbf1; color: #0f5257;">Salud & Citas</span>
+        <span>ASUNTO: Portal clínico para agendamiento de pacientes, catálogo de tratamientos y reputación digital</span>
+      </div>
+
+      <div class="letter-body">
+        <p>
+          Reciba un saludo cordial. La decisión de un paciente al elegir un consultorio dental, un centro de terapia o una clínica para su mascota se basa en dos pilares críticos: <strong>confianza médica</strong> y <strong>facilidad para programar su consulta</strong>. Contar con una presencia web desactualizada transmite una imagen lejana a la excelencia de sus tratamientos.
+        </p>
+
+        <p>
+          En <strong>LimaSync Solutions</strong> desarrollamos plataformas digitales para consultorios odontológicos, médicos y veterinarias en Lima, con enfoque sobrio y estricto cumplimiento de estándares de claridad y reputación:
+        </p>
+
+        <div class="highlight-card">
+          <h4 style="color: #0f5257;">Estructura recomendada para su clínica o consultorio:</h4>
+          <ul class="features-list">
+            <li>
+              <span class="bullet-icon" style="color: #0f5257;">✓</span>
+              <span><strong>Arancel y Especialidades Claras:</strong> Profilaxis ultrasonido, ortodoncia, curaciones, vacunas y cirugías explicadas con sencillez.</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #0f5257;">✓</span>
+              <span><strong>Pre-Agendamiento de Pacientes:</strong> El paciente o tutor solicita su turno con fecha y horario preferido directo al WhatsApp de recepción.</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #0f5257;">✓</span>
+              <span><strong>Reputación y Reseñas de Google:</strong> Integración de sus estrellas de Google Maps destacando la cercanía con los vecinos.</span>
+            </li>
+            <li>
+              <span class="bullet-icon" style="color: #0f5257;">✓</span>
+              <span><strong>Ubicación con Navegación GPS:</strong> Mapa georreferenciado con un solo clic para abrir Google Maps y llegar sin desvíos.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pricing-pill">
+          <div class="pricing-info">
+            Inversión única sector salud/veterinaria: <strong>S/ 500 (Pago Único)</strong> · Entrega lista en <strong>72 horas</strong>
+            <div style="font-size: 10.5px; color: #047857;">Incluye dominio institucional, catálogo de especialidades y acompañamiento técnico inicial.</div>
+          </div>
+          <span class="pricing-badge">Confianza Médica</span>
+        </div>
+
+        <p>
+          Le invitamos a escanear el código QR adjunto para visualizar una muestra en vivo adaptada al rubro odontológico/veterinario. Con gusto podemos coordinar una breve llamada de 3 minutos para evaluar las necesidades específicas de su centro.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="bottom-section">
+        <div class="signature-group">
+          <div class="sign-line"></div>
+          <div class="sign-author dyn-rep">Área de Tecnología y Soluciones Médicas</div>
+          <div class="sign-job">Portales Clínicos y Agendamiento de Pacientes</div>
+          <div class="sign-dept">LimaSync Solutions</div>
+        </div>
+
+        <div class="qr-container">
+          <svg class="qr-svg" viewBox="0 0 100 100">
+            <rect width="100" height="100" fill="white"/>
+            <rect x="10" y="10" width="24" height="24" fill="#0f172a"/>
+            <rect x="14" y="14" width="16" height="16" fill="white"/>
+            <rect x="18" y="18" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="10" width="24" height="24" fill="#0f172a"/>
+            <rect x="70" y="14" width="16" height="16" fill="white"/>
+            <rect x="74" y="18" width="8" height="8" fill="#0f172a"/>
+            <rect x="10" y="66" width="24" height="24" fill="#0f172a"/>
+            <rect x="14" y="70" width="16" height="16" fill="white"/>
+            <rect x="18" y="74" width="8" height="8" fill="#0f172a"/>
+            <rect x="42" y="14" width="14" height="6" fill="#0f172a"/>
+            <rect x="46" y="24" width="10" height="6" fill="#0f172a"/>
+            <rect x="14" y="42" width="6" height="16" fill="#0f172a"/>
+            <rect x="42" y="42" width="16" height="16" fill="#0f5257"/>
+            <rect x="66" y="42" width="24" height="6" fill="#0f172a"/>
+            <rect x="66" y="56" width="10" height="12" fill="#0f172a"/>
+            <rect x="42" y="66" width="10" height="24" fill="#0f172a"/>
+            <rect x="62" y="68" width="28" height="22" fill="#0f172a"/>
+          </svg>
+          <div class="qr-info">
+            <strong>Ver Portal Dental/Vet en Móvil:</strong>
+            <span>Muestra funcional con lista de tratamientos</span>
+            <span class="qr-url">demo-solutions-livid.vercel.app/?id=P015</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer-bar">
+        <span>LimaSync Solutions · Digitalización de consultorios y clínicas en Lima</span>
+        <span>WhatsApp: <strong>+51 906 920 958</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CARTA 5: VOLANTES DÍPTICOS A5 (2 POR A4)   -->
+  <!-- ========================================== -->
+  <div class="sheet-a4" id="carta-5">
+    <div class="half-sheet-container">
+      
+      <!-- VOLANTE SUPERIOR (A5) -->
+      <div class="flyer-card">
+        <div>
+          <div class="flyer-header">
+            <div class="brand-group">
+              <div class="brand-logo-badge" style="width: 32px; height: 32px; font-size: 18px;">LS</div>
+              <div class="brand-title">
+                <h2 style="font-size: 18px;">LimaSync Solutions</h2>
+                <span style="font-size: 8.5px;">Webs de Alta Conversión & Catálogos WhatsApp</span>
+              </div>
+            </div>
+            <div class="header-contact-meta" style="font-size: 9px;">
+              WA: <strong>+51 906 920 958</strong><br>
+              Lima, Perú
+            </div>
+          </div>
+
+          <div class="flyer-headline">
+            ¿Tus clientes pueden ver tu carta de precios y pedirte directo por WhatsApp?
+          </div>
+          <div class="flyer-sub">
+            Si tus clientes te buscan en Google Maps pero no tienen dónde ver tus servicios, precios y fotos reales, estás perdiendo ventas todos los días frente a tu competencia.
+          </div>
+
+          <div class="flyer-features">
+            <div>✓ <strong>Catálogo digital interactivo</strong> con precios en Soles.</div>
+            <div>✓ <strong>Pedidos directos a tu WhatsApp</strong> con total ya sumado.</div>
+            <div>✓ <strong>Cero comisiones:</strong> El 100% de la venta es tuyo.</div>
+            <div>✓ <strong>Entrega en 72 horas</strong> con dominio corporativo .com.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flyer-cta-box">
+            <div>
+              Web + Catálogo WhatsApp: <strong>S/ 500 (Pago Único)</strong>
+              <div style="font-size: 9px; opacity: 0.85;">Escribe "DEMO" al WhatsApp para recibir tu boceto gratis en 24h</div>
+            </div>
+            <div style="text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: bold; color: #38bdf8;">
+              +51 906 920 958
+            </div>
+          </div>
+          <div style="font-size: 8.5px; color: #64748b; margin-top: 4px; text-align: center; font-family: 'JetBrains Mono', monospace;">
+            Muestra online: demo-solutions-livid.vercel.app · Atención en Lima Metropolitana
+          </div>
+        </div>
+      </div>
+
+      <!-- LÍNEA GUÍA DE CORTE CON TIJERA -->
+      <div class="flyer-cut-hint">
+        <span>✂</span>
+        <span>CORTAR POR LA LÍNEA MEDIA (FORMATO MEDIA HOJA A5 PARA REPARTO RÁPIDO)</span>
+        <span>✂</span>
+      </div>
+
+      <!-- VOLANTE INFERIOR (A5 - IDÉNTICO PARA APROVECHAR HOJA) -->
+      <div class="flyer-card">
+        <div>
+          <div class="flyer-header">
+            <div class="brand-group">
+              <div class="brand-logo-badge" style="width: 32px; height: 32px; font-size: 18px;">LS</div>
+              <div class="brand-title">
+                <h2 style="font-size: 18px;">LimaSync Solutions</h2>
+                <span style="font-size: 8.5px;">Webs de Alta Conversión & Catálogos WhatsApp</span>
+              </div>
+            </div>
+            <div class="header-contact-meta" style="font-size: 9px;">
+              WA: <strong>+51 906 920 958</strong><br>
+              Lima, Perú
+            </div>
+          </div>
+
+          <div class="flyer-headline">
+            ¿Tus clientes pueden ver tu carta de precios y pedirte directo por WhatsApp?
+          </div>
+          <div class="flyer-sub">
+            Si tus clientes te buscan en Google Maps pero no tienen dónde ver tus servicios, precios y fotos reales, estás perdiendo ventas todos los días frente a tu competencia.
+          </div>
+
+          <div class="flyer-features">
+            <div>✓ <strong>Catálogo digital interactivo</strong> con precios en Soles.</div>
+            <div>✓ <strong>Pedidos directos a tu WhatsApp</strong> con total ya sumado.</div>
+            <div>✓ <strong>Cero comisiones:</strong> El 100% de la venta es tuyo.</div>
+            <div>✓ <strong>Entrega en 72 horas</strong> con dominio corporativo .com.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flyer-cta-box">
+            <div>
+              Web + Catálogo WhatsApp: <strong>S/ 500 (Pago Único)</strong>
+              <div style="font-size: 9px; opacity: 0.85;">Escribe "DEMO" al WhatsApp para recibir tu boceto gratis en 24h</div>
+            </div>
+            <div style="text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: bold; color: #38bdf8;">
+              +51 906 920 958
+            </div>
+          </div>
+          <div style="font-size: 8.5px; color: #64748b; margin-top: 4px; text-align: center; font-family: 'JetBrains Mono', monospace;">
+            Muestra online: demo-solutions-livid.vercel.app · Atención en Lima Metropolitana
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Fecha actual formateada
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const now = new Date();
+    const formattedDate = `${meses[now.getMonth()]} de ${now.getFullYear()}`;
+    document.querySelectorAll(".current-date-text").forEach(el => el.textContent = formattedDate);
+
+    // Filtrado de cartas
+    function filterLetters(val) {
+      const allSheets = document.querySelectorAll(".sheet-a4");
+      allSheets.forEach(sheet => {
+        if (val === "all" || sheet.id === val) {
+          sheet.style.display = "flex";
+        } else {
+          sheet.style.display = "none";
+        }
+      });
+      // Actualizar tags
+      document.querySelectorAll(".tag-btn").forEach(btn => {
+        const text = btn.textContent.toLowerCase();
+        btn.classList.toggle("active", (val === "all" && text.includes("todas")) || (val !== "all" && btn.getAttribute("onclick")?.includes(val)));
+      });
+    }
+
+    function setQuickFilter(val) {
+      document.getElementById("filter-select").value = val;
+      filterLetters(val);
+    }
+
+    // Actualización de campos personalizados
+    function updateCustomFields() {
+      const recipientVal = document.getElementById("custom-recipient").value.trim();
+      const districtVal = document.getElementById("custom-district").value.trim();
+      const repVal = document.getElementById("custom-rep").value.trim();
+
+      document.querySelectorAll(".dyn-recipient").forEach(el => {
+        el.textContent = recipientVal || "Estimado(a) Director(a) / Propietario(a) / Administrador(a)";
+      });
+
+      document.querySelectorAll(".dyn-district").forEach(el => {
+        el.textContent = districtVal 
+          ? `Establecimiento Comercial · ${districtVal}, Lima` 
+          : "Establecimiento Comercial · Lima, Perú";
+      });
+
+      document.querySelectorAll(".dyn-rep").forEach(el => {
+        el.textContent = repVal || "Equipo de Soluciones Comerciales";
+      });
+    }
+  </script>
+</body>
+</html>

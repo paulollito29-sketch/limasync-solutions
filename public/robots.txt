@@ -1,6 +1,48 @@
 # Robots.txt for LIMASYNC SOLUTIONS (https://www.limasync.com)
+
+# 1. Allow legitimate search engines for indexing and SEO
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Bingbot
+User-agent: Slurp
+User-agent: DuckDuckBot
+Allow: /
+
+# 2. Block AI crawlers, automated scrapers, content scrapers & data harvesters
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: CCBot
+User-agent: ClaudeBot
+User-agent: Anthropic-AI
+User-agent: Bytespider
+User-agent: PerplexityBot
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: FacebookBot
+User-agent: Meta-ExternalAgent
+User-agent: Scrapy
+User-agent: SemrushBot
+User-agent: AhrefsBot
+User-agent: DotBot
+User-agent: MJ12bot
+User-agent: PetalBot
+User-agent: DataForSeoBot
+User-agent: SeekportBot
+User-agent: Omgilibot
+User-agent: ImagesiftBot
+User-agent: Diffbot
+User-agent: Screaming Frog SEO Spider
+Disallow: /
+
+# 3. Default rule for other bots
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /admin/
+Disallow: /templates/
+Disallow: /demos
+Disallow: /en/demos
 
 # Sitemaps
 Sitemap: https://www.limasync.com/sitemap-index.xml

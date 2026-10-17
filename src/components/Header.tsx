@@ -9,14 +9,12 @@ interface HeaderProps {
 const navLinks = {
   es: [
     { href: "/#servicios", label: "Servicios" },
-    { href: "/demos", label: "Demos en Vivo" },
     { href: "/#precios", label: "Planes" },
     { href: "/#proceso", label: "Proceso" },
     { href: "/#contacto", label: "Contacto" },
   ],
   en: [
     { href: "/en#services", label: "Services" },
-    { href: "/en/demos", label: "Live Demos" },
     { href: "/en#pricing", label: "Plans" },
     { href: "/en#process", label: "Process" },
     { href: "/en#contact", label: "Contact" },
@@ -38,20 +36,13 @@ const ctaLabels = {
 
 export default function Header({ lang = "es" }: HeaderProps) {
   const [open, setOpen] = useState(false);
-  const [isDemosPage, setIsDemosPage] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsDemosPage(window.location.pathname.includes("/demos"));
-    }
-  }, []);
 
   const links = navLinks[lang];
   const cta = ctaLabels[lang];
   const waUrl = `https://wa.me/51906920958?text=${encodeURIComponent(cta.waMsg)}`;
 
-  const esHref = isDemosPage ? "/demos" : "/";
-  const enHref = isDemosPage ? "/en/demos" : "/en";
+  const esHref = "/";
+  const enHref = "/en";
 
   return (
     <header className="header">

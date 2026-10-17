@@ -45,7 +45,7 @@ const businessSchema = {
   name: 'LimaSync Solutions',
   alternateName: 'LimaSync',
   url: siteUrl,
-  logo: ogImageUrl,
+  logo: `${siteUrl}/favicon-192x192.png`,
   image: ogImageUrl,
   description: description,
   telephone: '+51906920958',
@@ -185,17 +185,22 @@ const faqSchema = {
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Search Engine Indexing & Robots -->
+    <!-- Search Engine Indexing & Anti-Scraping Protection -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="bingbot" content="index, follow" />
+    <meta name="robots" content="index, follow, noarchive, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, noarchive" />
+    <meta name="bingbot" content="index, follow, noarchive" />
     <meta name="author" content="LimaSync Solutions" />
 
     <!-- Google Search Console Verification (Meta Tag) -->
@@ -239,6 +244,177 @@ const faqSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+    <!-- Security, Anti-Inspection & Anti-Scraping Shield -->
+    <script is:inline>
+      (function () {
+        // 1. Disable Right-Click Context Menu
+        document.addEventListener(
+          "contextmenu",
+          function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          },
+          { capture: true, passive: false }
+        );
+
+        // 2. Disable Keyboard Shortcuts (Inspect, DevTools, View Source, Save, Print Dump)
+        document.addEventListener(
+          "keydown",
+          function (e) {
+            const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+            const ctrlOrCmd = isMac ? e.metaKey : e.ctrlKey;
+            const shift = e.shiftKey;
+            const altOrOption = e.altKey;
+
+            // F12 key
+            if (e.key === "F12" || e.keyCode === 123) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+
+            // Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Inspect Element), Ctrl+Shift+K
+            if (
+              ctrlOrCmd &&
+              shift &&
+              ["I", "i", "J", "j", "C", "c", "K", "k"].includes(e.key)
+            ) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+
+            // Mac Cmd+Option+I, Cmd+Option+J, Cmd+Option+C, Cmd+Option+U
+            if (
+              isMac &&
+              e.metaKey &&
+              altOrOption &&
+              ["I", "i", "J", "j", "C", "c", "U", "u"].includes(e.key)
+            ) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+
+            // Ctrl+U / Cmd+U (View Source)
+            if (
+              ctrlOrCmd &&
+              (e.key === "u" || e.key === "U" || e.keyCode === 85)
+            ) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+
+            // Ctrl+S / Cmd+S (Save Page)
+            if (
+              ctrlOrCmd &&
+              (e.key === "s" || e.key === "S" || e.keyCode === 83)
+            ) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+
+            // Ctrl+P / Cmd+P (Print / PDF Dump)
+            if (
+              ctrlOrCmd &&
+              (e.key === "p" || e.key === "P" || e.keyCode === 80)
+            ) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+
+            // Check if user is typing in a legitimate form field
+            const target = e.target;
+            const tag = target && target.tagName ? target.tagName.toLowerCase() : "";
+            const isEditable =
+              tag === "input" ||
+              tag === "textarea" ||
+              (target && target.isContentEditable);
+
+            // Block Ctrl+A (Select All text dump) outside form inputs
+            if (ctrlOrCmd && (e.key === "a" || e.key === "A") && !isEditable) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+
+            // Block Ctrl+C (Copy) outside form inputs
+            if (ctrlOrCmd && (e.key === "c" || e.key === "C") && !isEditable) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }
+          },
+          { capture: true, passive: false }
+        );
+
+        // 3. Prevent Drag and Drop of Images and Content
+        document.addEventListener(
+          "dragstart",
+          function (e) {
+            e.preventDefault();
+            return false;
+          },
+          { capture: true }
+        );
+
+        // 4. Prevent Copy Event outside interactive form fields
+        document.addEventListener(
+          "copy",
+          function (e) {
+            const target = e.target;
+            const tag = target && target.tagName ? target.tagName.toLowerCase() : "";
+            if (
+              tag !== "input" &&
+              tag !== "textarea" &&
+              !(target && target.isContentEditable)
+            ) {
+              e.preventDefault();
+              return false;
+            }
+          },
+          { capture: true, passive: false }
+        );
+
+        // 5. Console Shield & Security Warning
+        function shieldConsole() {
+          if (typeof console !== "undefined") {
+            try {
+              console.clear();
+              console.log(
+                "%c⚠️ LIMASYNC SOLUTIONS — ENTORNO PROTEGIDO\n%cEl código fuente, arquitectura, diseño y recursos multimedia están protegidos bajo directivas de seguridad activas contra inspección y extracción no autorizada.",
+                "color: #0ea5e9; font-size: 16px; font-weight: bold; font-family: sans-serif;",
+                "color: #94a3b8; font-size: 12px; font-family: sans-serif; margin-top: 4px;"
+              );
+            } catch (_) {}
+          }
+        }
+
+        shieldConsole();
+        setInterval(shieldConsole, 3500);
+
+        // 6. Detect DevTools Opening via Window Dimensions
+        let devtoolsDetected = false;
+        const threshold = 160;
+        setInterval(function () {
+          const widthDiff = window.outerWidth - window.innerWidth > threshold;
+          const heightDiff = window.outerHeight - window.innerHeight > threshold;
+          if (widthDiff || heightDiff) {
+            if (!devtoolsDetected) {
+              devtoolsDetected = true;
+              shieldConsole();
+            }
+          } else {
+            devtoolsDetected = false;
+          }
+        }, 1200);
+      })();
+    </script>
   </head>
   <body>
     <slot />
