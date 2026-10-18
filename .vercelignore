@@ -1,5 +1,7 @@
 node_modules
 .astro
+.git
+.env.local
 material-impresion
 docs
 *.log
