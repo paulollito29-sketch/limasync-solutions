@@ -247,29 +247,7 @@ const faqSchema = {
 
     <!-- Security, Anti-Inspection & Anti-Scraping Shield -->
     <script is:inline>
-      (function () {
-        // 0. Proactively Purge Legacy Next.js Cookies & Globals (Fix for tech profilers / Wappalyzer)
-        try {
-          const legacyCookies = ["NEXT_LOCALE", "__next_preview_data", "__prerender_bypass", "next-auth.session-token"];
-          const host = window.location.hostname;
-          legacyCookies.forEach(function (name) {
-            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + host + ";";
-            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + host.replace(/^www\./, "") + ";";
-          });
-          if (typeof window !== "undefined") {
-            delete window.__NEXT_DATA__;
-            delete window.next;
-            delete window._next;
-            Object.defineProperty(window, "__NEXT_DATA__", { value: undefined, writable: false, configurable: false });
-            Object.defineProperty(window, "next", { value: undefined, writable: false, configurable: false });
-          }
-          if (typeof navigator !== "undefined" && "serviceWorker" in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (registrations) {
-              registrations.forEach(function (r) { r.unregister(); });
-            }).catch(function () {});
-          }
-        } catch (_) {}
+
 
         // 1. Disable Right-Click Context Menu
         document.addEventListener(
