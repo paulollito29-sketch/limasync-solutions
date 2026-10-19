@@ -245,26 +245,26 @@ const faqSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
-    <!-- Clean legacy service workers and caches from previous deployments -->
+    <!-- Security, Anti-Inspection Shield & Legacy Cache Eviction -->
     <script is:inline>
-      if (typeof window !== "undefined") {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.getRegistrations().then(function (registrations) {
-            for (var i = 0; i < registrations.length; i++) {
-              registrations[i].unregister();
-            }
-          }).catch(function () {});
+      (function () {
+        // 0. Clean legacy service workers and caches from previous deployments
+        if (typeof window !== "undefined") {
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+              for (var i = 0; i < registrations.length; i++) {
+                registrations[i].unregister();
+              }
+            }).catch(function () {});
+          }
+          if ("caches" in window) {
+            caches.keys().then(function (names) {
+              for (var i = 0; i < names.length; i++) {
+                caches.delete(names[i]);
+              }
+            }).catch(function () {});
+          }
         }
-        if ("caches" in window) {
-          caches.keys().then(function (names) {
-            for (var i = 0; i < names.length; i++) {
-              caches.delete(names[i]);
-            }
-          }).catch(function () {});
-        }
-      }
-    </script>
-
 
         // 1. Disable Right-Click Context Menu
         document.addEventListener(
