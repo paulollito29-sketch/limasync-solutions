@@ -21,6 +21,7 @@ export default function FloatingWhatsApp({ lang = "es" }: FloatingWhatsAppProps)
 
   return (
     <motion.div
+      className="floating-contact-container"
       initial={{ opacity: 0, scale: 0.8, y: 30 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
@@ -37,6 +38,7 @@ export default function FloatingWhatsApp({ lang = "es" }: FloatingWhatsAppProps)
     >
       {/* Floating Email Button */}
       <motion.a
+        className="floating-email-btn"
         href={mailUrl}
         aria-label={mailLabel}
         whileHover={{
@@ -81,6 +83,7 @@ export default function FloatingWhatsApp({ lang = "es" }: FloatingWhatsAppProps)
 
       {/* Floating WhatsApp Button */}
       <motion.a
+        className="floating-whatsapp-btn"
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
