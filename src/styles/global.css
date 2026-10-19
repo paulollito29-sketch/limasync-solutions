@@ -6,6 +6,7 @@
   --line: #dddacd;
   --accent: #0ea5e9;
   --accent-strong: #0369a1;
+  --accent-ink: #ffffff;
   --font-sans: "Space Grotesk", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --sans: var(--font-sans);
@@ -164,33 +165,39 @@ img {
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: var(--ink);
   color: var(--paper);
-  padding: 0.6rem 1.15rem;
+  padding: 0.65rem 1.15rem;
   font-size: 0.92rem;
   font-weight: 600;
   border: 1px solid var(--ink);
-  transition: background 0.15s, color 0.15s;
-  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: normal;
+  word-break: normal;
+  text-wrap: balance;
+  text-align: center;
+  text-decoration: none;
 }
 
 .btn:hover {
   background: var(--accent);
   border-color: var(--accent);
-  color: var(--accent-ink);
+  color: #ffffff;
 }
 
 .btn-accent {
   background: var(--accent-strong);
   border-color: var(--accent-strong);
-  color: var(--accent-ink);
+  color: #ffffff !important;
 }
 
 .btn-accent:hover {
   background: var(--ink);
   border-color: var(--ink);
-  color: var(--paper);
+  color: #ffffff !important;
 }
 
 .nav-actions {

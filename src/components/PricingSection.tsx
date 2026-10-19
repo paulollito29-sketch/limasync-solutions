@@ -129,7 +129,7 @@ export default function PricingSection({ lang = "es" }: PricingSectionProps) {
               background: "var(--paper-2)",
               border: "2px solid var(--accent-strong)",
               borderRadius: "16px",
-              padding: "2.25rem",
+              padding: "clamp(1.25rem, 4.5vw, 2.25rem)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -182,7 +182,21 @@ export default function PricingSection({ lang = "es" }: PricingSectionProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-accent"
-                style={{ width: "100%", textAlign: "center", padding: "0.85rem", boxSizing: "border-box", display: "block" }}
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  padding: "0.85rem 1rem",
+                  boxSizing: "border-box",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#ffffff",
+                  whiteSpace: "normal",
+                  lineHeight: 1.35,
+                  borderRadius: "8px",
+                  fontWeight: 700,
+                  fontSize: "0.95rem",
+                }}
               >
                 {t.btn1}
               </a>
@@ -195,7 +209,7 @@ export default function PricingSection({ lang = "es" }: PricingSectionProps) {
               background: "var(--paper)",
               border: "1px solid var(--line)",
               borderRadius: "16px",
-              padding: "2.25rem",
+              padding: "clamp(1.25rem, 4.5vw, 2.25rem)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -229,7 +243,20 @@ export default function PricingSection({ lang = "es" }: PricingSectionProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn"
-                style={{ width: "100%", textAlign: "center", padding: "0.85rem", boxSizing: "border-box", display: "block" }}
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  padding: "0.85rem 1rem",
+                  boxSizing: "border-box",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  whiteSpace: "normal",
+                  lineHeight: 1.35,
+                  borderRadius: "8px",
+                  fontWeight: 700,
+                  fontSize: "0.95rem",
+                }}
               >
                 {t.btn2}
               </a>
