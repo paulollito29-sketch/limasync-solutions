@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async () => {
-  const siteUrl = 'https://limasync.com';
+  const siteUrl = 'https://www.limasync.com';
   const now = new Date();
   const lastMod = now.toISOString().split('T')[0];
 
