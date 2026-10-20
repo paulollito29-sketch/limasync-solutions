@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/react": "^4.2.0",
     "@astrojs/sitemap": "^3.7.4",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^5.4.0",
     "framer-motion": "^14.3.0",
     "react": "^19.0.0",
