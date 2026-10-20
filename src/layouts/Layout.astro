@@ -437,6 +437,12 @@ const faqSchema = {
         }, 1200);
       })();
     </script>
+
+    <!-- Vercel Web Analytics -->
+    <script>
+      import { inject } from '@vercel/analytics';
+      inject();
+    </script>
   </head>
   <body>
     <slot />
