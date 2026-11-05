@@ -15,10 +15,10 @@ const EMAIL = "limasync0@gmail.com";
   <Header client:load lang="es" />
   <main id="top">
     <MinimalHero client:load lang="es" />
-    <ServicesSection client:load lang="es" />
-    <ProcessSection client:load lang="es" />
-    <PricingSection client:load lang="es" />
-    <MinimalContactCta client:load lang="es" email={EMAIL} />
+    <ServicesSection client:visible lang="es" />
+    <ProcessSection client:visible lang="es" />
+    <PricingSection client:visible lang="es" />
+    <MinimalContactCta client:visible lang="es" email={EMAIL} />
   </main>
   <FloatingWhatsApp client:idle lang="es" />
 </Layout>

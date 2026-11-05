@@ -24,13 +24,13 @@ const chapters = {
       href: "#precios",
       images: [
         {
-          src: "/images/hero_mockup.png",
+          src: "/images/hero_mockup.webp",
           alt: "Vista móvil y escritorio de sitio Web Express",
           w: 960,
           h: 720,
         },
         {
-          src: "/images/hero_web_showcase.jpg",
+          src: "/images/hero_web_showcase.webp",
           alt: "Diseño de interfaz web corporativa en Lima",
           w: 960,
           h: 720,
@@ -52,7 +52,7 @@ const chapters = {
       href: "#precios",
       images: [
         {
-          src: "/images/service_restaurant_pos.jpg",
+          src: "/images/service_restaurant_pos.webp",
           alt: "Carta digital QR interactiva para restaurantes en Lima",
           w: 1200,
           h: 900,
@@ -74,13 +74,13 @@ const chapters = {
       href: "#precios",
       images: [
         {
-          src: "/images/service_dashboard.jpg",
+          src: "/images/service_dashboard.webp",
           alt: "Panel de control de métricas operativas y CRM en tiempo real",
           w: 960,
           h: 720,
         },
         {
-          src: "/images/service_automation_bot.jpg",
+          src: "/images/service_automation_bot.webp",
           alt: "Flujo de automatización, CRM y bot de atención comercial 24/7",
           w: 960,
           h: 720,
@@ -104,13 +104,13 @@ const chapters = {
       href: "#pricing",
       images: [
         {
-          src: "/images/hero_mockup.png",
+          src: "/images/hero_mockup.webp",
           alt: "Mobile and desktop view of Web Express site",
           w: 960,
           h: 720,
         },
         {
-          src: "/images/hero_web_showcase.jpg",
+          src: "/images/hero_web_showcase.webp",
           alt: "Corporate web interface design in Lima",
           w: 960,
           h: 720,
@@ -132,7 +132,7 @@ const chapters = {
       href: "#pricing",
       images: [
         {
-          src: "/images/service_restaurant_pos.jpg",
+          src: "/images/service_restaurant_pos.webp",
           alt: "Interactive digital QR menu for restaurants in Lima",
           w: 1200,
           h: 900,
@@ -154,13 +154,13 @@ const chapters = {
       href: "#pricing",
       images: [
         {
-          src: "/images/service_dashboard.jpg",
+          src: "/images/service_dashboard.webp",
           alt: "Real-time operational metrics and CRM dashboard",
           w: 960,
           h: 720,
         },
         {
-          src: "/images/service_automation_bot.jpg",
+          src: "/images/service_automation_bot.webp",
           alt: "Automation workflow, CRM, and 24/7 commercial bot",
           w: 960,
           h: 720,

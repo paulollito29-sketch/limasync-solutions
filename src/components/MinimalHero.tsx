@@ -15,7 +15,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
 
   const slides = [
     {
-      src: "/images/hero_web_showcase.jpg",
+      src: "/images/hero_web_showcase.webp",
       alt: isEs
         ? "Plataforma web comercial express desarrollada en 72 horas"
         : "Express commercial web platform built in 72 hours",
@@ -24,7 +24,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
       badge: isEs ? "72 HORAS SLA" : "72-HOUR SLA",
     },
     {
-      src: "/images/service_restaurant_pos.jpg",
+      src: "/images/service_restaurant_pos.webp",
       alt: isEs
         ? "Carta digital QR interactiva para restaurantes sin comisiones"
         : "Interactive digital QR menu for restaurants without fees",
@@ -33,7 +33,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
       badge: isEs ? "CERO COMISIONES" : "ZERO COMMISSIONS",
     },
     {
-      src: "/images/service_dashboard.jpg",
+      src: "/images/service_dashboard.webp",
       alt: isEs
         ? "Dashboard, CRM y portal administrativo con métricas en tiempo real"
         : "Live metrics dashboard and custom CRM portal",
@@ -42,7 +42,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
       badge: isEs ? "A COTIZAR" : "CUSTOM QUOTE",
     },
     {
-      src: "/images/service_automation_bot.jpg",
+      src: "/images/service_automation_bot.webp",
       alt: isEs
         ? "Bots de WhatsApp, flujos CRM y automatización comercial"
         : "WhatsApp bots, CRM workflows, and sales automation",
@@ -51,7 +51,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
       badge: isEs ? "A COTIZAR" : "CUSTOM QUOTE",
     },
     {
-      src: "/images/hero_mockup.png",
+      src: "/images/hero_mockup.webp",
       alt: isEs
         ? "Ecosistema multiplataforma adaptado a celulares y computadoras con Angular.ts"
         : "Cross-platform mobile and desktop ecosystem with Angular.ts",
@@ -65,8 +65,10 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
+    setHasMounted(true);
     setIsDesktop(window.innerWidth >= 960);
   }, []);
 
@@ -85,28 +87,18 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
         <div className="hero-field-top" aria-hidden="true" />
         <div className="hero-field-bottom" aria-hidden="true" />
 
-        <motion.div
-          className="hero-headline-stack"
-          initial={{ opacity: 0, scale: 0.96, y: 32 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="hero-headline-stack">
           <h1 className="hero-h1-layer">
             <span className="hero-line-top">{line1}</span>
             <br />
             <span className="hero-line-bottom">{line2}</span>
           </h1>
-        </motion.div>
+        </div>
       </div>
 
       <div className="hero-lower-band" data-chapter="sky">
         <div className="hero-deck-grid">
-          <motion.div
-            className="hero-lead-col"
-            initial={{ opacity: 0, x: isDesktop ? -54 : 0, y: isDesktop ? 0 : 32 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.72, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div className="hero-lead-col">
             <p className="hero-lead-text">
               {isEs
                 ? "Fácil, rápido, LimaSync. Webs, sistemas comerciales y software a medida en Lima. Inicias hoy con el 50% de anticipo y cancelas el saldo únicamente al verificar tu sistema funcionando en 72 horas."
@@ -116,7 +108,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
             <div className="hero-cta-row">
               <a href={isEs ? "#precios" : "#pricing"} className="btn-dark">
                 <span>
-                  {isEs ? "Ver planes desde S/ 499" : "View plans from S/ 499"}
+                  {isEs ? "Ver planes desde S/ 499" : "View planes from S/ 499"}
                 </span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path
@@ -131,14 +123,9 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                 <span>{isEs ? "Probar reloj de 72h" : "Test 72h clock"}</span>
               </a>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="hero-media-col"
-            initial={{ opacity: 0, x: isDesktop ? 54 : 0, y: isDesktop ? 0 : 32 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.72, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div className="hero-media-col">
             {/* 3D Flip Image Showcase (Perspective rotation, steady container) */}
             <div
               className="hero-photo-wrap"
@@ -183,7 +170,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                       },
                     }),
                   }}
-                  initial="enter"
+                  initial={hasMounted ? "enter" : false}
                   animate="center"
                   exit="exit"
                   style={{
@@ -199,6 +186,8 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                     alt={slides[activeSlide].alt}
                     width={1200}
                     height={750}
+                    loading={activeSlide === 0 ? "eager" : "lazy"}
+                    decoding="async"
                     style={{
                       width: "100%",
                       height: "100%",
@@ -250,16 +239,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                           {slides[activeSlide].title}
                         </div>
                       </div>
-                      <span
-                        style={{
-                          fontSize: "0.85rem",
-                          fontWeight: 700,
-                          padding: "4px 8px",
-                          backgroundColor: "#0369a1",
-                          color: "#ffffff",
-                          flexShrink: 0,
-                        }}
-                      >
+                      <span className="hero-slide-badge">
                         {slides[activeSlide].badge}
                       </span>
                     </div>
@@ -277,9 +257,9 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                   right: "12px",
                   zIndex: 10,
                   display: "flex",
-                  gap: "6px",
+                  gap: "2px",
                   backgroundColor: "rgba(10, 15, 29, 0.72)",
-                  padding: "5px 8px",
+                  padding: "2px 4px",
                   backdropFilter: "blur(6px)",
                 }}
               >
@@ -295,16 +275,30 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                       setActiveSlide(idx);
                     }}
                     style={{
-                      width: idx === activeSlide ? "22px" : "8px",
-                      height: "8px",
-                      backgroundColor:
-                        idx === activeSlide ? "#38bdf8" : "rgba(255,255,255,0.45)",
+                      minWidth: "26px",
+                      minHeight: "26px",
+                      padding: "6px 2px",
+                      background: "transparent",
                       border: 0,
                       cursor: "pointer",
-                      padding: 0,
-                      transition: "all 180ms ease",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "transform 140ms cubic-bezier(0.23, 1, 0.32, 1)",
                     }}
-                  />
+                  >
+                    <span
+                      style={{
+                        display: "block",
+                        width: idx === activeSlide ? "22px" : "8px",
+                        height: "8px",
+                        backgroundColor:
+                          idx === activeSlide ? "#38bdf8" : "rgba(255,255,255,0.45)",
+                        transition:
+                          "width 240ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease-out",
+                      }}
+                    />
+                  </button>
                 ))}
               </div>
             </div>
@@ -392,7 +386,7 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

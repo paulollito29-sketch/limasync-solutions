@@ -370,6 +370,16 @@ summary:focus-visible {
   transition: transform 600ms var(--ease-out);
 }
 
+.hero-slide-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  background-color: #0369a1 !important;
+  color: #ffffff !important;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
 /* Showcase Chapters */
 .showcase-chapter {
   min-height: 92svh;
