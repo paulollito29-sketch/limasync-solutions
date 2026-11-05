@@ -3,6 +3,10 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://limasync.com',
+  outDir: './dist',
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [
     react(),
   ],
@@ -14,4 +18,3 @@ export default defineConfig({
     },
   },
 });
-

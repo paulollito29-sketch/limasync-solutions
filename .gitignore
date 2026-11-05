@@ -43,3 +43,9 @@ dist/
 
 # private offline tools
 tarjetas-limasync.html
+run-local.mjs
+*.nosync
+*.nosync/
+.taste-skill/
+.impeccable/
+.astro

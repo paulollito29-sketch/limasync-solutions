@@ -1,165 +1,88 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 interface HeaderProps {
   lang?: "es" | "en";
 }
 
-const navLinks = {
+const navItems = {
   es: [
-    { href: "/#servicios", label: "Servicios" },
-    { href: "/#precios", label: "Planes" },
-    { href: "/#proceso", label: "Proceso" },
-    { href: "/#contacto", label: "Contacto" },
+    { href: "#servicios", label: "Servicios" },
+    { href: "#proceso", label: "Proceso" },
+    { href: "#precios", label: "Planes" },
+    { href: "#preguntas", label: "Preguntas" },
   ],
   en: [
-    { href: "/en#services", label: "Services" },
-    { href: "/en#pricing", label: "Plans" },
-    { href: "/en#process", label: "Process" },
-    { href: "/en#contact", label: "Contact" },
+    { href: "#services", label: "Services" },
+    { href: "#process", label: "Process" },
+    { href: "#pricing", label: "Plans" },
+    { href: "#faq", label: "Questions" },
   ],
-};
-
-const ctaLabels = {
-  es: {
-    btn: "Cotizar en 72h",
-    drawer: "Cotizar en 72h por WhatsApp →",
-    waMsg: "Hola LimaSync Solutions, quiero cotizar un proyecto",
-  },
-  en: {
-    btn: "Get Quote (72h)",
-    drawer: "Get a 72h Quote on WhatsApp →",
-    waMsg: "Hello LimaSync Solutions, I want to get a quote for a web project",
-  },
 };
 
 export default function Header({ lang = "es" }: HeaderProps) {
-  const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<"paper" | "dark" | "sand" | "sky">("paper");
+  const isEs = lang === "es";
+  const items = navItems[lang];
 
-  const links = navLinks[lang];
-  const cta = ctaLabels[lang];
-  const waUrl = `https://wa.me/51906920958?text=${encodeURIComponent(cta.waMsg)}`;
-
-  const esHref = "/";
-  const enHref = "/en";
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll<HTMLElement>("[data-chapter]");
+      let active: "paper" | "dark" | "sand" | "sky" = "paper";
+      for (const sec of sections) {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top <= 64 && rect.bottom >= 64) {
+          const val = sec.getAttribute("data-chapter") as "paper" | "dark" | "sand" | "sky";
+          if (val) active = val;
+          break;
+        }
+      }
+      setTheme(active);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="header">
-      <div className="wrap">
-        <nav className="nav">
-          {/* Zone 1: Brand & Logo */}
-          <div className="nav-brand">
-            <a className="logo" href={lang === "en" ? "/en" : "/"} onClick={() => setOpen(false)}>
-              <span className="logo-mark" aria-hidden="true" />
-              <span>LIMASYNC SOLUTIONS</span>
-            </a>
-          </div>
+    <header className="site-header" data-chapter-theme={theme}>
+      <div className="header-inner">
+        <a
+          href={isEs ? "/" : "/en"}
+          className="wordmark"
+          style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}
+        >
+          <img
+            src="/favicon.svg"
+            alt=""
+            width="24"
+            height="24"
+            style={{ display: "block", flexShrink: 0 }}
+          />
+          <span>LIMASYNC</span>
+        </a>
 
-          {/* Zone 2: Navigation Links (Centered with spacious margins) */}
+        <nav className="nav-row" aria-label={isEs ? "Navegación principal" : "Main navigation"}>
           <div className="nav-links">
-            {links.map((l) => (
-              <a key={l.href} href={l.href}>
-                {l.label}
+            {items.map((item) => (
+              <a key={item.href} href={item.href} className="nav-link">
+                {item.label}
               </a>
             ))}
-          </div>
-
-          {/* Zone 3: Actions (Language Switcher + Quote Button + Mobile Burger) */}
-          <div className="nav-actions">
-            <div className="lang-switch" role="navigation" aria-label="Language selector">
-              <a
-                href={esHref}
-                className={lang === "es" ? "active" : ""}
-                aria-label="Versión en Español"
-                aria-current={lang === "es" ? "page" : undefined}
-              >
-                ES
-              </a>
-              <span className="lang-divider" aria-hidden="true">/</span>
-              <a
-                href={enHref}
-                className={lang === "en" ? "active" : ""}
-                aria-label="English version"
-                aria-current={lang === "en" ? "page" : undefined}
-              >
-                EN
-              </a>
-            </div>
-
             <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-accent"
+              href={isEs ? "/en" : "/"}
+              className="nav-link"
+              aria-label={isEs ? "Switch to English" : "Cambiar a Español"}
             >
-              {cta.btn}
+              {isEs ? "EN" : "ES"}
             </a>
-
-            <button
-              className="burger"
-              aria-label={open ? "Cerrar menú" : "Abrir menú"}
-              aria-expanded={open}
-              onClick={() => setOpen(!open)}
-            >
-              {open ? (
-                <>
-                  <span style={{ transform: "rotate(45deg) translateY(2px)" }} />
-                  <span style={{ transform: "rotate(-45deg) translateY(-2px)" }} />
-                </>
-              ) : (
-                <>
-                  <span />
-                  <span />
-                  <span />
-                </>
-              )}
-            </button>
           </div>
-        </nav>
-      </div>
 
-      {/* Mobile Drawer */}
-      <div className={`mobile-menu${open ? " open" : ""}`}>
-        {links.map((l) => (
-          <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
-            {l.label}
+          <a href={isEs ? "#precios" : "#pricing"} className="btn-action">
+            <span>{isEs ? "Cotizar en 72h" : "Quote in 72h"}</span>
           </a>
-        ))}
-
-        <div style={{ paddingBlock: "0.85rem", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--line)" }}>
-          <span style={{ fontFamily: "var(--mono)", fontSize: "0.85rem", color: "var(--ink-soft)" }}>
-            {lang === "es" ? "Idioma / Language:" : "Language / Idioma:"}
-          </span>
-          <div className="lang-switch">
-            <a href={esHref} className={lang === "es" ? "active" : ""}>ES</a>
-            <span className="lang-divider">/</span>
-            <a href={enHref} className={lang === "en" ? "active" : ""}>EN</a>
-          </div>
-        </div>
-
-        <a
-          href={waUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => setOpen(false)}
-          style={{ border: "none", color: "var(--accent-strong)", fontWeight: 700, paddingBlock: "0.85rem" }}
-        >
-          {cta.drawer}
-        </a>
-
-        <a
-          href="mailto:limasync0@gmail.com?subject=Consulta%20de%20Proyecto%20Web%20-%20LimaSync"
-          onClick={() => setOpen(false)}
-          className="drawer-mail-btn"
-          title="Enviar correo a limasync0@gmail.com"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-            <polyline points="22,6 12,13 2,6" />
-          </svg>
-          <span>{lang === "es" ? "Contactar por correo (limasync0@gmail.com)" : "Contact by email (limasync0@gmail.com)"}</span>
-        </a>
+        </nav>
       </div>
     </header>
   );
