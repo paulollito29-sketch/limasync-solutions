@@ -106,18 +106,6 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                 : "Websites, commercial systems, and custom software in Lima. Start with a 50% deposit and pay the balance upon verified delivery in 72 hours."}
             </p>
 
-            <div className="hero-tech-indicator" aria-label="Tecnología 100% Angular.ts">
-              <div className="hero-tech-info">
-                <span className="hero-tech-label">
-                  {isEs ? "TECNOLOGÍA" : "TECHNOLOGY"} <strong>Angular.ts</strong>
-                </span>
-                <span className="hero-tech-val">100%</span>
-              </div>
-              <div className="hero-tech-bar">
-                <div className="hero-tech-bar-fill" />
-              </div>
-            </div>
-
             <div className="hero-cta-row">
               <a href={isEs ? "#precios" : "#pricing"} className="btn-dark">
                 <span>
@@ -249,7 +237,17 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                           {slides[activeSlide].title}
                         </div>
                       </div>
-                      <span className="hero-slide-badge">
+                      <span
+                        className="hero-slide-badge"
+                        style={{
+                          backgroundColor: "#0284c7",
+                          color: "#ffffff",
+                          fontWeight: 700,
+                          fontSize: "0.82rem",
+                          padding: "4px 8px",
+                          display: "inline-block",
+                        }}
+                      >
                         {slides[activeSlide].badge}
                       </span>
                     </div>
