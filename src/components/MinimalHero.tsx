@@ -100,10 +100,23 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
         <div className="hero-deck-grid">
           <div className="hero-lead-col">
             <p className="hero-lead-text">
+              <strong>{isEs ? "Fácil, rápido, LimaSync." : "Easy, fast, LimaSync."}</strong>{" "}
               {isEs
-                ? "Fácil, rápido, LimaSync. Webs, sistemas comerciales y software a medida en Lima. Inicias hoy con el 50% de anticipo y cancelas el saldo únicamente al verificar tu sistema funcionando en 72 horas."
-                : "Easy, fast, LimaSync. Websites, commercial systems, and custom software in Lima. Start today with a 50% deposit and pay the balance upon verified delivery in 72 hours."}
+                ? "Webs, sistemas comerciales y software a medida en Lima. Inicias con el 50% de anticipo y cancelas el saldo únicamente al verificar tu sistema funcionando en 72 horas."
+                : "Websites, commercial systems, and custom software in Lima. Start with a 50% deposit and pay the balance upon verified delivery in 72 hours."}
             </p>
+
+            <div className="hero-tech-indicator" aria-label="Tecnología 100% Angular.ts">
+              <div className="hero-tech-info">
+                <span className="hero-tech-label">
+                  {isEs ? "TECNOLOGÍA" : "TECHNOLOGY"} <strong>Angular.ts</strong>
+                </span>
+                <span className="hero-tech-val">100%</span>
+              </div>
+              <div className="hero-tech-bar">
+                <div className="hero-tech-bar-fill" />
+              </div>
+            </div>
 
             <div className="hero-cta-row">
               <a href={isEs ? "#precios" : "#pricing"} className="btn-dark">
@@ -119,14 +132,11 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                   />
                 </svg>
               </a>
-              <a href={isEs ? "#proceso" : "#process"} className="btn-action">
-                <span>{isEs ? "Probar reloj de 72h" : "Test 72h clock"}</span>
-              </a>
             </div>
           </div>
 
           <div className="hero-media-col">
-            {/* 3D Flip Image Showcase (Perspective rotation, steady container) */}
+            {/* Showcase Visual */}
             <div
               className="hero-photo-wrap"
               onMouseEnter={() => setIsPaused(true)}
@@ -300,90 +310,6 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
                     />
                   </button>
                 ))}
-              </div>
-            </div>
-
-            {/* Contract Guarantee Tile */}
-            <div
-              data-ui="true"
-              style={{
-                backgroundColor: "var(--field-4)",
-                color: "var(--field-4-ink)",
-                padding: "24px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                gap: "16px",
-              }}
-            >
-              <div>
-                <div
-                  style={{
-                    fontSize: "0.85rem",
-                    fontWeight: 700,
-                    color: "#38bdf8",
-                    marginBottom: "8px",
-                    letterSpacing: "0.06em",
-                  }}
-                >
-                  {isEs ? "FÁCIL, RÁPIDO, LIMASYNC" : "EASY, FAST, LIMASYNC"}
-                </div>
-                <div style={{ fontSize: "1.35rem", fontWeight: 900, lineHeight: 1.1 }}>
-                  {isEs ? "Entrega en 72 horas" : "72-hour delivery"}
-                </div>
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    backgroundColor: "rgba(255, 255, 255, 0.06)",
-                    padding: "10px 12px",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  <span>{isEs ? "Adelanto inicial" : "Initial deposit"}</span>
-                  <strong>S/ 249.50 (50%)</strong>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    backgroundColor: "rgba(255, 255, 255, 0.06)",
-                    padding: "10px 12px",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  <span>{isEs ? "Tecnología base" : "Base technology"}</span>
-                  <strong style={{ color: "#38bdf8" }}>Angular.ts (100%)</strong>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    backgroundColor: "rgba(255, 255, 255, 0.06)",
-                    padding: "10px 12px",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  <span>{isEs ? "Dominio .com + SSL" : ".com Domain + SSL"}</span>
-                  <strong>{isEs ? "Incluido 1 año" : "Included 1 yr"}</strong>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    backgroundColor: "var(--accent)",
-                    color: "var(--accent-ink)",
-                    padding: "10px 12px",
-                    fontSize: "0.9rem",
-                    fontWeight: 700,
-                  }}
-                >
-                  <span>{isEs ? "Saldo contra entrega" : "Balance on delivery"}</span>
-                  <strong>S/ 249.50 (50%)</strong>
-                </div>
               </div>
             </div>
           </div>
