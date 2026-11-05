@@ -204,6 +204,23 @@ summary:focus-visible {
   transform: scale(0.97);
 }
 
+.lang-trigger-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.lang-trigger-btn:active {
+  transform: scale(0.96);
+}
+
+.lang-menu-item:hover {
+  background-color: var(--accent) !important;
+  color: var(--accent-ink) !important;
+}
+
+.lang-menu-item:hover span {
+  color: var(--accent-ink) !important;
+}
+
 .btn-action {
   display: inline-flex;
   align-items: center;

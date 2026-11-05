@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header';
+import MinimalHero from '../../components/MinimalHero';
+import ServicesSection from '../../components/ServicesSection';
+import ProcessSection from '../../components/ProcessSection';
+import PricingSection from '../../components/PricingSection';
+import MinimalContactCta from '../../components/MinimalContactCta';
+import FloatingWhatsApp from '../../components/FloatingWhatsApp';
+
+const EMAIL = "limasync0@gmail.com";
+---
+
+<Layout
+  lang="pt"
+  title="LIMASYNC SOLUTIONS | Sites, Sistemas e Software em 72 Horas"
+  description="Engenharia web, sistemas comerciais e software personalizado em Lima, Peru. Entregue em 72 horas com garantia 50/50."
+>
+  <Header client:load lang="pt" />
+  <main id="top">
+    <MinimalHero client:load lang="en" />
+    <ServicesSection client:visible lang="en" />
+    <ProcessSection client:visible lang="en" />
+    <PricingSection client:visible lang="en" />
+    <MinimalContactCta client:visible lang="en" email={EMAIL} />
+  </main>
+  <FloatingWhatsApp client:idle lang="en" />
+</Layout>
