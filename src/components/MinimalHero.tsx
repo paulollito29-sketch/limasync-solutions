@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface MinimalHeroProps {
   lang?: "es" | "en";
@@ -49,15 +50,6 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
       tag: "BOTS & AUTOMATIZACIÓN",
       title: isEs ? "Automatización y Bots 24/7" : "24/7 Automation & Bots",
       badge: isEs ? "A COTIZAR" : "CUSTOM QUOTE",
-    },
-    {
-      src: "/images/hero_mockup.webp",
-      alt: isEs
-        ? "Ecosistema multiplataforma adaptado a celulares y computadoras con Angular.ts"
-        : "Cross-platform mobile and desktop ecosystem with Angular.ts",
-      tag: "TECNOLOGÍA 100%",
-      title: isEs ? "Arquitectura Angular.ts" : "Angular.ts Architecture",
-      badge: "ANGULAR.TS 100%",
     },
   ];
 
@@ -107,9 +99,18 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
             </p>
 
             <div className="hero-cta-row">
-              <a href={isEs ? "#precios" : "#pricing"} className="btn-dark">
+              <a
+                href={getWhatsAppUrl(
+                  isEs
+                    ? "Hola LimaSync Solutions, quiero cotizar mi proyecto web en 72 horas."
+                    : "Hello LimaSync Solutions, I want to quote my 72-hour web project."
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-dark"
+              >
                 <span>
-                  {isEs ? "Ver planes desde S/ 499" : "View planes from S/ 499"}
+                  {isEs ? "Cotizar por WhatsApp (desde S/ 499)" : "Quote on WhatsApp (from S/ 499)"}
                 </span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path

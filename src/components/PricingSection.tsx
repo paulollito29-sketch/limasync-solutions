@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface PricingSectionProps {
   lang?: "es" | "en";
@@ -252,9 +253,9 @@ export default function PricingSection({ lang = "es" }: PricingSectionProps) {
               </div>
 
               <a
-                href={`mailto:limasync0@gmail.com?subject=${encodeURIComponent(
-                  plan.subject
-                )}`}
+                href={getWhatsAppUrl(`Hola LimaSync Solutions, ${plan.subject}`)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={plan.stripClass}
               >
                 <span>{plan.btn}</span>
@@ -309,9 +310,9 @@ export default function PricingSection({ lang = "es" }: PricingSectionProps) {
         </div>
 
         <a
-          href={`mailto:limasync0@gmail.com?subject=${encodeURIComponent(
-            t.cloudCare.subject
-          )}`}
+          href={getWhatsAppUrl(`Hola LimaSync Solutions, ${t.cloudCare.subject}`)}
+          target="_blank"
+          rel="noopener noreferrer"
           className="cloudcare-strip"
         >
           <span>{t.cloudCare.btn}</span>

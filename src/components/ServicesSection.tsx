@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface ServicesSectionProps {
   lang?: "es" | "en";
@@ -227,7 +228,16 @@ export default function ServicesSection({ lang = "es" }: ServicesSectionProps) {
               </div>
 
               <div>
-                <a href={ch.href} className="btn-action">
+                <a
+                  href={getWhatsAppUrl(
+                    lang === "es"
+                      ? `Hola LimaSync Solutions, quiero cotizar el servicio de ${ch.title} en 72 horas.`
+                      : `Hello LimaSync Solutions, I want to quote ${ch.title} in 72 hours.`
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-action"
+                >
                   <span>{ch.cta}</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path

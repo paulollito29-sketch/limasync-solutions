@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface HeaderProps {
   lang?: string;
@@ -249,7 +250,16 @@ export default function Header({ lang = "es" }: HeaderProps) {
             </div>
           </div>
 
-          <a href={isEs ? "#precios" : "#pricing"} className="btn-action">
+          <a
+            href={getWhatsAppUrl(
+              isEs
+                ? "Hola LimaSync Solutions, quiero cotizar un proyecto en 72 horas."
+                : "Hello LimaSync Solutions, I want to get a quote for a 72-hour project."
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-action"
+          >
             <span>{ctaText}</span>
           </a>
         </nav>

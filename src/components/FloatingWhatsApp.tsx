@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface FloatingWhatsAppProps {
   lang?: "es" | "en";
@@ -14,7 +15,7 @@ export default function FloatingWhatsApp({ lang = "es" }: FloatingWhatsAppProps)
     ? "Hola LimaSync Solutions, quiero cotizar un proyecto web en 72 horas."
     : "Hello LimaSync Solutions, I want to get a quote for a 72-hour web project.";
 
-  const waUrl = `https://wa.me/51906920958?text=${encodeURIComponent(msg)}`;
+  const waUrl = getWhatsAppUrl(msg);
   const ariaLabel = isEs
     ? "Contactar directamente por WhatsApp al equipo de ingeniería"
     : "Contact engineering team directly via WhatsApp";

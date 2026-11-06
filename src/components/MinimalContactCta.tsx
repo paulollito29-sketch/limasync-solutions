@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface MinimalContactCtaProps {
   lang?: "es" | "en";
@@ -309,7 +310,11 @@ export default function MinimalContactCta({
 
             <div style={{ marginTop: "12px" }}>
               <a
-                href="https://wa.me/51906920958?text=Hola%20LimaSync%20Solutions%2C%20quiero%20cotizar%20un%20proyecto"
+                href={getWhatsAppUrl(
+                  isEs
+                    ? "Hola LimaSync Solutions, quiero cotizar un proyecto"
+                    : "Hello LimaSync Solutions, I want to quote a project"
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -627,7 +632,16 @@ export default function MinimalContactCta({
           <span className="ft-wordmark-text">LIMASYNC</span>
         </div>
 
-        <a href={mailHref} className="footer-tile ft-invite">
+        <a
+          href={getWhatsAppUrl(
+            isEs
+              ? "Hola LimaSync Solutions, quiero iniciar una conversación directa para mi proyecto en 72 horas."
+              : "Hello LimaSync Solutions, I want to start a project in 72 hours."
+          )}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-tile ft-invite"
+        >
           <span style={{ fontSize: "var(--step-subhead)", fontWeight: 900, lineHeight: 1.1 }}>
             {t.inviteText}
           </span>

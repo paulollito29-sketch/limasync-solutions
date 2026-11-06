@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface ProcessSectionProps {
   lang?: "es" | "en";
@@ -268,9 +269,11 @@ export default function ProcessSection({ lang = "es" }: ProcessSectionProps) {
             </div>
 
             <a
-              href={`mailto:limasync0@gmail.com?subject=${encodeURIComponent(
+              href={getWhatsAppUrl(
                 `Consulta 50/50 - ${currentPlan.name}${currentPlan.total ? ` (S/ ${currentPlan.total})` : " (A cotizar)"}`
-              )}`}
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-action"
               style={{ width: "100%", textAlign: "center" }}
             >
