@@ -1381,7 +1381,10 @@ button {
 
 @media (max-width: 768px) {
   .statement-scroll-track {
-    height: 240vh;
+    height: 210vh;
+  }
+  .statement-sticky-viewport {
+    padding: 72px 20px 32px;
   }
 }
 
@@ -1468,8 +1471,13 @@ button {
 
 @media (max-width: 768px) {
   .statement-block-inner {
-    font-size: clamp(2.4rem, 11vw, 4.2rem);
-    line-height: 0.94;
+    font-size: clamp(2.85rem, 13.5vw, 4.4rem);
+    line-height: 0.92;
+  }
+  .inverted-sub-clause {
+    font-size: 0.72rem;
+    line-height: 1.5;
+    margin-top: 20px;
   }
 }
 
@@ -2597,9 +2605,17 @@ body.obys-crazy-active .monolith-price {
   }
 
   .canon-stops-row,
-  .obys-swiss-pricing-grid,
-  .inverted-boxes-grid {
+  .obys-swiss-pricing-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .inverted-boxes-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .inverted-boxes-grid > * {
+    grid-column: span 1;
   }
 
   .canon-accumulating-row {
@@ -2680,9 +2696,22 @@ body.obys-crazy-active .monolith-price {
   }
 
   .canon-stops-row,
-  .obys-swiss-pricing-grid,
-  .inverted-boxes-grid {
+  .obys-swiss-pricing-grid {
     grid-template-columns: 1fr;
+  }
+
+  .inverted-boxes-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .inverted-boxes-grid > * {
+    grid-column: span 1;
+  }
+
+  .gray-box {
+    height: 12px;
   }
 
   .canon-stop-cell,

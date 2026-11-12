@@ -127,10 +127,6 @@ export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
         {/* Upper Grid Layout (Exact Obys Header Grid Structure) */}
         <div className="obys-hero-grid-upper">
           <div className="hero-cell-statement">
-            <div className="mobile-meta-kicker show-mobile-only">
-              <span className="kicker-dot">■</span>
-              <span>LIMA, PERÚ · SOFTWARE STUDIO</span>
-            </div>
             <p className="statement-text">
               {isEs ? (
                 <>
