@@ -1,339 +1,300 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface ProcessSectionProps {
   lang?: "es" | "en";
 }
 
-const stageData = {
-  es: {
-    id: "proceso",
-    rangeLabel: "Desliza por las etapas de entrega en 72 horas",
-    planSelectLabel: "Simular contrato con plan:",
-    plans: [
-      { id: "express", name: "Web Express", total: 499, totalLabel: "S/ 499.00", half: "S/ 249.50" },
-      { id: "resto", name: "Carta Digital QR", total: 790, totalLabel: "S/ 790.00", half: "S/ 395.00" },
-      { id: "custom", name: "Dashboard, CRM & Bots", isQuote: true, totalLabel: "A cotizar a medida", half: "50% anticipo" },
-    ],
-    stages: [
-      {
-        stopName: "Inicio y 50%",
-        clause: "Primero defines con el 50%",
-        desc: "Alineamos la arquitectura de tu negocio en 10 minutos, registramos tu dominio .com propio y activamos el entorno con solo la mitad de adelanto.",
-        uiStatus: "HITO INICIAL CONFIRMADO",
-        uiStep: "Registro de dominio .com y estructura base",
-        uiMetricLabel: "Adelanto requerido hoy",
-        uiProgress: "25%",
-      },
-      {
-        stopName: "Día uno: Interfaz",
-        clause: "Segundo ves tu web viva",
-        desc: "Construimos el diseño completo adaptado a celulares y computadoras sobre un enlace privado para que navegues tu plataforma en tiempo real.",
-        uiStatus: "SERVIDOR STAGING EN LÍNEA",
-        uiStep: "Vistas móviles, catálogo y velocidad 99/100",
-        uiMetricLabel: "Tiempo transcurrido",
-        uiProgress: "50%",
-      },
-      {
-        stopName: "Día dos: Pedidos",
-        clause: "Tercero pruebas pedidos",
-        desc: "Conectamos tus botones de WhatsApp, comandas QR de restaurante o paneles de métricas y realizamos pruebas reales de compra contigo.",
-        uiStatus: "FLUJO WHATSAPP Y PEDIDOS CONECTADO",
-        uiStep: "Pruebas de pedidos, SSL y automatización",
-        uiMetricLabel: "Pruebas superadas",
-        uiProgress: "75%",
-      },
-      {
-        stopName: "Hora 72: Entrega",
-        clause: "Cuarto apruebas y cierras",
-        desc: "Verificas todo funcionando desde tu propio teléfono, recibes tu capacitación de 15 minutos y recién entonces abonas el 50% restante.",
-        uiStatus: "ENTREGA VERIFICADA EN PRODUCCIÓN",
-        uiStep: "Dominio activo, accesos entregados y garantía",
-        uiMetricLabel: "Saldo contra conformidad",
-        uiProgress: "100%",
-      },
-    ],
-  },
-  en: {
-    id: "process",
-    rangeLabel: "Drag through the 72-hour delivery stages",
-    planSelectLabel: "Simulate contract with plan:",
-    plans: [
-      { id: "express", name: "Web Express", total: 499, totalLabel: "S/ 499.00", half: "S/ 249.50" },
-      { id: "resto", name: "Digital QR Menu", total: 790, totalLabel: "S/ 790.00", half: "S/ 395.00" },
-      { id: "custom", name: "Dashboard, CRM & Bots", isQuote: true, totalLabel: "Custom quote", half: "50% deposit" },
-    ],
-    stages: [
-      {
-        stopName: "Start & 50%",
-        clause: "First lock in with 50%",
-        desc: "We align your business architecture in 10 minutes, register your custom .com domain, and spin up the project with a 50% milestone deposit.",
-        uiStatus: "INITIAL MILESTONE CONFIRMED",
-        uiStep: "Custom .com domain and core structure",
-        uiMetricLabel: "Deposit required today",
-        uiProgress: "25%",
-      },
-      {
-        stopName: "Day one: Interface",
-        clause: "Second preview live UI",
-        desc: "We build the complete mobile and desktop interface on a private staging link so you can interact with your platform in real time.",
-        uiStatus: "STAGING SERVER ONLINE",
-        uiStep: "Mobile views, catalog, and 99/100 speed",
-        uiMetricLabel: "Elapsed window",
-        uiProgress: "50%",
-      },
-      {
-        stopName: "Day two: Orders",
-        clause: "Third test live orders",
-        desc: "We wire your WhatsApp checkout flows, restaurant QR kitchen tickets, or dashboard metrics and run live end-to-end order tests with you.",
-        uiStatus: "WHATSAPP & ORDERS FLOW WIRED",
-        uiStep: "Order routing, SSL, and bot verification",
-        uiMetricLabel: "Verification checks",
-        uiProgress: "75%",
-      },
-      {
-        stopName: "Hour 72: Handover",
-        clause: "Fourth approve and launch",
-        desc: "You verify everything working on your own phone, complete your 15-minute training, and only then settle the remaining 50% balance.",
-        uiStatus: "VERIFIED PRODUCTION LAUNCH",
-        uiStep: "Active domain, full credentials, and support",
-        uiMetricLabel: "Balance upon approval",
-        uiProgress: "100%",
-      },
-    ],
-  },
-};
-
 export default function ProcessSection({ lang = "es" }: ProcessSectionProps) {
-  const t = stageData[lang];
-  const [stageIdx, setStageIdx] = useState(0);
-  const [planIdx, setPlanIdx] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const isEs = lang === "es";
+
+  // 1. Statement Track (TÓMALO CON CALMA)
+  const statementTrackRef = useRef<HTMLDivElement>(null);
+  const [statementProgress, setStatementProgress] = useState(0);
+
+  // 2. Horizontal Process Track
+  const processTrackRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [processProgress, setProcessProgress] = useState(0);
+  const [translateX, setTranslateX] = useState(0);
 
   useEffect(() => {
-    setIsDesktop(window.innerWidth >= 960);
+    let rafId: number;
+
+    const handleScroll = () => {
+      // 1. Statement track
+      if (statementTrackRef.current) {
+        const sRect = statementTrackRef.current.getBoundingClientRect();
+        const sTrackH = statementTrackRef.current.offsetHeight - window.innerHeight;
+        if (sTrackH > 0) {
+          const raw = -sRect.top / sTrackH;
+          setStatementProgress(Math.min(Math.max(raw, 0), 1));
+        }
+      }
+
+      // 2. Horizontal process track
+      if (processTrackRef.current && sliderRef.current) {
+        const pRect = processTrackRef.current.getBoundingClientRect();
+        const pTrackH = processTrackRef.current.offsetHeight - window.innerHeight;
+        if (pTrackH > 0) {
+          const raw = -pRect.top / pTrackH;
+          const clamped = Math.min(Math.max(raw, 0), 1);
+          setProcessProgress(clamped);
+
+          const totalWidth = sliderRef.current.scrollWidth;
+          const viewportWidth = processTrackRef.current.clientWidth || window.innerWidth;
+          // Calculate max horizontal travel with comfortable end margin
+          const maxScroll = Math.max(0, totalWidth - viewportWidth + 40);
+          setTranslateX(clamped * maxScroll);
+        }
+      }
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  const triggerStageChange = (nextIdx: number) => {
-    if (nextIdx === stageIdx) return;
-    setTransitioning(true);
-    setStageIdx(nextIdx);
-    window.setTimeout(() => setTransitioning(false), 180);
+  // Statement text blocks animation (exact original implementation)
+  const statementBlocks = isEs
+    ? ["TÓMALO", "CON", "CALMA"]
+    : ["DON'T TAKE", "IT TOO", "SERIOUSLY"];
+
+  const getStatementBlockStyle = (index: number) => {
+    const startRange = 0.05 + index * 0.22;
+    const endRange = startRange + 0.20;
+    const raw = (statementProgress - startRange) / (endRange - startRange);
+    const clamped = Math.min(Math.max(raw, 0), 1);
+    const eased = 1 - Math.pow(1 - clamped, 3);
+    const y = (1 - eased) * 105;
+    const opacity = Math.min(clamped * 1.5, 1);
+
+    return {
+      transform: `translate3d(0, ${y}%, 0)`,
+      opacity: opacity,
+    };
   };
 
-  const currentStage = t.stages[stageIdx];
-  const currentPlan = t.plans[planIdx];
+  const subStart = 0.72;
+  const subEnd = 0.86;
+  const subRaw = (statementProgress - subStart) / (subEnd - subStart);
+  const subClamped = Math.min(Math.max(subRaw, 0), 1);
+  const subEased = 1 - Math.pow(1 - subClamped, 2.5);
+  const subOpacity = subEased;
+
+  // Clean, uncluttered milestones: No blue words, no footers, pure Swiss typography
+  const milestones = [
+    {
+      num: "01",
+      timing: isEs ? "00 — 24H" : "00 — 24H",
+      title: isEs ? "Arquitectura & Alcance" : "Architecture & Scope",
+      desc: isEs
+        ? "Definición del stack técnico, modelos de datos y registro de dominio .com con el 50% de anticipo inicial."
+        : "Definition of tech stack, data models, and .com domain registration with the 50% milestone deposit.",
+    },
+    {
+      num: "02",
+      timing: isEs ? "24 — 48H" : "24 — 48H",
+      title: isEs ? "Prototipo Interactivo" : "Interactive Prototype",
+      desc: isEs
+        ? "Maquetación navegable en servidor privado. Pruebas la interfaz en tu teléfono y computadora en tiempo real."
+        : "Navigable prototype on a private link. Test the live interface on your phone and computer in real time.",
+    },
+    {
+      num: "03",
+      timing: isEs ? "48 — 72H" : "48 — 72H",
+      title: isEs ? "Ingeniería & Rendimiento" : "Engineering & Speed",
+      desc: isEs
+        ? "Desarrollo en Astro 5 y React 19 sin librerías pesadas. Cero demoras, carga instantánea y optimización total."
+        : "Engineered with Astro 5 and React 19. Zero heavy bloat, instant static loads, and complete optimization.",
+    },
+    {
+      num: "04",
+      timing: isEs ? "HORA 72+" : "HOUR 72+",
+      title: isEs ? "Conformidad & Saldo 50%" : "Approval & 50% Balance",
+      desc: isEs
+        ? "Solo cuando verificas el proyecto terminado y estás 100% conforme con el resultado, abonas el 50% restante."
+        : "Only when you verify the finished system and are 100% satisfied with the outcome, you settle the final 50%.",
+    },
+  ];
+
+  const activeMilestoneIdx = Math.min(Math.floor(processProgress * 4), 3);
 
   return (
-    <section id={t.id} className="stages-chapter" data-chapter="sand">
-      <div className="stages-split">
-        <motion.div
-          className="stages-left-field"
-          initial={{ opacity: 0, x: isDesktop ? -52 : 0, y: isDesktop ? 0 : 36 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <h2
-            className={`stage-clause-heading ${
-              transitioning ? "stage-transitioning" : ""
-            }`}
-          >
-            {currentStage.clause}
-          </h2>
+    <>
+      {/* =========================================================================
+          1. INVERTED BLACK STATEMENT SECTION: SCROLL-PINNED BLOCK-BY-BLOCK REVEAL
+      ========================================================================= */}
+      <div
+        ref={statementTrackRef}
+        className="statement-scroll-track"
+        aria-label={isEs ? "Manifiesto de ingeniería LimaSync" : "LimaSync engineering statement"}
+      >
+        <div className="statement-sticky-viewport">
+          <div className="statement-inner-content">
+            {/* Top decorative modular boxes matching Swiss 12-column grid */}
+            <div className="inverted-boxes-grid">
+              <div className="gray-box" />
+              <div className="gray-box light" />
+              <div className="gray-box white" />
+              <div className="gray-box" />
+            </div>
 
-          <p
-            className={transitioning ? "stage-transitioning" : ""}
-            style={{
-              transition:
-                "filter 200ms cubic-bezier(0.23, 1, 0.32, 1), opacity 200ms cubic-bezier(0.23, 1, 0.32, 1)",
-            }}
-          >
-            {currentStage.desc}
-          </p>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            <span id="plan-select-label" style={{ fontSize: "var(--step-small)", fontWeight: 700 }}>
-              {t.planSelectLabel}
-            </span>
-            <div
-              role="radiogroup"
-              aria-labelledby="plan-select-label"
-              style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}
-            >
-              {t.plans.map((p, idx) => (
-                <button
-                  key={p.id}
-                  type="button"
-                  role="radio"
-                  aria-checked={idx === planIdx}
-                  onClick={() => setPlanIdx(idx)}
-                  style={{
-                    padding: "10px 16px",
-                    border: 0,
-                    fontWeight: 700,
-                    fontSize: "var(--step-small)",
-                    backgroundColor: idx === planIdx ? "#0369a1" : "#e2e8f0",
-                    color: idx === planIdx ? "#ffffff" : "#0f172a",
-                    transition:
-                      "transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease",
-                  }}
-                >
-                  {p.name} {p.total ? `(S/ ${p.total})` : lang === "es" ? "(A cotizar)" : "(Custom)"}
-                </button>
+            {/* Scroll-driven headline by blocks that stay pinned and reveal */}
+            <div className="statement-blocks-stack">
+              {statementBlocks.map((blockText, bIdx) => (
+                <div key={bIdx} className="statement-block-line">
+                  <div className="statement-block-mask">
+                    <span
+                      className="statement-block-inner"
+                      style={getStatementBlockStyle(bIdx)}
+                    >
+                      {blockText}
+                    </span>
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
-        </motion.div>
 
-        <motion.div
-          className="stages-right-field"
-          initial={{ opacity: 0, x: isDesktop ? 52 : 0, y: isDesktop ? 0 : 36 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div
-            data-ui="true"
-            className={transitioning ? "stage-transitioning" : ""}
-            style={{
-              width: "100%",
-              maxWidth: "460px",
-              backgroundColor: "#0a0a0a",
-              color: "#f2f2f2",
-              padding: "28px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              transition:
-                "filter 200ms cubic-bezier(0.23, 1, 0.32, 1), opacity 200ms cubic-bezier(0.23, 1, 0.32, 1), transform 200ms cubic-bezier(0.23, 1, 0.32, 1)",
-            }}
-          >
-            <div
+            {/* Subtitle appearing smoothly after blocks */}
+            <p
+              className="inverted-sub-clause font-mono"
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                backgroundColor: "#181818",
-                padding: "12px 14px",
+                opacity: subOpacity,
+                transform: `translate3d(0, ${(1 - subEased) * 20}px, 0)`,
+                transition: "opacity 0.12s ease-out, transform 0.12s ease-out",
               }}
             >
-              <span
-                style={{
-                  fontSize: "0.82rem",
-                  fontWeight: 700,
-                  color: "#38bdf8",
-                }}
-              >
-                {currentStage.uiStatus}
-              </span>
-              <span style={{ fontSize: "0.85rem", fontWeight: 900 }}>
-                {currentStage.uiProgress}
-              </span>
-            </div>
-
-            <div>
-              <div style={{ fontSize: "0.85rem", color: "#38bdf8", marginBottom: "4px" }}>
-                {currentPlan.name}
-              </div>
-              <div style={{ fontSize: "1.35rem", fontWeight: 900, lineHeight: 1.15 }}>
-                {currentStage.uiStep}
-              </div>
-            </div>
-
-            <div
-              style={{
-                backgroundColor: "#181818",
-                padding: "16px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "8px",
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ fontSize: "0.9rem" }}>{currentStage.uiMetricLabel}</span>
-                <strong style={{ fontSize: "1.1rem", color: "#38bdf8" }}>
-                  {currentPlan.half}
-                </strong>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ fontSize: "0.9rem" }}>
-                  {lang === "es" ? "Inversión total cerrada" : "Total locked price"}
-                </span>
-                <strong>{currentPlan.totalLabel || `S/ ${currentPlan.total}.00`}</strong>
-              </div>
-            </div>
-
-            <a
-              href={`mailto:limasync0@gmail.com?subject=${encodeURIComponent(
-                `Consulta 50/50 - ${currentPlan.name}${currentPlan.total ? ` (S/ ${currentPlan.total})` : " (A cotizar)"}`
-              )}`}
-              className="btn-action"
-              style={{ width: "100%", textAlign: "center" }}
-            >
-              <span>
-                {currentPlan.isQuote
-                  ? lang === "es"
-                    ? "Cotizar Dashboard, CRM y Bots"
-                    : "Quote Dashboard, CRM & Bots"
-                  : lang === "es"
-                  ? `Iniciar ${currentPlan.name} con ${currentPlan.half}`
-                  : `Start ${currentPlan.name} with ${currentPlan.half}`}
-              </span>
-            </a>
+              {isEs
+                ? "(HACEMOS TODO POR TI · CERO COMPLICACIONES TÉCNICAS · GARANTÍA DE ENTREGA 50/50)"
+                : "(WE DO EVERYTHING FOR YOU · ZERO TECHNICAL FRICTION · 50/50 GUARANTEE)"}
+            </p>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      <motion.div
-        className="stages-bar"
-        initial={{ opacity: 0, y: 36 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.65, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+      {/* =========================================================================
+          2. HORIZONTAL SCROLL CONVEYOR SECTION (CÓMO TRABAJAMOS)
+          Clean, minimal, creative Swiss editorial layout aligned 100% with the grid
+      ========================================================================= */}
+      <section
+        id="proceso"
+        ref={processTrackRef}
+        className="horizontal-process-track"
+        aria-label={isEs ? "Cómo trabajamos" : "How we work"}
       >
-        <label
-          htmlFor="limasync-stage-slider"
-          style={{
-            display: "block",
-            fontSize: "var(--step-small)",
-            fontWeight: 700,
-            marginBottom: "10px",
-          }}
-        >
-          {t.rangeLabel}
-        </label>
-        <input
-          id="limasync-stage-slider"
-          type="range"
-          min={0}
-          max={3}
-          step={1}
-          value={stageIdx}
-          aria-label={t.rangeLabel}
-          onChange={(e) => triggerStageChange(Number(e.target.value))}
-          className="stage-range-input"
-        />
+        <div className="horizontal-process-viewport">
+          {/* Architectural Watermark in Background */}
+          <div className="process-giant-watermark font-mono" aria-hidden="true">
+            {isEs ? "CÓMO TRABAJAMOS // 50-50" : "HOW WE WORK // 50-50"}
+          </div>
 
-        <div className="stage-stops-row" role="tablist" aria-label={t.rangeLabel}>
-          {t.stages.map((st, idx) => (
-            <button
-              key={st.stopName}
-              type="button"
-              role="tab"
-              aria-selected={idx === stageIdx}
-              data-active={idx === stageIdx ? "true" : "false"}
-              onClick={() => triggerStageChange(idx)}
-              className="stage-stop-btn"
+          {/* Minimal Top Header Bar */}
+          <div className="horizontal-process-header">
+            <div className="h-header-left">
+              <h2 className="h-header-title">
+                {isEs ? "CÓMO TRABAJAMOS" : "HOW WE WORK"}
+              </h2>
+            </div>
+
+            <div className="h-header-right">
+              <div className="h-phase-indicator font-mono">
+                <span className="h-current-num">0{activeMilestoneIdx + 1}</span>
+                <span className="h-total-num">/ 04</span>
+              </div>
+              <div className="h-progress-bar-wrap" aria-hidden="true">
+                <div
+                  className="h-progress-bar-fill"
+                  style={{ width: `${Math.round(processProgress * 100)}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Cards Track (Slides horizontally with transform: translateX) */}
+          <div className="horizontal-slider-container">
+            <div
+              ref={sliderRef}
+              className="horizontal-cards-track"
+              style={{
+                transform: `translate3d(-${translateX}px, 0, 0)`,
+              }}
             >
-              {st.stopName}
-            </button>
-          ))}
+              {milestones.map((m, idx) => {
+                const isActive = activeMilestoneIdx === idx;
+
+                return (
+                  <article
+                    key={m.num}
+                    className={`process-milestone-panel ${isActive ? "is-active-card" : ""}`}
+                    aria-label={`Fase ${m.num}: ${m.title}`}
+                  >
+                    {/* Top: Large architectural number + Timing */}
+                    <div className="panel-clean-top">
+                      <span className="panel-clean-num font-mono">{m.num}</span>
+                      <span className="panel-clean-timing font-mono">[{m.timing}]</span>
+                    </div>
+
+                    {/* Middle: Title & crisp description */}
+                    <div className="panel-clean-body">
+                      <h3 className="panel-clean-title">{m.title}</h3>
+                      <p className="panel-clean-desc">{m.desc}</p>
+                    </div>
+
+                    {/* Bottom: Minimal hairline accent */}
+                    <div className="panel-clean-bottom">
+                      <span className="clean-hairline-accent" />
+                    </div>
+                  </article>
+                );
+              })}
+
+              {/* Card 05: Minimal Clean CTA (No extra text, no resultado final, aligned to grid) */}
+              <div className="process-milestone-panel process-card-five">
+                <div className="panel-clean-top">
+                  <span className="panel-clean-num font-mono">05</span>
+                </div>
+
+                <div className="panel-clean-body">
+                  <h3 className="panel-clean-title">
+                    {isEs ? "¿Iniciamos tu proyecto hoy?" : "Start your project today?"}
+                  </h3>
+                  <p className="panel-clean-desc">
+                    {isEs
+                      ? "Sin burocracia ni reuniones eternas. Empezamos en 24h con entrega ágil y garantía 50/50."
+                      : "Zero bureaucracy or endless meetings. We begin within 24h with 50/50 milestone guarantee."}
+                  </p>
+                </div>
+
+                <div className="panel-clean-action">
+                  <a
+                    href={getWhatsAppUrl(isEs ? "Hola, quiero iniciar un proyecto de software con el modelo 50/50." : "Hello, I want to start a software project with the 50/50 model.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="panel-clean-btn font-mono"
+                    aria-label={isEs ? "Contactar por WhatsApp para iniciar proyecto" : "Contact on WhatsApp to start project"}
+                  >
+                    <span>{isEs ? "INICIAR PROYECTO ↗" : "START PROJECT ↗"}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </motion.div>
-    </section>
+      </section>
+    </>
   );
 }

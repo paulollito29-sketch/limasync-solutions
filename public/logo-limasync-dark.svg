@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" width="100%" height="100%" fill="none">
+  <!-- LimaSync Solutions Logo (Dark Mode) -->
+  <g id="isotipo" transform="translate(10, 8)">
+    <!-- Base ring: Clean Paper / Off-white #f8f7f4 -->
+    <circle cx="32" cy="32" r="26" stroke="#f8f7f4" stroke-width="5.5" stroke-linecap="round" />
+    <!-- Cyan dynamic sync arc: #0ea5e9 -->
+    <circle cx="32" cy="32" r="26" stroke="#0ea5e9" stroke-width="5.5" stroke-linecap="round"
+            stroke-dasharray="122.5 40.8"
+            transform="rotate(35 32 32)" />
+  </g>
+  <!-- Wordmark -->
+  <text x="84" y="44" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="32" letter-spacing="-0.04em" fill="#f8f7f4">LIMASYNC</text>
+  <text x="85" y="60" font-family="'IBM Plex Mono', Menlo, Consolas, monospace" font-weight="600" font-size="10" letter-spacing="0.22em" fill="#0ea5e9">SOLUTIONS</text>
+</svg>

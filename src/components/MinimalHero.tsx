@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface MinimalHeroProps {
   lang?: "es" | "en";
@@ -10,309 +11,209 @@ interface MinimalHeroProps {
 export default function MinimalHero({ lang = "es" }: MinimalHeroProps) {
   const isEs = lang === "es";
 
-  const line1 = isEs ? "WEBS Y MÁS" : "WEBS & MORE";
-  const line2 = isEs ? "EN 72 HORAS" : "IN 72 HOURS";
-
-  const slides = [
+  const words = [
     {
-      src: "/images/hero_web_showcase.webp",
-      alt: isEs
-        ? "Plataforma web comercial express desarrollada en 72 horas"
-        : "Express commercial web platform built in 72 hours",
-      tag: "WEB EXPRESS",
-      title: isEs ? "Páginas Web Corporativas" : "Corporate Web Platforms",
-      badge: isEs ? "72 HORAS SLA" : "72-HOUR SLA",
+      word: "FÁCIL",
+      rot: 0,
+      sub: isEs
+        ? "Procesos transparentes, directos y sin complicaciones técnicas."
+        : "Transparent, direct processes without technical friction.",
     },
     {
-      src: "/images/service_restaurant_pos.webp",
-      alt: isEs
-        ? "Carta digital QR interactiva para restaurantes sin comisiones"
-        : "Interactive digital QR menu for restaurants without fees",
-      tag: "CARTA DIGITAL QR",
-      title: isEs ? "Carta Digital QR Interactiva" : "Interactive Digital QR Menu",
-      badge: isEs ? "CERO COMISIONES" : "ZERO COMMISSIONS",
+      word: "RÁPIDO",
+      rot: 32,
+      sub: isEs
+        ? "Despliegues en 72 horas con 99/100 de velocidad de carga garantizada."
+        : "Deployments in 72 hours with guaranteed 99/100 page speed.",
     },
     {
-      src: "/images/service_dashboard.webp",
-      alt: isEs
-        ? "Dashboard, CRM y portal administrativo con métricas en tiempo real"
-        : "Live metrics dashboard and custom CRM portal",
-      tag: "DASHBOARD & CRM",
-      title: isEs ? "Gestión y Control Operativo" : "Operations & CRM Pipeline",
-      badge: isEs ? "A COTIZAR" : "CUSTOM QUOTE",
-    },
-    {
-      src: "/images/service_automation_bot.webp",
-      alt: isEs
-        ? "Bots de WhatsApp, flujos CRM y automatización comercial"
-        : "WhatsApp bots, CRM workflows, and sales automation",
-      tag: "BOTS & AUTOMATIZACIÓN",
-      title: isEs ? "Automatización y Bots 24/7" : "24/7 Automation & Bots",
-      badge: isEs ? "A COTIZAR" : "CUSTOM QUOTE",
-    },
-    {
-      src: "/images/hero_mockup.webp",
-      alt: isEs
-        ? "Ecosistema multiplataforma adaptado a celulares y computadoras con Angular.ts"
-        : "Cross-platform mobile and desktop ecosystem with Angular.ts",
-      tag: "TECNOLOGÍA 100%",
-      title: isEs ? "Arquitectura Angular.ts" : "Angular.ts Architecture",
-      badge: "ANGULAR.TS 100%",
+      word: "LIMASYNC",
+      rot: 0,
+      sub: "",
     },
   ];
 
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeWordIdx, setActiveWordIdx] = useState(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const phase = params.get("phase");
+      if (phase === "rapido") return 1;
+      if (phase === "limasync") return 2;
+    }
+    return 0;
+  });
   const [hasMounted, setHasMounted] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
+  // Scroll-driven animation handler
   useEffect(() => {
     setHasMounted(true);
-    setIsDesktop(window.innerWidth >= 960);
+
+    let rafId: number;
+
+    const updateScrollProgress = () => {
+      if (!trackRef.current) return;
+      const rect = trackRef.current.getBoundingClientRect();
+      const trackHeight = trackRef.current.offsetHeight - window.innerHeight;
+
+      if (trackHeight > 0) {
+        const progress = Math.min(Math.max(-rect.top / trackHeight, 0), 1);
+        setScrollProgress(progress);
+
+        // When user scrolls through the track
+        if (window.scrollY > 10 || progress > 0.02) {
+          if (progress < 0.35) {
+            setActiveWordIdx(0);
+          } else if (progress < 0.70) {
+            setActiveWordIdx(1);
+          } else {
+            setActiveWordIdx(2);
+          }
+        }
+      }
+    };
+
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateScrollProgress);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+    
+    // Check initial query parameter if provided
+    const params = new URLSearchParams(window.location.search);
+    const phase = params.get("phase");
+    if (phase === "limasync") {
+      setTimeout(() => scrollToMilestone(2), 80);
+    } else if (phase === "rapido") {
+      setTimeout(() => scrollToMilestone(1), 80);
+    } else {
+      updateScrollProgress();
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
-      setDirection(1);
-      setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, 3800);
-    return () => clearInterval(timer);
-  }, [isPaused, slides.length]);
+  // Jump smoothly to a word milestone within the track on click
+  const scrollToMilestone = (idx: number) => {
+    if (!trackRef.current) return;
+    const trackTop = trackRef.current.offsetTop;
+    const trackHeight = trackRef.current.offsetHeight - window.innerHeight;
+    const milestonePercentages = [0.05, 0.50, 0.85];
+    const targetScrollY = trackTop + trackHeight * milestonePercentages[idx];
+
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: "smooth",
+    });
+  };
+
+  const current = words[activeWordIdx];
+
+  const defaultMsg = isEs
+    ? "Hola LimaSync Solutions, quiero iniciar un proyecto de software con el modelo 50/50."
+    : "Hello LimaSync Solutions, I want to start a software project with the 50/50 model.";
 
   return (
-    <section className="hero-chapter" data-chapter="paper">
-      <div className="hero-seam-stage">
-        <div className="hero-field-top" aria-hidden="true" />
-        <div className="hero-field-bottom" aria-hidden="true" />
-
-        <div className="hero-headline-stack">
-          <h1 className="hero-h1-layer">
-            <span className="hero-line-top">{line1}</span>
-            <br />
-            <span className="hero-line-bottom">{line2}</span>
-          </h1>
-        </div>
-      </div>
-
-      <div className="hero-lower-band" data-chapter="sky">
-        <div className="hero-deck-grid">
-          <div className="hero-lead-col">
-            <p className="hero-lead-text">
-              <strong>{isEs ? "Fácil, rápido, LimaSync." : "Easy, fast, LimaSync."}</strong>{" "}
-              {isEs
-                ? "Webs, sistemas comerciales y software a medida en Lima. Inicias con el 50% de anticipo y cancelas el saldo únicamente al verificar tu sistema funcionando en 72 horas."
-                : "Websites, commercial systems, and custom software in Lima. Start with a 50% deposit and pay the balance upon verified delivery in 72 hours."}
-            </p>
-
-            <div className="hero-cta-row">
-              <a href={isEs ? "#precios" : "#pricing"} className="btn-dark">
-                <span>
-                  {isEs ? "Ver planes desde S/ 499" : "View planes from S/ 499"}
-                </span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path
-                    d="M5 12H19M19 12L13 6M19 12L13 18"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="square"
-                  />
-                </svg>
-              </a>
+    <div ref={trackRef} className="hero-scroll-track" id="top">
+      {/* Sticky Fullscreen 100% Viewport Hero Container */}
+      <section className="obys-hero-container" aria-label="Introducción LimaSync Solutions">
+        {/* Upper Grid Layout (Exact Obys Header Grid Structure) */}
+        <div className="obys-hero-grid-upper">
+          <div className="hero-cell-statement">
+            <div className="mobile-meta-kicker show-mobile-only">
+              <span className="kicker-dot">■</span>
+              <span>LIMA, PERÚ · SOFTWARE STUDIO</span>
             </div>
+            <p className="statement-text">
+              {isEs ? (
+                <>
+                  LimaSync Solutions es un estudio de desarrollo de software en Lima, Perú.<br />
+                  En esta plataforma mostramos nuestros sistemas de alta precisión y el modelo transparente 50/50.
+                </>
+              ) : (
+                <>
+                  LimaSync Solutions is a bespoke software engineering studio in Lima, Peru.<br />
+                  Here we demonstrate our precision engineering principles and 50/50 milestone model.
+                </>
+              )}
+            </p>
           </div>
 
-          <div className="hero-media-col">
-            {/* Showcase Visual */}
-            <div
-              className="hero-photo-wrap"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-              style={{
-                position: "relative",
-                perspective: "1200px",
-                aspectRatio: "16 / 10",
-                width: "100%",
-                maxWidth: "100%",
-                backgroundColor: "var(--field-4)",
-                overflow: "hidden",
-              }}
-            >
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={activeSlide}
-                  custom={direction}
-                  variants={{
-                    enter: (d: number) => ({
-                      rotateY: d > 0 ? 85 : -85,
-                      opacity: 0,
-                      scale: 0.94,
-                    }),
-                    center: {
-                      rotateY: 0,
-                      opacity: 1,
-                      scale: 1,
-                      transition: {
-                        duration: 0.62,
-                        ease: [0.23, 1, 0.32, 1],
-                      },
-                    },
-                    exit: (d: number) => ({
-                      rotateY: d > 0 ? -85 : 85,
-                      opacity: 0,
-                      scale: 0.94,
-                      transition: {
-                        duration: 0.45,
-                        ease: [0.23, 1, 0.32, 1],
-                      },
-                    }),
-                  }}
-                  initial={hasMounted ? "enter" : false}
-                  animate="center"
-                  exit="exit"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                  }}
-                >
-                  <img
-                    src={slides[activeSlide].src}
-                    alt={slides[activeSlide].alt}
-                    width={1200}
-                    height={750}
-                    loading={activeSlide === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
-                  />
-                  <div
-                    data-ui="true"
-                    style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      backgroundColor: "rgba(10, 15, 29, 0.9)",
-                      display: "flex",
-                      flexDirection: "column",
-                      padding: "16px 18px",
-                      color: "#ffffff",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                        gap: "10px",
-                      }}
-                    >
-                      <div>
-                        <div
-                          style={{
-                            fontSize: "0.85rem",
-                            fontWeight: 700,
-                            color: "#38bdf8",
-                            letterSpacing: "0.04em",
-                          }}
-                        >
-                          {slides[activeSlide].tag}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: "1.08rem",
-                            fontWeight: 900,
-                            lineHeight: 1.2,
-                            color: "#ffffff",
-                          }}
-                        >
-                          {slides[activeSlide].title}
-                        </div>
-                      </div>
-                      <span
-                        className="hero-slide-badge"
-                        style={{
-                          backgroundColor: "#0284c7",
-                          color: "#ffffff",
-                          fontWeight: 700,
-                          fontSize: "0.82rem",
-                          padding: "4px 8px",
-                          display: "inline-block",
-                        }}
-                      >
-                        {slides[activeSlide].badge}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+          <div className="hero-cell-spacer-1 hide-mobile" />
+          <div className="hero-cell-spacer-2 hide-mobile" />
+          <div className="hero-cell-spacer-3 hide-mobile" />
+        </div>
 
-              {/* Interactive 3D indicators */}
-              <div
-                role="tablist"
-                aria-label={isEs ? "Galería interactiva 3D" : "Interactive 3D gallery"}
-                style={{
-                  position: "absolute",
-                  top: "12px",
-                  right: "12px",
-                  zIndex: 10,
-                  display: "flex",
-                  gap: "2px",
-                  backgroundColor: "rgba(10, 15, 29, 0.72)",
-                  padding: "2px 4px",
-                  backdropFilter: "blur(6px)",
-                }}
-              >
-                {slides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    role="tab"
-                    aria-selected={idx === activeSlide}
-                    aria-label={`${isEs ? "Ver solución" : "View solution"} ${idx + 1}`}
-                    onClick={() => {
-                      setDirection(idx > activeSlide ? 1 : -1);
-                      setActiveSlide(idx);
-                    }}
-                    style={{
-                      minWidth: "26px",
-                      minHeight: "26px",
-                      padding: "6px 2px",
-                      background: "transparent",
-                      border: 0,
-                      cursor: "pointer",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      transition: "transform 140ms cubic-bezier(0.23, 1, 0.32, 1)",
-                    }}
-                  >
-                    <span
-                      style={{
-                        display: "block",
-                        width: idx === activeSlide ? "22px" : "8px",
-                        height: "8px",
-                        backgroundColor:
-                          idx === activeSlide ? "#38bdf8" : "rgba(255,255,255,0.45)",
-                        transition:
-                          "width 240ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease-out",
-                      }}
-                    />
-                  </button>
-                ))}
+        {/* Lower Section with the Big Animated Words */}
+        <div className="obys-hero-grid-lower">
+          <div className="hero-types-meta-row">
+            {/* Scroll Indicator Telemetry */}
+            <div className="hero-scroll-hint">
+              <span className="scroll-hint-mono hide-mobile">
+                {activeWordIdx === 2
+                  ? isEs
+                    ? "Sigue el scroll para ver servicios ↓"
+                    : "Keep scrolling for services ↓"
+                  : isEs
+                  ? "Scroll para avanzar fases ↓"
+                  : "Scroll to cycle phases ↓"}
+              </span>
+              <span className="scroll-hint-mono show-mobile-only">
+                {activeWordIdx === 2 ? "Servicios ↓" : `Fase 0${activeWordIdx + 1}/03 ↓`}
+              </span>
+              <div className="scroll-mini-track">
+                <div
+                  className="scroll-mini-fill"
+                  style={{ width: `${Math.round(scrollProgress * 100)}%` }}
+                />
               </div>
             </div>
           </div>
+
+          {/* Kinetic Row: Rotating Square + Giant Morphing Word */}
+          <div className="obys-kinetic-word-row">
+            {/* Rotating Solid Black Square */}
+            <motion.div
+              className="obys-hero-square"
+              animate={{ rotate: current.rot }}
+              transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+              aria-hidden="true"
+            />
+
+            {/* Giant Animated Word with Subtitle */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.word}
+                initial={hasMounted ? { opacity: 0, y: 15 } : false}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
+                className="obys-word-content-wrapper"
+              >
+                <h1
+                  className={`obys-hero-giant-word word-${current.word
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .toLowerCase()
+                    .replace(/[^a-z]/g, "")}`}
+                >
+                  {current.word}
+                </h1>
+                {current.sub && (
+                  <p className="obys-word-subtitle">{current.sub}</p>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

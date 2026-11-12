@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header';
+import MinimalContactCta from '../components/MinimalContactCta';
+import FloatingWhatsApp from '../components/FloatingWhatsApp';
+import CustomCursor from '../components/CustomCursor';
+
+const EMAIL = "limasync0@gmail.com";
+---
+
+<Layout
+  lang="es"
+  title="404 · Ruta No Encontrada · LimaSync Solutions"
+  description="La coordenada o sistema que buscas no existe o ha sido reubicada en nuestra arquitectura de software."
+>
+  <Header client:load lang="es" />
+
+  <main id="top" class="error-404-viewport">
+    <div class="error-404-card">
+      {/* Corner crosshairs matching Swiss editorial grid */}
+      <span class="card-corner-crosshair top-left">+</span>
+      <span class="card-corner-crosshair top-right">+</span>
+      <span class="card-corner-crosshair bottom-left">+</span>
+      <span class="card-corner-crosshair bottom-right">+</span>
+
+      {/* Top kicker */}
+      <div class="error-404-kicker">
+        <span class="kicker-num">(404)</span>
+        <span class="kicker-sep">/</span>
+        <span class="kicker-tag">ERROR DE ENRUTAMIENTO · PÁGINA NO ENCONTRADA</span>
+      </div>
+
+      {/* Monumental Hero Headline */}
+      <div class="error-404-giant-row">
+        <div class="error-404-square" aria-hidden="true"></div>
+        <h1 class="error-404-display-h1">404</h1>
+      </div>
+
+      <p class="error-404-statement">
+        La coordenada, módulo o sistema que intentas consultar no existe o ha sido reubicado en nuestra infraestructura.
+      </p>
+
+      {/* Technical Diagnostics Table */}
+      <div class="error-404-telemetry-box">
+        <div class="telemetry-item">
+          <span class="telemetry-label">ESTADO HTTP:</span>
+          <span class="telemetry-val-alert">404 NOT FOUND</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">DIAGNÓSTICO:</span>
+          <span class="telemetry-val">URL NO MAPEADA EN EL SERVIDOR</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">ARQUITECTURA:</span>
+          <span class="telemetry-val">ASTRO 5 STATIC</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">ACCIÓN:</span>
+          <span class="telemetry-val-action">RETORNO AL INICIO</span>
+        </div>
+      </div>
+
+      {/* Prominent Action Button to return home */}
+      <div class="error-404-actions">
+        <a href="/" class="error-btn-primary">
+          <span>← VOLVER A LA PÁGINA PRINCIPAL</span>
+        </a>
+        <a href="/servicios" class="error-btn-secondary">
+          <span>VER SERVICIOS DISPONIBLES ↗</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <MinimalContactCta client:load lang="es" email={EMAIL} />
+  <FloatingWhatsApp client:idle lang="es" />
+  <CustomCursor client:load />
+</Layout>

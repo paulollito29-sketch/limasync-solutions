@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header';
+import ServicesSection from '../components/ServicesSection';
+import MinimalContactCta from '../components/MinimalContactCta';
+import FloatingWhatsApp from '../components/FloatingWhatsApp';
+import CustomCursor from '../components/CustomCursor';
+
+const EMAIL = "limasync0@gmail.com";
+---
+
+<Layout lang="es" title="Servicios de Software · LimaSync Solutions" description="Webs Corporativas, Tiendas Online, Sistemas ERP/CRM, Apps Móviles y Software a Medida en Lima, Perú.">
+  <Header client:load lang="es" />
+  <main id="top">
+    <!-- Dedicated Services Headline -->
+    <section class="services-standalone-hero" aria-label="Catálogo de Sistemas Digitales LimaSync">
+      <div class="services-standalone-intro">
+        <span class="mono-dim">(01) / ARQUITECTURAS DIGITALES</span>
+        <h1 class="services-standalone-h1">CATÁLOGO DE SERVICIOS</h1>
+        <p class="services-standalone-desc">
+          Sistemas digitales diseñados desde cero con arquitectura modular, velocidad 99/100 en Google PageSpeed y código fuente propio transferido al cliente.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Interactive Showcase -->
+    <ServicesSection client:load lang="es" />
+
+    <!-- Clean Footer -->
+    <MinimalContactCta client:load lang="es" email={EMAIL} />
+  </main>
+  <FloatingWhatsApp client:idle lang="es" />
+  <CustomCursor client:load />
+</Layout>

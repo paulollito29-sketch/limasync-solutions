@@ -1,330 +1,314 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { getWhatsAppUrl } from "../utils/whatsapp";
 
 interface PricingSectionProps {
   lang?: "es" | "en";
 }
 
-const pricingContent = {
-  es: {
-    sectionId: "precios",
-    heading: "Planes claros con 50% de adelanto",
-    lead: "Inicias el desarrollo abonando el 50% y cancelas el 50% restante únicamente cuando recibes tu sistema verificado y funcionando en tu propio dominio.",
-    plans: [
-      {
-        id: "express",
-        tileClass: "plan-tile plan-tile-step-1",
-        stripClass: "plan-action-strip strip-step-1",
-        title: "Web Express",
-        price: "S/ 499",
-        unit: "Pago único · Inicias con S/ 249.50",
-        desc: "Para profesionales, marcas y pymes que necesitan captar clientes en Lima en 72 horas.",
-        features: [
-          "Entrega garantizada en máximo 72 horas",
-          "Sitio web de hasta 4 secciones de alto impacto",
-          "Adaptado a celulares, tablets y computadoras",
-          "Flujo directo a WhatsApp con mensaje prearmado",
-          "Dominio .com propio por 1 año y certificado SSL",
-          "Integración con Google Maps y ficha comercial",
-        ],
-        btn: "Iniciar Web Express con S/ 249.50",
-        subject: "Cotización Plan Web Express (S/ 499) - LimaSync",
-      },
-      {
-        id: "resto",
-        tileClass: "plan-tile plan-tile-step-2",
-        stripClass: "plan-action-strip strip-step-2",
-        title: "Carta Digital QR",
-        price: "S/ 790",
-        unit: "Pago único · Inicias con S/ 395.00",
-        desc: "Diseñado para restaurantes, cafeterías, sangucherías y dark kitchens con pedidos sin comisiones.",
-        features: [
-          "Carta QR interactiva y autoadministrable en tiempo real",
-          "Recepción de pedidos directo a WhatsApp o cocina sin comisiones",
-          "Organización por categorías (platos, bebidas, promociones)",
-          "Panel simple para cambiar platos, fotos y precios en 1 clic",
-          "Dominio .com propio y alojamiento de alta velocidad",
-          "Códigos QR listos para imprimir en acrílicos de mesa",
-          "Capacitación de 15 minutos para tu equipo",
-        ],
-        btn: "Iniciar Carta Digital QR con S/ 395",
-        subject: "Cotización Plan Carta Digital QR (S/ 790) - LimaSync",
-      },
-      {
-        id: "custom",
-        tileClass: "plan-tile plan-tile-step-3",
-        stripClass: "plan-action-strip strip-step-3",
-        title: "Dashboard, CRM & Bots",
-        price: "A cotizar",
-        unit: "A medida según tu operación · 50% anticipo",
-        desc: "Software empresarial a medida: gestión de prospectos CRM, control operativo, reportes automáticos y bots de WhatsApp 24/7.",
-        features: [
-          "CRM personalizado para captura y seguimiento de prospectos",
-          "Portal administrativo y dashboard de métricas en vivo",
-          "Bots de WhatsApp para calificación de clientes y respuestas 24/7",
-          "Integración con bases de datos, pasarelas, ERP o Google Sheets",
-          "Alertas automáticas por correo y webhook ante eventos clave",
-          "Control de usuarios con roles y permisos jerárquicos",
-          "Arquitectura en servidor Cloud VPS dedicado de alta capacidad",
-          "Garantía de código, confidencialidad y soporte de ingenieros",
-        ],
-        btn: "Solicitar Cotización a Medida",
-        subject: "Cotización Sistema Dashboard, CRM & Bots - LimaSync",
-      },
-    ],
-    cloudCare: {
-      title: "Cloud Care & Hosting",
-      price: "S/ 99",
-      unit: "(~$27) / mes sin contrato forzoso",
-      desc: "Tu plataforma siempre en línea, rápida, respaldada y mantenida sobre servidores Cloud VPS de alto rendimiento.",
-      features: [
-        "Infraestructura dedicada Cloud VPS de alta velocidad",
-        "Renovación automatizada de certificados de seguridad SSL",
-        "Copias de seguridad semanales completas en la nube",
-        "Monitoreo de disponibilidad 24/7 (99.9% uptime)",
-        "Hasta 2 actualizaciones menores de texto, fotos o precios al mes",
-        "Soporte directo con ingenieros de software",
-        "Sin contratos de permanencia: cancela cuando quieras sin penalidades",
-      ],
-      btn: "Consultar Cloud Care & Hosting (S/ 99/mes)",
-      subject: "Consulta Cloud Care & Hosting (S/ 99/mes) - LimaSync",
-    },
-  },
-  en: {
-    sectionId: "pricing",
-    heading: "Clear plans with 50% deposit",
-    lead: "Start development with a 50% deposit and pay the remaining 50% only after verifying your live platform on your own custom domain.",
-    plans: [
-      {
-        id: "express",
-        tileClass: "plan-tile plan-tile-step-1",
-        stripClass: "plan-action-strip strip-step-1",
-        title: "Web Express",
-        price: "S/ 499",
-        unit: "One-time · Start with S/ 249.50",
-        desc: "For professionals, brands, and SMBs that need to capture leads in 72 hours.",
-        features: [
-          "Guaranteed delivery in 72 hours maximum",
-          "High-impact website up to 4 custom sections",
-          "Adapted for mobile phones, tablets, and desktop",
-          "Direct WhatsApp conversion flow with pre-filled text",
-          "Custom .com domain for 1 year and SSL certificate",
-          "Google Maps and business profile integration",
-        ],
-        btn: "Start Web Express with S/ 249.50",
-        subject: "Quote Web Express Plan (S/ 499) - LimaSync",
-      },
-      {
-        id: "resto",
-        tileClass: "plan-tile plan-tile-step-2",
-        stripClass: "plan-action-strip strip-step-2",
-        title: "Digital QR Menu",
-        price: "S/ 790",
-        unit: "One-time · Start with S/ 395.00",
-        desc: "Built for restaurants, cafes, and dark kitchens with zero-commission ordering.",
-        features: [
-          "Interactive self-managed QR menu in real time",
-          "Direct order routing to WhatsApp or kitchen without fees",
-          "Organized by categories (dishes, drinks, specials)",
-          "Simple panel to update dishes, photos, and prices in 1 click",
-          "Custom .com domain and high-speed cloud hosting",
-          "Print-ready QR codes for table stands",
-          "15-minute onboarding session for your restaurant team",
-        ],
-        btn: "Start Digital QR Menu with S/ 395",
-        subject: "Quote Digital QR Menu Plan (S/ 790) - LimaSync",
-      },
-      {
-        id: "custom",
-        tileClass: "plan-tile plan-tile-step-3",
-        stripClass: "plan-action-strip strip-step-3",
-        title: "Dashboard, CRM & Bots",
-        price: "Custom quote",
-        unit: "Tailored to your operations · 50% milestone",
-        desc: "Custom business software: CRM pipeline, operations dashboard, automated reporting, and 24/7 WhatsApp bots.",
-        features: [
-          "Custom CRM for lead capture and pipeline tracking",
-          "Real-time admin portal and live metrics dashboard",
-          "24/7 WhatsApp bots for support and appointment booking",
-          "Database, payment gateway, ERP, or Google Sheets sync",
-          "Automated email and webhook alerts on key events",
-          "Multi-user access with hierarchical role permissions",
-          "Deployed on high-capacity dedicated Cloud VPS infrastructure",
-          "Source code warranty, NDA, and direct engineering support",
-        ],
-        btn: "Request Custom Quote",
-        subject: "Quote Custom Dashboard, CRM & Bots - LimaSync",
-      },
-    ],
-    cloudCare: {
-      title: "Cloud Care & Hosting",
-      price: "S/ 99",
-      unit: "(~$27) / month (no lock-in)",
-      desc: "Your platform always online, secure, fast, and maintained on high-performance Cloud VPS servers.",
-      features: [
-        "High-speed Cloud VPS dedicated infrastructure",
-        "Automated SSL security certificate renewals",
-        "Weekly automatic full-site cloud backups",
-        "24/7 uptime monitoring (99.9% availability)",
-        "Up to 2 minor text, image, or price updates per month",
-        "Direct support with software engineers",
-        "No lock-in contracts: cancel anytime with zero penalties",
-      ],
-      btn: "Ask About Cloud Care (S/ 99/mo)",
-      subject: "Inquiry Cloud Care & Hosting (S/ 99/mo) - LimaSync",
-    },
-  },
-};
+interface PlanItem {
+  id: string;
+  num: string;
+  badge: string;
+  isPopular?: boolean;
+  name: string;
+  price: string;
+  features: string[];
+  btn: string;
+  msg: string;
+  mockupImage?: string;
+}
 
 export default function PricingSection({ lang = "es" }: PricingSectionProps) {
-  const [isDesktop, setIsDesktop] = useState(false);
+  const isEs = lang === "es";
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+
+  // Scroll-pinned sequential rise from below (Obys Books Effect)
+  const pricingTrackRef = useRef<HTMLElement>(null);
+  const [pricingProgress, setPricingProgress] = useState(0);
+
   useEffect(() => {
-    setIsDesktop(window.innerWidth >= 960);
+    let rafId: number;
+
+    const handleScroll = () => {
+      if (!pricingTrackRef.current) return;
+      if (window.innerWidth <= 1024) {
+        setPricingProgress(1);
+        return;
+      }
+      const rect = pricingTrackRef.current.getBoundingClientRect();
+      const trackH = pricingTrackRef.current.offsetHeight - window.innerHeight;
+      if (trackH > 0) {
+        const raw = (-rect.top + window.innerHeight * 0.14) / trackH;
+        setPricingProgress(Math.min(Math.max(raw, 0), 1));
+      } else {
+        setPricingProgress(1);
+      }
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  const t = pricingContent[lang];
+  const plans: PlanItem[] = [
+    {
+      id: "web",
+      num: "01",
+      badge: "72 HORAS",
+      isPopular: true,
+      name: isEs ? "Web Corporativa" : "Corporate Web",
+      price: "S/ 499",
+      features: [
+        isEs ? "Entrega en máximo 72 horas" : "Guaranteed 72-hour delivery",
+        isEs ? "Diseño editorial a medida" : "Bespoke editorial design",
+        isEs ? "Dominio .com propio y SSL" : ".com domain & SSL certificate",
+        isEs ? "PageSpeed 99/100 garantizado" : "99/100 PageSpeed verified",
+      ],
+      btn: isEs ? "Iniciar con S/ 249.50" : "Start with S/ 249.50",
+      msg: "Hola LimaSync, quiero cotizar el Plan Web Corporativa (S/ 499) con entrega en 72 horas.",
+      mockupImage: "/images/clay-mockups/plan_clay_web.jpg",
+    },
+    {
+      id: "tienda",
+      num: "02",
+      badge: "VENTAS 24/7",
+      isPopular: false,
+      name: isEs ? "Tienda Online" : "Online Store",
+      price: "S/ 990",
+      features: [
+        isEs ? "Catálogo dinámico con variantes" : "Dynamic variant catalog",
+        isEs ? "Pedidos directos a WhatsApp" : "Direct WhatsApp checkout",
+        isEs ? "Control de stock en tiempo real" : "Live inventory tracking",
+        isEs ? "Panel autogestionable ligero" : "Self-managed admin panel",
+      ],
+      btn: isEs ? "Iniciar con S/ 495.00" : "Start with S/ 495.00",
+      msg: "Hola LimaSync, quiero cotizar el Plan Tienda Online (S/ 990).",
+      mockupImage: "/images/clay-mockups/plan_clay_tienda.jpg",
+    },
+    {
+      id: "erp",
+      num: "03",
+      badge: "MULTIALMACÉN",
+      isPopular: false,
+      name: isEs ? "Sistemas ERP / CRM" : "ERP / CRM Systems",
+      price: "S/ 1,890",
+      features: [
+        isEs ? "Control de stock multialmacén" : "Multi-warehouse inventory control",
+        isEs ? "Cotizaciones PDF al instante" : "Instant branded PDF quotes",
+        isEs ? "CRM comercial y roles de usuario" : "Sales CRM & user roles",
+        isEs ? "Base PostgreSQL + export Excel" : "Cloud PostgreSQL + Excel export",
+      ],
+      btn: isEs ? "Iniciar con S/ 945.00" : "Start with S/ 945.00",
+      msg: "Hola LimaSync, quiero cotizar el Sistema ERP / CRM (Desde S/ 1,890).",
+      mockupImage: "/images/clay-mockups/plan_clay_erp.jpg",
+    },
+    {
+      id: "custom",
+      num: "04",
+      badge: "A MEDIDA",
+      isPopular: false,
+      name: isEs ? "Software & Apps" : "Custom Software & Apps",
+      price: isEs ? "A medida" : "Bespoke",
+      features: [
+        isEs ? "Arquitectura directa con ingenieros" : "Direct engineer architecture",
+        isEs ? "Prototipo interactivo en Figma" : "High-fidelity Figma prototype",
+        isEs ? "Apps nativas iOS y Android" : "Native iOS/Android Flutter apps",
+        isEs ? "Código fuente 100% a tu nombre" : "100% client code ownership",
+      ],
+      btn: isEs ? "Solicitar cotización técnica" : "Request technical quote",
+      msg: "Hola LimaSync, quiero solicitar una cotización técnica para Software & Apps a Medida.",
+      mockupImage: "/images/clay-mockups/plan_clay_mobile.jpg",
+    },
+  ];
+
+  // Sequential reveal one-by-one from below as the user scrolls
+  const getCardScrollStyle = (index: number) => {
+    const start = 0.02 + index * 0.2;
+    const end = start + 0.18;
+    const raw = (pricingProgress - start) / (end - start);
+    const clamped = Math.min(Math.max(raw, 0), 1);
+    const eased = 1 - Math.pow(1 - clamped, 3);
+
+    const translateY = (1 - eased) * 115;
+    const opacity = clamped;
+    const isVisible = clamped > 0.01;
+
+    return {
+      translateY,
+      opacity,
+      pointerEvents: isVisible ? ("auto" as const) : ("none" as const),
+    };
+  };
 
   return (
-    <section id={t.sectionId} className="pricing-chapter" data-chapter="paper">
-      <div className="pricing-top-row">
-        <motion.div
-          className="pricing-heading-col"
-          initial={{ opacity: 0, x: isDesktop ? -50 : 0, y: isDesktop ? 0 : 32 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: true, margin: "-70px" }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <h2 style={{ fontSize: "var(--step-head)", maxWidth: "15ch" }}>
-            {t.heading}
-          </h2>
-        </motion.div>
-        <motion.div
-          className="pricing-lead-col"
-          initial={{ opacity: 0, x: isDesktop ? 50 : 0, y: isDesktop ? 0 : 32 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: true, margin: "-70px" }}
-          transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <p>{t.lead}</p>
-        </motion.div>
-      </div>
-
-      <div className="pricing-step-grid">
-        {t.plans.map((plan, idx) => {
-          const planInitial = isDesktop
-            ? idx === 0
-              ? { opacity: 0, x: -48, y: 14 }
-              : idx === 1
-              ? { opacity: 0, y: 44, scale: 0.95 }
-              : { opacity: 0, x: 48, y: 14 }
-            : { opacity: 0, y: 36, scale: 0.98 };
-
-          return (
-            <motion.article
-              key={plan.id}
-              className={plan.tileClass}
-              initial={planInitial}
-              whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{
-                duration: 0.65,
-                delay: idx * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <div className="plan-tile-body">
-                <h3 className="plan-name">{plan.title}</h3>
-                <div>
-                  <div className="plan-price">{plan.price}</div>
-                  <div className="plan-unit">{plan.unit}</div>
-                </div>
-                <p style={{ fontSize: "var(--step-body)" }}>{plan.desc}</p>
-
-                <ul className="plan-features">
-                  {plan.features.map((feat, fIdx) => (
-                    <li key={fIdx}>
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <a
-                href={`mailto:limasync0@gmail.com?subject=${encodeURIComponent(
-                  plan.subject
-                )}`}
-                className={plan.stripClass}
-              >
-                <span>{plan.btn}</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            </motion.article>
-          );
-        })}
-      </div>
-
-      <motion.article
-        className="cloudcare-tile"
-        initial={{ opacity: 0, y: 42 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.65, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="cloudcare-main">
-          <div>
-            <h3 className="plan-name">{t.cloudCare.title}</h3>
-            <div style={{ marginTop: "12px" }}>
-              <div className="plan-price">{t.cloudCare.price}</div>
-              <div className="plan-unit">{t.cloudCare.unit}</div>
-            </div>
+    <section
+      id="precios"
+      ref={pricingTrackRef}
+      className="pricing-scroll-track"
+      aria-label={isEs ? "Planes y Precios" : "Plans and Pricing"}
+    >
+      <div className="pricing-sticky-viewport">
+        {/* Editorial Section Header with Master Swiss Typography */}
+        <div className="pricing-editorial-header">
+          <div className="pricing-header-left">
+            <h2 className="pricing-display-h2">
+              {isEs ? "PLANES CLAROS" : "CLEAR PLANS"}
+            </h2>
           </div>
-          <p>{t.cloudCare.desc}</p>
         </div>
 
-        <div className="cloudcare-list-col">
-          <ul className="cloudcare-grid-features">
-            {t.cloudCare.features.map((feat, idx) => (
-              <li key={idx}>
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  style={{ flexShrink: 0, marginTop: "3px", color: "#38bdf8" }}
-                >
-                  <path
-                    d="M4 12.5L9.5 18L20 6.5"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="square"
-                  />
-                </svg>
-                <span>{feat}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* Monolithic Standing Columns Grid: Rising one by one from below on scroll */}
+        <div className="obys-monolith-pricing-deck">
+          {plans.map((p, idx) => {
+            const { translateY, opacity, pointerEvents } = getCardScrollStyle(idx);
 
-        <a
-          href={`mailto:limasync0@gmail.com?subject=${encodeURIComponent(
-            t.cloudCare.subject
-          )}`}
-          className="cloudcare-strip"
-        >
-          <span>{t.cloudCare.btn}</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M5 12H19M19 12L13 6M19 12L13 18"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="square"
-            />
-          </svg>
-        </a>
-      </motion.article>
+            return (
+              <MonolithPlanCard
+                key={p.id}
+                plan={p}
+                isActive={hoveredCardId === p.id}
+                scrollTranslateY={translateY}
+                scrollOpacity={opacity}
+                pointerEvents={pointerEvents}
+                onSelect={() => setHoveredCardId(p.id)}
+                onDeselect={() => setHoveredCardId(null)}
+              />
+            );
+          })}
+        </div>
+      </div>
     </section>
+  );
+}
+
+interface MonolithPlanCardProps {
+  plan: PlanItem;
+  isActive: boolean;
+  scrollTranslateY: number;
+  scrollOpacity: number;
+  pointerEvents: "auto" | "none";
+  onSelect: () => void;
+  onDeselect: () => void;
+}
+
+function MonolithPlanCard({
+  plan,
+  isActive,
+  scrollTranslateY,
+  scrollOpacity,
+  pointerEvents,
+  onSelect,
+  onDeselect,
+}: MonolithPlanCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotX = -((y - centerY) / centerY) * 3;
+    const rotY = ((x - centerX) / centerX) * 3;
+    setTilt({ x: rotX, y: rotY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    onDeselect();
+  };
+
+  const hoverLift = isActive ? -6 : 0;
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={onSelect}
+      onMouseLeave={handleMouseLeave}
+      className={`monolith-standing-card ${plan.isPopular ? "is-popular-monolith" : ""} ${
+        isActive ? "is-elevated" : ""
+      }`}
+      style={{
+        transform: `perspective(1000px) translate3d(0, calc(${scrollTranslateY}% + ${hoverLift}px), 0) rotateX(${
+          isActive ? tilt.x : 0
+        }deg) rotateY(${isActive ? tilt.y : 0}deg)`,
+        opacity: scrollOpacity,
+        pointerEvents,
+        transition:
+          "transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.25s ease, opacity 0.2s ease",
+      }}
+    >
+      {/* Head: Monolithic Index & Badge */}
+      <div className="monolith-head">
+        <span className="monolith-num">({plan.num})</span>
+        <div className="monolith-badges">
+          {plan.isPopular ? (
+            <span className="monolith-star-badge">★ POPULAR 72H</span>
+          ) : (
+            <span className="monolith-type-badge">{plan.badge}</span>
+          )}
+        </div>
+      </div>
+
+      {/* Body: Title, Price, Mockup, Features */}
+      <div className="monolith-body">
+        <h3 className="monolith-title">{plan.name}</h3>
+
+        <div className="monolith-price-row">
+          <div className="monolith-price">{plan.price}</div>
+        </div>
+
+        {plan.mockupImage && (
+          <div className="monolith-clay-preview">
+            <img
+              src={plan.mockupImage}
+              alt={`${plan.name} Clay Mockup`}
+              className="monolith-clay-img"
+              loading="lazy"
+              width="480"
+              height="270"
+            />
+          </div>
+        )}
+
+        {/* Feature List */}
+        <ul className="monolith-features">
+          {plan.features.map((f, i) => (
+            <li key={i} className="monolith-feature-item">
+              <span className="monolith-check-icon" aria-hidden="true">✓</span>
+              <span className="monolith-feature-text">{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Action Footer: WhatsApp Direct Button */}
+      <a
+        href={getWhatsAppUrl(plan.msg)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="monolith-action-btn"
+      >
+        <span>{plan.btn}</span>
+        <span className="monolith-action-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
   );
 }

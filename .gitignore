@@ -49,3 +49,4 @@ run-local.mjs
 .taste-skill/
 .impeccable/
 .astro
+serve-dist.mjs
